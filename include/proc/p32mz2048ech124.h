@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * PIC32MZ2048ECH124 processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.

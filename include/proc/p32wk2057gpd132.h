@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * PIC32WK2057GPD132 processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -3415,6 +3415,8 @@ typedef struct {
   unsigned VOFF:17;
 } __OFF107bits_t;
 extern volatile __OFF107bits_t OFF107bits __asm__ ("OFF107") __attribute__((section("sfrs")));
+#define OFF108 OFF108
+extern volatile unsigned int   OFF108 __attribute__((section("sfrs")));
 #define OFF109 OFF109
 extern volatile unsigned int   OFF109 __attribute__((section("sfrs")));
 typedef struct {
@@ -4914,44 +4916,6 @@ extern volatile __DCH7DATbits_t DCH7DATbits __asm__ ("DCH7DAT") __attribute__((s
 extern volatile unsigned int        DCH7DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DATINV __attribute__((section("sfrs")));
-#define RESERVED1 RESERVED1
-extern volatile unsigned int   RESERVED1 __attribute__((section("sfrs")));
-#define RESERVED2 RESERVED2
-extern volatile unsigned int   RESERVED2 __attribute__((section("sfrs")));
-#define RESERVED3 RESERVED3
-extern volatile unsigned int   RESERVED3 __attribute__((section("sfrs")));
-#define RESERVED4 RESERVED4
-extern volatile unsigned int   RESERVED4 __attribute__((section("sfrs")));
-#define RESERVED5 RESERVED5
-extern volatile unsigned int   RESERVED5 __attribute__((section("sfrs")));
-#define RESERVED6 RESERVED6
-extern volatile unsigned int   RESERVED6 __attribute__((section("sfrs")));
-#define RESERVED7 RESERVED7
-extern volatile unsigned int   RESERVED7 __attribute__((section("sfrs")));
-#define RESERVED8 RESERVED8
-extern volatile unsigned int   RESERVED8 __attribute__((section("sfrs")));
-#define RESERVED9 RESERVED9
-extern volatile unsigned int   RESERVED9 __attribute__((section("sfrs")));
-#define RESERVED10 RESERVED10
-extern volatile unsigned int   RESERVED10 __attribute__((section("sfrs")));
-#define RESERVED11 RESERVED11
-extern volatile unsigned int   RESERVED11 __attribute__((section("sfrs")));
-#define RESERVED12 RESERVED12
-extern volatile unsigned int   RESERVED12 __attribute__((section("sfrs")));
-#define RESERVED13 RESERVED13
-extern volatile unsigned int   RESERVED13 __attribute__((section("sfrs")));
-#define RESERVED14 RESERVED14
-extern volatile unsigned int   RESERVED14 __attribute__((section("sfrs")));
-#define RESERVED15 RESERVED15
-extern volatile unsigned int   RESERVED15 __attribute__((section("sfrs")));
-#define RESERVED16 RESERVED16
-extern volatile unsigned int   RESERVED16 __attribute__((section("sfrs")));
-#define RESERVED17 RESERVED17
-extern volatile unsigned int   RESERVED17 __attribute__((section("sfrs")));
-#define RESERVED18 RESERVED18
-extern volatile unsigned int   RESERVED18 __attribute__((section("sfrs")));
-#define RESERVED19 RESERVED19
-extern volatile unsigned int   RESERVED19 __attribute__((section("sfrs")));
 #define _ICDCON _ICDCON
 extern volatile unsigned int   _ICDCON __attribute__((section("sfrs")));
 typedef struct {
@@ -5176,7 +5140,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -5516,7 +5482,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -5787,7 +5755,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -6078,7 +6048,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -6516,7 +6488,7 @@ typedef struct {
   unsigned FSYUPB:1;
   unsigned FSYDMA:1;
   unsigned CVDEN:1;
-  unsigned AICPMPEN:1;
+  unsigned :1;
   unsigned SIDL:1;
   unsigned :1;
   unsigned ON:1;
@@ -6536,10 +6508,9 @@ extern volatile unsigned int        ADCCON1INV __attribute__((section("sfrs")));
 extern volatile unsigned int   ADCCON2 __attribute__((section("sfrs")));
 typedef struct {
   unsigned ADCDIV:7;
-  unsigned :1;
-  unsigned ADCEIS:3;
+  unsigned :4;
   unsigned ENXCNVRT:1;
-  unsigned ADCEIOVR:1;
+  unsigned :1;
   unsigned EOSIEN:1;
   unsigned REFFLTIEN:1;
   unsigned BGVRIEN:1;
@@ -6719,22 +6690,6 @@ typedef struct {
   unsigned CMPE13:1;
   unsigned CMPE14:1;
   unsigned CMPE15:1;
-  unsigned CMPE16:1;
-  unsigned CMPE17:1;
-  unsigned CMPE18:1;
-  unsigned CMPE19:1;
-  unsigned CMPE20:1;
-  unsigned CMPE21:1;
-  unsigned CMPE22:1;
-  unsigned CMPE23:1;
-  unsigned CMPE24:1;
-  unsigned CMPE25:1;
-  unsigned CMPE26:1;
-  unsigned CMPE27:1;
-  unsigned CMPE28:1;
-  unsigned CMPE29:1;
-  unsigned CMPE30:1;
-  unsigned CMPE31:1;
 } __ADCCMPEN0bits_t;
 extern volatile __ADCCMPEN0bits_t ADCCMPEN0bits __asm__ ("ADCCMPEN0") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADCCMPEN0CLR __attribute__((section("sfrs")));
@@ -6769,22 +6724,6 @@ typedef struct {
   unsigned CMPE13:1;
   unsigned CMPE14:1;
   unsigned CMPE15:1;
-  unsigned CMPE16:1;
-  unsigned CMPE17:1;
-  unsigned CMPE18:1;
-  unsigned CMPE19:1;
-  unsigned CMPE20:1;
-  unsigned CMPE21:1;
-  unsigned CMPE22:1;
-  unsigned CMPE23:1;
-  unsigned CMPE24:1;
-  unsigned CMPE25:1;
-  unsigned CMPE26:1;
-  unsigned CMPE27:1;
-  unsigned CMPE28:1;
-  unsigned CMPE29:1;
-  unsigned CMPE30:1;
-  unsigned CMPE31:1;
 } __ADCCMPEN1bits_t;
 extern volatile __ADCCMPEN1bits_t ADCCMPEN1bits __asm__ ("ADCCMPEN1") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADCCMPEN1CLR __attribute__((section("sfrs")));
@@ -6998,7 +6937,6 @@ typedef struct {
   unsigned ADCDIV:7;
   unsigned BCHEN0:1;
   unsigned SELRES:2;
-  unsigned ADCEIS:3;
 } __ADC0TIMEbits_t;
 extern volatile __ADC0TIMEbits_t ADC0TIMEbits __asm__ ("ADC0TIME") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADC0TIMECLR __attribute__((section("sfrs")));
@@ -13061,8 +12999,6 @@ extern volatile __CTR0_DRIFT_ACCU_USbits_t CTR0_DRIFT_ACCU_USbits __asm__ ("CTR0
 extern volatile unsigned int   CTR0_ADJUST_LIN __attribute__((section("sfrs")));
 typedef struct {
   unsigned ADJUST_LIN:16;
-  unsigned :15;
-  unsigned REVISION:3;
 } __CTR0_ADJUST_LINbits_t;
 extern volatile __CTR0_ADJUST_LINbits_t CTR0_ADJUST_LINbits __asm__ ("CTR0_ADJUST_LIN") __attribute__((section("sfrs")));
 #define CTR0_DRIFT_LIN CTR0_DRIFT_LIN
@@ -14652,6 +14588,7 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
   .extern OFF104           /* 0xBF8106E0 */
   .extern OFF106           /* 0xBF8106E8 */
   .extern OFF107           /* 0xBF8106EC */
+  .extern OFF108           /* 0xBF8106F0 */
   .extern OFF109           /* 0xBF8106F4 */
   .extern OFF110           /* 0xBF8106F8 */
   .extern OFF111           /* 0xBF8106FC */
@@ -15119,27 +15056,8 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
   .extern DCH7DATCLR       /* 0xBF811654 */
   .extern DCH7DATSET       /* 0xBF811658 */
   .extern DCH7DATINV       /* 0xBF81165C */
-  .extern RESERVED1        /* 0xBF850000 */
-  .extern RESERVED2        /* 0xBF850010 */
-  .extern RESERVED3        /* 0xBF850020 */
-  .extern RESERVED4        /* 0xBF850030 */
-  .extern RESERVED5        /* 0xBF850090 */
-  .extern RESERVED6        /* 0xBF8500A0 */
-  .extern RESERVED7        /* 0xBF8500B0 */
-  .extern RESERVED8        /* 0xBF8500C0 */
-  .extern RESERVED9        /* 0xBF8500D0 */
-  .extern RESERVED10       /* 0xBF8500E0 */
-  .extern RESERVED11       /* 0xBF8500F0 */
-  .extern RESERVED12       /* 0xBF850100 */
-  .extern RESERVED13       /* 0xBF850110 */
-  .extern RESERVED14       /* 0xBF850120 */
-  .extern RESERVED15       /* 0xBF850130 */
-  .extern RESERVED16       /* 0xBF850140 */
-  .extern RESERVED17       /* 0xBF850150 */
-  .extern RESERVED18       /* 0xBF850160 */
-  .extern RESERVED19       /* 0xBF850170 */
-  .extern _ICDCON          /* 0xBF812130 */
-  .extern _ICDSTAT         /* 0xBF812140 */
+  .extern _ICDCON          /* 0xBF812000 */
+  .extern _ICDSTAT         /* 0xBF812010 */
   .extern ANSELA           /* 0xBF820000 */
   .extern ANSELACLR        /* 0xBF820004 */
   .extern ANSELASET        /* 0xBF820008 */
@@ -23123,6 +23041,10 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _CNCONA_EDGEDETECT_MASK                  0x00000800
 #define _CNCONA_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONA_SIDL_POSITION                    0x0000000D
+#define _CNCONA_SIDL_MASK                        0x00002000
+#define _CNCONA_SIDL_LENGTH                      0x00000001
+
 #define _CNCONA_ON_POSITION                      0x0000000F
 #define _CNCONA_ON_MASK                          0x00008000
 #define _CNCONA_ON_LENGTH                        0x00000001
@@ -23855,6 +23777,10 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _CNCONB_EDGEDETECT_MASK                  0x00000800
 #define _CNCONB_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONB_SIDL_POSITION                    0x0000000D
+#define _CNCONB_SIDL_MASK                        0x00002000
+#define _CNCONB_SIDL_LENGTH                      0x00000001
+
 #define _CNCONB_ON_POSITION                      0x0000000F
 #define _CNCONB_ON_MASK                          0x00008000
 #define _CNCONB_ON_LENGTH                        0x00000001
@@ -24362,6 +24288,10 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _CNCONC_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONC_EDGEDETECT_MASK                  0x00000800
 #define _CNCONC_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONC_SIDL_POSITION                    0x0000000D
+#define _CNCONC_SIDL_MASK                        0x00002000
+#define _CNCONC_SIDL_LENGTH                      0x00000001
 
 #define _CNCONC_ON_POSITION                      0x0000000F
 #define _CNCONC_ON_MASK                          0x00008000
@@ -24942,6 +24872,10 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _CNCONK_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONK_EDGEDETECT_MASK                  0x00000800
 #define _CNCONK_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONK_SIDL_POSITION                    0x0000000D
+#define _CNCONK_SIDL_MASK                        0x00002000
+#define _CNCONK_SIDL_LENGTH                      0x00000001
 
 #define _CNCONK_ON_POSITION                      0x0000000F
 #define _CNCONK_ON_MASK                          0x00008000
@@ -25739,10 +25673,6 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _ADCCON1_CVDEN_MASK                      0x00000800
 #define _ADCCON1_CVDEN_LENGTH                    0x00000001
 
-#define _ADCCON1_AICPMPEN_POSITION               0x0000000C
-#define _ADCCON1_AICPMPEN_MASK                   0x00001000
-#define _ADCCON1_AICPMPEN_LENGTH                 0x00000001
-
 #define _ADCCON1_SIDL_POSITION                   0x0000000D
 #define _ADCCON1_SIDL_MASK                       0x00002000
 #define _ADCCON1_SIDL_LENGTH                     0x00000001
@@ -25783,17 +25713,9 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _ADCCON2_ADCDIV_MASK                     0x0000007F
 #define _ADCCON2_ADCDIV_LENGTH                   0x00000007
 
-#define _ADCCON2_ADCEIS_POSITION                 0x00000008
-#define _ADCCON2_ADCEIS_MASK                     0x00000700
-#define _ADCCON2_ADCEIS_LENGTH                   0x00000003
-
 #define _ADCCON2_ENXCNVRT_POSITION               0x0000000B
 #define _ADCCON2_ENXCNVRT_MASK                   0x00000800
 #define _ADCCON2_ENXCNVRT_LENGTH                 0x00000001
-
-#define _ADCCON2_ADCEIOVR_POSITION               0x0000000C
-#define _ADCCON2_ADCEIOVR_MASK                   0x00001000
-#define _ADCCON2_ADCEIOVR_LENGTH                 0x00000001
 
 #define _ADCCON2_EOSIEN_POSITION                 0x0000000D
 #define _ADCCON2_EOSIEN_MASK                     0x00002000
@@ -26275,70 +26197,6 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _ADCCMPEN0_CMPE15_MASK                   0x00008000
 #define _ADCCMPEN0_CMPE15_LENGTH                 0x00000001
 
-#define _ADCCMPEN0_CMPE16_POSITION               0x00000010
-#define _ADCCMPEN0_CMPE16_MASK                   0x00010000
-#define _ADCCMPEN0_CMPE16_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE17_POSITION               0x00000011
-#define _ADCCMPEN0_CMPE17_MASK                   0x00020000
-#define _ADCCMPEN0_CMPE17_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE18_POSITION               0x00000012
-#define _ADCCMPEN0_CMPE18_MASK                   0x00040000
-#define _ADCCMPEN0_CMPE18_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE19_POSITION               0x00000013
-#define _ADCCMPEN0_CMPE19_MASK                   0x00080000
-#define _ADCCMPEN0_CMPE19_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE20_POSITION               0x00000014
-#define _ADCCMPEN0_CMPE20_MASK                   0x00100000
-#define _ADCCMPEN0_CMPE20_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE21_POSITION               0x00000015
-#define _ADCCMPEN0_CMPE21_MASK                   0x00200000
-#define _ADCCMPEN0_CMPE21_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE22_POSITION               0x00000016
-#define _ADCCMPEN0_CMPE22_MASK                   0x00400000
-#define _ADCCMPEN0_CMPE22_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE23_POSITION               0x00000017
-#define _ADCCMPEN0_CMPE23_MASK                   0x00800000
-#define _ADCCMPEN0_CMPE23_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE24_POSITION               0x00000018
-#define _ADCCMPEN0_CMPE24_MASK                   0x01000000
-#define _ADCCMPEN0_CMPE24_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE25_POSITION               0x00000019
-#define _ADCCMPEN0_CMPE25_MASK                   0x02000000
-#define _ADCCMPEN0_CMPE25_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE26_POSITION               0x0000001A
-#define _ADCCMPEN0_CMPE26_MASK                   0x04000000
-#define _ADCCMPEN0_CMPE26_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE27_POSITION               0x0000001B
-#define _ADCCMPEN0_CMPE27_MASK                   0x08000000
-#define _ADCCMPEN0_CMPE27_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE28_POSITION               0x0000001C
-#define _ADCCMPEN0_CMPE28_MASK                   0x10000000
-#define _ADCCMPEN0_CMPE28_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE29_POSITION               0x0000001D
-#define _ADCCMPEN0_CMPE29_MASK                   0x20000000
-#define _ADCCMPEN0_CMPE29_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE30_POSITION               0x0000001E
-#define _ADCCMPEN0_CMPE30_MASK                   0x40000000
-#define _ADCCMPEN0_CMPE30_LENGTH                 0x00000001
-
-#define _ADCCMPEN0_CMPE31_POSITION               0x0000001F
-#define _ADCCMPEN0_CMPE31_MASK                   0x80000000
-#define _ADCCMPEN0_CMPE31_LENGTH                 0x00000001
-
 #define _ADCCMP0_DCMPLO_POSITION                 0x00000000
 #define _ADCCMP0_DCMPLO_MASK                     0x0000FFFF
 #define _ADCCMP0_DCMPLO_LENGTH                   0x00000010
@@ -26410,70 +26268,6 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _ADCCMPEN1_CMPE15_POSITION               0x0000000F
 #define _ADCCMPEN1_CMPE15_MASK                   0x00008000
 #define _ADCCMPEN1_CMPE15_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE16_POSITION               0x00000010
-#define _ADCCMPEN1_CMPE16_MASK                   0x00010000
-#define _ADCCMPEN1_CMPE16_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE17_POSITION               0x00000011
-#define _ADCCMPEN1_CMPE17_MASK                   0x00020000
-#define _ADCCMPEN1_CMPE17_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE18_POSITION               0x00000012
-#define _ADCCMPEN1_CMPE18_MASK                   0x00040000
-#define _ADCCMPEN1_CMPE18_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE19_POSITION               0x00000013
-#define _ADCCMPEN1_CMPE19_MASK                   0x00080000
-#define _ADCCMPEN1_CMPE19_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE20_POSITION               0x00000014
-#define _ADCCMPEN1_CMPE20_MASK                   0x00100000
-#define _ADCCMPEN1_CMPE20_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE21_POSITION               0x00000015
-#define _ADCCMPEN1_CMPE21_MASK                   0x00200000
-#define _ADCCMPEN1_CMPE21_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE22_POSITION               0x00000016
-#define _ADCCMPEN1_CMPE22_MASK                   0x00400000
-#define _ADCCMPEN1_CMPE22_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE23_POSITION               0x00000017
-#define _ADCCMPEN1_CMPE23_MASK                   0x00800000
-#define _ADCCMPEN1_CMPE23_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE24_POSITION               0x00000018
-#define _ADCCMPEN1_CMPE24_MASK                   0x01000000
-#define _ADCCMPEN1_CMPE24_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE25_POSITION               0x00000019
-#define _ADCCMPEN1_CMPE25_MASK                   0x02000000
-#define _ADCCMPEN1_CMPE25_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE26_POSITION               0x0000001A
-#define _ADCCMPEN1_CMPE26_MASK                   0x04000000
-#define _ADCCMPEN1_CMPE26_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE27_POSITION               0x0000001B
-#define _ADCCMPEN1_CMPE27_MASK                   0x08000000
-#define _ADCCMPEN1_CMPE27_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE28_POSITION               0x0000001C
-#define _ADCCMPEN1_CMPE28_MASK                   0x10000000
-#define _ADCCMPEN1_CMPE28_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE29_POSITION               0x0000001D
-#define _ADCCMPEN1_CMPE29_MASK                   0x20000000
-#define _ADCCMPEN1_CMPE29_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE30_POSITION               0x0000001E
-#define _ADCCMPEN1_CMPE30_MASK                   0x40000000
-#define _ADCCMPEN1_CMPE30_LENGTH                 0x00000001
-
-#define _ADCCMPEN1_CMPE31_POSITION               0x0000001F
-#define _ADCCMPEN1_CMPE31_MASK                   0x80000000
-#define _ADCCMPEN1_CMPE31_LENGTH                 0x00000001
 
 #define _ADCCMP1_DCMPLO_POSITION                 0x00000000
 #define _ADCCMP1_DCMPLO_MASK                     0x0000FFFF
@@ -26778,10 +26572,6 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _ADC0TIME_SELRES_POSITION                0x00000018
 #define _ADC0TIME_SELRES_MASK                    0x03000000
 #define _ADC0TIME_SELRES_LENGTH                  0x00000002
-
-#define _ADC0TIME_ADCEIS_POSITION                0x0000001A
-#define _ADC0TIME_ADCEIS_MASK                    0x1C000000
-#define _ADC0TIME_ADCEIS_LENGTH                  0x00000003
 
 #define _ADCEIEN1_EIEN0_POSITION                 0x00000000
 #define _ADCEIEN1_EIEN0_MASK                     0x00000001
@@ -35183,10 +34973,6 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _CTR0_ADJUST_LIN_ADJUST_LIN_MASK         0x0000FFFF
 #define _CTR0_ADJUST_LIN_ADJUST_LIN_LENGTH       0x00000010
 
-#define _CTR0_ADJUST_LIN_REVISION_POSITION       0x0000001F
-#define _CTR0_ADJUST_LIN_REVISION_MASK           0x380000000
-#define _CTR0_ADJUST_LIN_REVISION_LENGTH         0x00000003
-
 #define _CTR0_DRIFT_LIN_DRIFT_LIN_POSITION       0x00000000
 #define _CTR0_DRIFT_LIN_DRIFT_LIN_MASK           0x01FFFFFF
 #define _CTR0_DRIFT_LIN_DRIFT_LIN_LENGTH         0x00000019
@@ -36518,36 +36304,36 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _RFTM3_VECTOR                            89
 #define _RFARB_VECTOR                            90
 #define _RFWCOE_VECTOR                           91
-#define _ADC1_VECTOR                             92
-#define _ADC1_DC1_VECTOR                         94
-#define _ADC1_DC2_VECTOR                         95
-#define _ADC1_DF1_VECTOR                         96
-#define _ADC1_DF2_VECTOR                         97
-#define _ADC1_FAULT_VECTOR                       100
-#define _ADC1_EOS_VECTOR                         101
-#define _ADC1_RDY_VECTOR                         102
-#define _ADC1_RS_VECTOR                          103
-#define _ADC1_FC_VECTOR                          104
-#define _ADC1_DATA0_VECTOR                       106
-#define _ADC1_DATA1_VECTOR                       107
-#define _ADC1_DATA2_VECTOR                       108
-#define _ADC1_DATA3_VECTOR                       109
-#define _ADC1_DATA4_VECTOR                       110
-#define _ADC1_DATA5_VECTOR                       111
-#define _ADC1_DATA6_VECTOR                       112
-#define _ADC1_DATA7_VECTOR                       113
-#define _ADC1_DATA8_VECTOR                       114
-#define _ADC1_DATA9_VECTOR                       115
-#define _ADC1_DATA10_VECTOR                      116
-#define _ADC1_DATA11_VECTOR                      117
-#define _ADC1_DATA12_VECTOR                      118
-#define _ADC1_DATA13_VECTOR                      119
-#define _ADC1_DATA14_VECTOR                      120
-#define _ADC1_DATA15_VECTOR                      121
-#define _ADC1_DATA16_VECTOR                      122
-#define _ADC1_DATA17_VECTOR                      123
-#define _ADC1_DATA18_VECTOR                      124
-#define _ADC1_DATA19_VECTOR                      125
+#define _ADC_VECTOR                              92
+#define _ADC_DC1_VECTOR                          94
+#define _ADC_DC2_VECTOR                          95
+#define _ADC_DF1_VECTOR                          96
+#define _ADC_DF2_VECTOR                          97
+#define _ADC_FAULT_VECTOR                        100
+#define _ADC_EOS_VECTOR                          101
+#define _ADC_ARDY_VECTOR                         102
+#define _ADC_URDY_VECTOR                         103
+#define _ADC_DMA_VECTOR                          104
+#define _ADC_DATA0_VECTOR                        106
+#define _ADC_DATA1_VECTOR                        107
+#define _ADC_DATA2_VECTOR                        108
+#define _ADC_DATA3_VECTOR                        109
+#define _ADC_DATA4_VECTOR                        110
+#define _ADC_DATA5_VECTOR                        111
+#define _ADC_DATA6_VECTOR                        112
+#define _ADC_DATA7_VECTOR                        113
+#define _ADC_DATA8_VECTOR                        114
+#define _ADC_DATA9_VECTOR                        115
+#define _ADC_DATA10_VECTOR                       116
+#define _ADC_DATA11_VECTOR                       117
+#define _ADC_DATA12_VECTOR                       118
+#define _ADC_DATA13_VECTOR                       119
+#define _ADC_DATA14_VECTOR                       120
+#define _ADC_DATA15_VECTOR                       121
+#define _ADC_DATA16_VECTOR                       122
+#define _ADC_DATA17_VECTOR                       123
+#define _ADC_DATA18_VECTOR                       124
+#define _ADC_DATA19_VECTOR                       125
 #define _CAN1_VECTOR                             142
 #define _SQI1_VECTOR                             150
 #define _PTG0_STEP_VECTOR                        152
@@ -36595,6 +36381,7 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _UART1
 #define _UART2
 #define _USB
+#define _USB1
 #define _WDT
 #define __DDPSTAT
 
@@ -36633,9 +36420,10 @@ extern volatile __DEVCFG4bits_t DEVCFG4bits __asm__ ("DEVCFG4") __attribute__((s
 #define _TMR7_BASE_ADDRESS                       0xBF802C00
 #define _UART1_BASE_ADDRESS                      0xBF820800
 #define _UART2_BASE_ADDRESS                      0xBF840800
+#define _USB1_BASE_ADDRESS                       0xBF850040
 #define _USB_BASE_ADDRESS                        0xBF850040
 #define _WDT_BASE_ADDRESS                        0xBF800800
-#define __DDPSTAT_BASE_ADDRESS                   0xBF812140
+#define __DDPSTAT_BASE_ADDRESS                   0xBF812010
 
 /* Default Memory-region macros */
 #define __SERIAL_MEM_BASE                        0x90000000

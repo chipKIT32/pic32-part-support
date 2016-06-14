@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * MGC3430 processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -17391,6 +17391,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _UART1
 #define _UART1A
 #define _USB
+#define _USB1
 #define _WDT
 
 /* Base Addresses for Peripherals */
@@ -17438,6 +17439,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _TMR5_BASE_ADDRESS                       0xBF800E00
 #define _UART1A_BASE_ADDRESS                     0xBF806000
 #define _UART1_BASE_ADDRESS                      0xBF806000
+#define _USB1_BASE_ADDRESS                       0xBF885040
 #define _USB_BASE_ADDRESS                        0xBF885040
 #define _WDT_BASE_ADDRESS                        0xBF800000
 

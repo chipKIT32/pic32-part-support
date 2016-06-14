@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MZ0512EFE144 linker script
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  * 
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -213,6 +213,12 @@ MEMORY
   config_BFC4FFF8             : ORIGIN = 0xBFC4FFF8, LENGTH = 0x4
   config_BFC4FFFC             : ORIGIN = 0xBFC4FFFC, LENGTH = 0x4
   boot1lastpage               : ORIGIN = 0xBFC50000, LENGTH = 0x4000
+  config_BFC54000             : ORIGIN = 0xBFC54000, LENGTH = 0x4
+  config_BFC54004             : ORIGIN = 0xBFC54004, LENGTH = 0x4
+  config_BFC54008             : ORIGIN = 0xBFC54008, LENGTH = 0x4
+  config_BFC5400C             : ORIGIN = 0xBFC5400C, LENGTH = 0x4
+  config_BFC54010             : ORIGIN = 0xBFC54010, LENGTH = 0x4
+  config_BFC5401C             : ORIGIN = 0xBFC5401C, LENGTH = 0x4
   config_BFC54020             : ORIGIN = 0xBFC54020, LENGTH = 0x4
   config_BFC54024             : ORIGIN = 0xBFC54024, LENGTH = 0x4
   boot2                       : ORIGIN = 0xBFC60000, LENGTH = 0xFF00
@@ -257,7 +263,7 @@ MEMORY
   configsfrs_BFC2FFC0         : ORIGIN = 0xBFC2FFC0, LENGTH = 0x40
   configsfrs_BFC4FF40         : ORIGIN = 0xBFC4FF40, LENGTH = 0x40
   configsfrs_BFC4FFC0         : ORIGIN = 0xBFC4FFC0, LENGTH = 0x40
-  configsfrs_BFC54020         : ORIGIN = 0xBFC54020, LENGTH = 0x8
+  configsfrs_BFC54000         : ORIGIN = 0xBFC54000, LENGTH = 0x20
   configsfrs_BFC6FF40         : ORIGIN = 0xBFC6FF40, LENGTH = 0x40
   configsfrs_BFC6FFC0         : ORIGIN = 0xBFC6FFC0, LENGTH = 0x40
   kseg2_ebi_data_mem          : ORIGIN = 0xC0000000, LENGTH = 0x4000000
@@ -560,6 +566,24 @@ SECTIONS
   .config_BFC4FFFC : {
     KEEP(*(.config_BFC4FFFC))
   } > config_BFC4FFFC
+  .config_BFC54000 : {
+    KEEP(*(.config_BFC54000))
+  } > config_BFC54000
+  .config_BFC54004 : {
+    KEEP(*(.config_BFC54004))
+  } > config_BFC54004
+  .config_BFC54008 : {
+    KEEP(*(.config_BFC54008))
+  } > config_BFC54008
+  .config_BFC5400C : {
+    KEEP(*(.config_BFC5400C))
+  } > config_BFC5400C
+  .config_BFC54010 : {
+    KEEP(*(.config_BFC54010))
+  } > config_BFC54010
+  .config_BFC5401C : {
+    KEEP(*(.config_BFC5401C))
+  } > config_BFC5401C
   .config_BFC54020 : {
     KEEP(*(.config_BFC54020))
   } > config_BFC54020

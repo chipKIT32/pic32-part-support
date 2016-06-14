@@ -2,8 +2,8 @@
 <mp:deviceSupport xmlns:mp="http://crownking/mplab"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://crownking/mplab%20mplab/deviceSupport"
-         mp:version="0.00 ()"
-         mp:builddate="2016-05-05"
+         mp:version="1.42 (A)"
+         mp:builddate="2016-06-01"
 >
 
 <mp:family mp:family="32x">
@@ -13,11 +13,20 @@
   <mp:device mp:name="MEC1404"/>
   <mp:device mp:name="MEC1406"/>
   <mp:device mp:name="MEC1408"/>
+  <mp:device mp:name="MEC1414"/>
+  <mp:device mp:name="MEC1416"/>
   <mp:device mp:name="MEC1418"/>
   <mp:device mp:name="MGC3430"/>
   <mp:device mp:name="MGC3431"/>
   <mp:device mp:name="MGC3450"/>
   <mp:device mp:name="MGC3451"/>
+  <mp:device mp:name="PIC32MK0512GPD064"/>
+  <mp:device mp:name="PIC32MK0512GPD100"/>
+  <mp:device mp:name="PIC32MK0512GPE064"/>
+  <mp:device mp:name="PIC32MK0512GPE100"/>
+  <mp:device mp:name="PIC32MK1024GPD064"/>
+  <mp:device mp:name="PIC32MK1024GPD100"/>
+  <mp:device mp:name="PIC32MK1024GPE064"/>
   <mp:device mp:name="PIC32MK1024GPE100"/>
   <mp:device mp:name="PIC32MK1024MCF100"/>
   <mp:device mp:name="PIC32MM0016GPL020"/>

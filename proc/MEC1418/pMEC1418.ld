@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  MEC1418 linker script
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  * 
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -103,14 +103,14 @@ SECTIONS
     KEEP(*(.gen_handler))
   } > kseg0_program_mem
 
-  /* MEC14x4 JTVIC has 19 aggregated interrupt sources in its 
-   * power-on-reset configuration. MEC14xx data sheet uses nomenclature 
-   * GIRQ00 - GIRQ18.
-   * MEC14x4 M14K core was built to support EIC Mode 2 only. The JTVIC 
-   * supplies a 17-bit offset to the M14K core. The M14K combines this 
+  /* Jump Table Vectored Interrupt Controller (JTVIC) has 19 aggregated 
+   * interrupt sources in its power-on-reset configuration. The 
+   * data sheet uses nomenclature GIRQ00 - GIRQ18.
+   * The MIPS core was built to support EIC Mode 2 only. The JTVIC 
+   * supplies a 17-bit offset to the MIPS core. The MIPS core combines this 
    * 17-bit offset with EBASE to produce the final vector location.
    * Similar to the PIC32MZ EVIC, the JTVIC has a register for each 
-   * GIRQx containing the 17-bit value supplied to the M14K core.
+   * GIRQx containing the 17-bit value supplied to the MIPS core.
    * This means ISR's can be located anywhere above EBASE except for 
    * the fixed location of the General Exception at EBASE + 0x180.
    * All JTVIC ISR's should be put into a named sections .vector_0, 

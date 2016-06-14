@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * PIC32MX230F128H processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -2393,21 +2393,32 @@ extern volatile unsigned int        PMSTATINV __attribute__((section("sfrs")));
 extern volatile unsigned int   PMWADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned WADDR:14;
-    unsigned WADDR14:1;
-    unsigned WADDR15:1;
+    unsigned WADDR:24;
   };
   struct {
     unsigned :14;
     unsigned WCS:2;
+    unsigned :6;
+    unsigned WCSA:2;
   };
   struct {
     unsigned :14;
     unsigned WCS1:1;
     unsigned WCS2:1;
+    unsigned :6;
+    unsigned WCS1A:1;
+    unsigned WCS2A:1;
   };
   struct {
     unsigned w:32;
+  };
+  struct {
+    unsigned :14;
+    unsigned WADDR14:1;
+    unsigned WADDR15:1;
+    unsigned :6;
+    unsigned WADDR22:1;
+    unsigned WADDR23:1;
   };
 } __PMWADDRbits_t;
 extern volatile __PMWADDRbits_t PMWADDRbits __asm__ ("PMWADDR") __attribute__((section("sfrs")));
@@ -12412,20 +12423,16 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _PMSTAT_w_LENGTH                         0x00000020
 
 #define _PMWADDR_WADDR_POSITION                  0x00000000
-#define _PMWADDR_WADDR_MASK                      0x00003FFF
-#define _PMWADDR_WADDR_LENGTH                    0x0000000E
-
-#define _PMWADDR_WADDR14_POSITION                0x0000000E
-#define _PMWADDR_WADDR14_MASK                    0x00004000
-#define _PMWADDR_WADDR14_LENGTH                  0x00000001
-
-#define _PMWADDR_WADDR15_POSITION                0x0000000F
-#define _PMWADDR_WADDR15_MASK                    0x00008000
-#define _PMWADDR_WADDR15_LENGTH                  0x00000001
+#define _PMWADDR_WADDR_MASK                      0x00FFFFFF
+#define _PMWADDR_WADDR_LENGTH                    0x00000018
 
 #define _PMWADDR_WCS_POSITION                    0x0000000E
 #define _PMWADDR_WCS_MASK                        0x0000C000
 #define _PMWADDR_WCS_LENGTH                      0x00000002
+
+#define _PMWADDR_WCSA_POSITION                   0x00000016
+#define _PMWADDR_WCSA_MASK                       0x00C00000
+#define _PMWADDR_WCSA_LENGTH                     0x00000002
 
 #define _PMWADDR_WCS1_POSITION                   0x0000000E
 #define _PMWADDR_WCS1_MASK                       0x00004000
@@ -12435,9 +12442,33 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _PMWADDR_WCS2_MASK                       0x00008000
 #define _PMWADDR_WCS2_LENGTH                     0x00000001
 
+#define _PMWADDR_WCS1A_POSITION                  0x00000016
+#define _PMWADDR_WCS1A_MASK                      0x00400000
+#define _PMWADDR_WCS1A_LENGTH                    0x00000001
+
+#define _PMWADDR_WCS2A_POSITION                  0x00000017
+#define _PMWADDR_WCS2A_MASK                      0x00800000
+#define _PMWADDR_WCS2A_LENGTH                    0x00000001
+
 #define _PMWADDR_w_POSITION                      0x00000000
 #define _PMWADDR_w_MASK                          0xFFFFFFFF
 #define _PMWADDR_w_LENGTH                        0x00000020
+
+#define _PMWADDR_WADDR14_POSITION                0x0000000E
+#define _PMWADDR_WADDR14_MASK                    0x00004000
+#define _PMWADDR_WADDR14_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR15_POSITION                0x0000000F
+#define _PMWADDR_WADDR15_MASK                    0x00008000
+#define _PMWADDR_WADDR15_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR22_POSITION                0x00000016
+#define _PMWADDR_WADDR22_MASK                    0x00400000
+#define _PMWADDR_WADDR22_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR23_POSITION                0x00000017
+#define _PMWADDR_WADDR23_MASK                    0x00800000
+#define _PMWADDR_WADDR23_LENGTH                  0x00000001
 
 #define _PMRADDR_RADDR_POSITION                  0x00000000
 #define _PMRADDR_RADDR_MASK                      0x00003FFF

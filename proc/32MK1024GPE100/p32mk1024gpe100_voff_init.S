@@ -66,8 +66,7 @@
   .word __vector_offset_25
   .word __vector_offset_26
   .word __vector_offset_27
-  .word __vector_offset_28
-  .word __vector_offset_29
+  .section .__vector_offset_BF8105B8_data,data,keep,address(0xBF8105B8)
   .word __vector_offset_30
   .word __vector_offset_31
   .word __vector_offset_32
@@ -131,7 +130,7 @@
   .word __vector_offset_90
   .word __vector_offset_91
   .word __vector_offset_92
-  .word __vector_offset_93
+  .section .__vector_offset_BF8106B8_data,data,keep,address(0xBF8106B8)
   .word __vector_offset_94
   .word __vector_offset_95
   .word __vector_offset_96
@@ -172,11 +171,7 @@
   .word __vector_offset_131
   .word __vector_offset_132
   .word __vector_offset_133
-  .word __vector_offset_134
-  .word __vector_offset_135
-  .word __vector_offset_136
-  .word __vector_offset_137
-  .word __vector_offset_138
+  .section .__vector_offset_BF81076C_data,data,keep,address(0xBF81076C)
   .word __vector_offset_139
   .word __vector_offset_140
   .word __vector_offset_141
@@ -186,9 +181,7 @@
   .word __vector_offset_145
   .word __vector_offset_146
   .word __vector_offset_147
-  .word __vector_offset_148
-  .word __vector_offset_149
-  .word __vector_offset_150
+  .section .__vector_offset_BF81079C_data,data,keep,address(0xBF81079C)
   .word __vector_offset_151
   .word __vector_offset_152
   .word __vector_offset_153
@@ -201,22 +194,13 @@
   .word __vector_offset_160
   .word __vector_offset_161
   .word __vector_offset_162
-  .word __vector_offset_163
+  .section .__vector_offset_BF8107D0_data,data,keep,address(0xBF8107D0)
   .word __vector_offset_164
   .word __vector_offset_165
   .word __vector_offset_166
   .word __vector_offset_167
   .word __vector_offset_168
-  .word __vector_offset_169
-  .word __vector_offset_170
-  .word __vector_offset_171
-  .word __vector_offset_172
-  .word __vector_offset_173
-  .word __vector_offset_174
-  .word __vector_offset_175
-  .word __vector_offset_176
-  .word __vector_offset_177
-  .word __vector_offset_178
+  .section .__vector_offset_BF81080C_data,data,keep,address(0xBF81080C)
   .word __vector_offset_179
   .word __vector_offset_180
   .word __vector_offset_181
@@ -227,11 +211,7 @@
   .word __vector_offset_186
   .word __vector_offset_187
   .word __vector_offset_188
-  .word __vector_offset_189
-  .word __vector_offset_190
-  .word __vector_offset_191
-  .word __vector_offset_192
-  .word __vector_offset_193
+  .section .__vector_offset_BF810848_data,data,keep,address(0xBF810848)
   .word __vector_offset_194
   .word __vector_offset_195
   .word __vector_offset_196
@@ -269,29 +249,11 @@
   .word __vector_offset_228
   .word __vector_offset_229
   .word __vector_offset_230
-  .word __vector_offset_231
-  .word __vector_offset_232
-  .word __vector_offset_233
-  .word __vector_offset_234
-  .word __vector_offset_235
-  .word __vector_offset_236
-  .word __vector_offset_237
-  .word __vector_offset_238
-  .word __vector_offset_239
-  .word __vector_offset_240
-  .word __vector_offset_241
-  .word __vector_offset_242
-  .word __vector_offset_243
+  .section .__vector_offset_BF810910_data,data,keep,address(0xBF810910)
   .word __vector_offset_244
   .word __vector_offset_245
   .word __vector_offset_246
-  .word __vector_offset_247
-  .word __vector_offset_248
-  .word __vector_offset_249
-  .word __vector_offset_250
-  .word __vector_offset_251
-  .word __vector_offset_252
-  .word __vector_offset_253
+  .section .__vector_offset_BF810938_data,data,keep,address(0xBF810938)
   .word __vector_offset_254
   .word __vector_offset_255
 

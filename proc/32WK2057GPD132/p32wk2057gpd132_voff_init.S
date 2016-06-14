@@ -132,7 +132,7 @@
   .section .__vector_offset_BF8106E8_data,data,keep,address(0xBF8106E8)
   .word __vector_offset_106
   .word __vector_offset_107
-  .section .__vector_offset_BF8106F4_data,data,keep,address(0xBF8106F4)
+  .word __vector_offset_108
   .word __vector_offset_109
   .word __vector_offset_110
   .word __vector_offset_111

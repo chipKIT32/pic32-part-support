@@ -301,30 +301,38 @@ CSETTING:00000400:FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -350,12 +358,30 @@ CVALUE:00000000:00000000:Range is from 0 to 0xffff
 CWORD:BFC0FFF4:FFFFFFFF:FFFFFFFF
 CWORD:BFC0FFF8:FFFFFFFF:FFFFFFFF
 CWORD:BFC0FFFC:FFFFFFFF:FFFFFFFF
+CWORD:BFC54000:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
+CWORD:BFC54004:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
+CWORD:BFC54008:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
+CWORD:BFC5400C:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
+CWORD:BFC54010:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
+CWORD:BFC5401C:FFFFFFFF:FFFFFFFF
+CSETTING:FFFFFFFF:ADCFG:
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54020:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:SN:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54024:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:SN:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC0FF40:FFFFFFFF:FFFFFFFF
 CSETTING:0000FFFF:A_USERID:
 CVALUE:00000000:00000000:Range is from 0 to 0xffff
@@ -658,30 +684,38 @@ CSETTING:00000400:A_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:A_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:A_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:A_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:A_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:A_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:A_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -1009,30 +1043,38 @@ CSETTING:00000400:AUBA_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:AUBA_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:AUBA_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:AUBA_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:AUBA_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:AUBA_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:AUBA_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -1360,30 +1402,38 @@ CSETTING:00000400:UBA_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:UBA_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:UBA_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:UBA_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:UBA_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:UBA_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:UBA_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -1711,30 +1761,38 @@ CSETTING:00000400:ABF1_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:ABF1_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:ABF1_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:ABF1_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:ABF1_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:ABF1_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:ABF1_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -2062,30 +2120,38 @@ CSETTING:00000400:BF1_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:BF1_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:BF1_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:BF1_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:BF1_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:BF1_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:BF1_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -2413,30 +2479,38 @@ CSETTING:00000400:ABF2_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:ABF2_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:ABF2_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:ABF2_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:ABF2_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:ABF2_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:ABF2_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator
@@ -2764,30 +2838,38 @@ CSETTING:00000400:BF2_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:BF2_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:00008000:BF2_SMCLR:Soft Master Clear Enable bit
 CVALUE:00000000:MCLR_POR:MCLR pin generates an emulated POR Reset
 CVALUE:00008000:MCLR_NORM:MCLR pin generates a normal system Reset
 CSETTING:00030000:BF2_SOSCGAIN:Secondary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00010000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00010000:GAIN_1X:1x gain setting
+CVALUE:00010000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00020000:GAIN_1_5X:1.5x gain setting
+CVALUE:00020000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00030000:GAIN_2X:2x gain setting
+CVALUE:00030000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00040000:BF2_SOSCBOOST:Secondary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00040000:ON:Boost the kick start of the oscillator
 CSETTING:00180000:BF2_POSCGAIN:Primary Oscillator Gain Control bits
-CVALUE:00000000:GAIN_1X:1x gain setting
-CVALUE:00080000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_0_5X:0.5x gain setting
+CVALUE:00000000:GAIN_LEVEL_0:Gain level 0 (Lowest)
+CVALUE:00080000:GAIN_1X:1x gain setting
+CVALUE:00080000:GAIN_LEVEL_1:Gain level 1
 CVALUE:00100000:GAIN_1_5X:1.5x gain setting
+CVALUE:00100000:GAIN_LEVEL_2:Gain level 2
 CVALUE:00180000:GAIN_2X:2x gain setting
+CVALUE:00180000:GAIN_LEVEL_3:Gain level 3 (Highest)
 CSETTING:00200000:BF2_POSCBOOST:Primary Oscillator Boost Kick Start Enable bit
 CVALUE:00000000:OFF:Normal start of the oscillator
 CVALUE:00200000:ON:Boost the kick start of the oscillator

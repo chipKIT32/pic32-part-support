@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MM0016GPL028 linker script
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  * 
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -105,6 +105,13 @@ MEMORY
   debug_exec_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x760
   kseg0_boot_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x0
   kseg1_boot_mem              : ORIGIN = 0xBFC00000, LENGTH = 0x490
+  config_BFC01704             : ORIGIN = 0xBFC01704, LENGTH = 0x4
+  config_BFC01708             : ORIGIN = 0xBFC01708, LENGTH = 0x4
+  config_BFC0170C             : ORIGIN = 0xBFC0170C, LENGTH = 0x4
+  config_BFC01710             : ORIGIN = 0xBFC01710, LENGTH = 0x4
+  config_BFC01714             : ORIGIN = 0xBFC01714, LENGTH = 0x4
+  config_BFC01718             : ORIGIN = 0xBFC01718, LENGTH = 0x4
+  config_BFC01720             : ORIGIN = 0xBFC01720, LENGTH = 0x4
   config_BFC017C4             : ORIGIN = 0xBFC017C4, LENGTH = 0x4
   config_BFC017C8             : ORIGIN = 0xBFC017C8, LENGTH = 0x4
   config_BFC017CC             : ORIGIN = 0xBFC017CC, LENGTH = 0x4
@@ -114,6 +121,7 @@ MEMORY
   config_BFC017E0             : ORIGIN = 0xBFC017E0, LENGTH = 0x4
   kseg0_data_mem       (w!x)  : ORIGIN = 0x80000000, LENGTH = 0x1000
   sfrs                        : ORIGIN = 0xBF800000, LENGTH = 0x100000
+  configsfrs_BFC01700         : ORIGIN = 0xBFC01700, LENGTH = 0x1C
   configsfrs_BFC017C0         : ORIGIN = 0xBFC017C0, LENGTH = 0x1C
 }
 
@@ -123,6 +131,27 @@ MEMORY
  *************************************************************************/
 SECTIONS
 {
+  .config_BFC01704 : {
+    KEEP(*(.config_BFC01704))
+  } > config_BFC01704
+  .config_BFC01708 : {
+    KEEP(*(.config_BFC01708))
+  } > config_BFC01708
+  .config_BFC0170C : {
+    KEEP(*(.config_BFC0170C))
+  } > config_BFC0170C
+  .config_BFC01710 : {
+    KEEP(*(.config_BFC01710))
+  } > config_BFC01710
+  .config_BFC01714 : {
+    KEEP(*(.config_BFC01714))
+  } > config_BFC01714
+  .config_BFC01718 : {
+    KEEP(*(.config_BFC01718))
+  } > config_BFC01718
+  .config_BFC01720 : {
+    KEEP(*(.config_BFC01720))
+  } > config_BFC01720
   .config_BFC017C4 : {
     KEEP(*(.config_BFC017C4))
   } > config_BFC017C4

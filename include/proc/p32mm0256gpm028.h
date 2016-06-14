@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * PIC32MM0256GPM028 processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -2316,8 +2316,7 @@ typedef struct {
   unsigned MODE12:1;
   unsigned SSRC:4;
   unsigned FORM:3;
-  unsigned DMAEN:1;
-  unsigned DMABM:1;
+  unsigned :2;
   unsigned SIDL:1;
   unsigned :1;
   unsigned ON:1;
@@ -2413,6 +2412,11 @@ typedef struct {
   unsigned WM:2;
   unsigned :4;
   unsigned ASINT:2;
+  unsigned :2;
+  unsigned BGREQ:1;
+  unsigned :1;
+  unsigned LPEN:1;
+  unsigned ASEN:1;
 } __AD1CON5bits_t;
 extern volatile __AD1CON5bits_t AD1CON5bits __asm__ ("AD1CON5") __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON5CLR __attribute__((section("sfrs")));
@@ -2441,23 +2445,30 @@ typedef struct {
   unsigned CHH17:1;
   unsigned CHH18:1;
   unsigned CHH19:1;
-  unsigned CHH20:1;
-  unsigned CHH21:1;
-  unsigned CHH22:1;
-  unsigned CHH23:1;
-  unsigned CHH24:1;
-  unsigned CHH25:1;
-  unsigned CHH26:1;
-  unsigned CHH27:1;
-  unsigned CHH28:1;
-  unsigned CHH29:1;
-  unsigned CHH30:1;
-  unsigned CHH31:1;
 } __AD1CHITbits_t;
 extern volatile __AD1CHITbits_t AD1CHITbits __asm__ ("AD1CHIT") __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CHITCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CHITSET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CHITINV __attribute__((section("sfrs")));
+#define CMSTAT CMSTAT
+extern volatile unsigned int   CMSTAT __attribute__((section("sfrs")));
+typedef struct {
+  unsigned C1OUT:1;
+  unsigned C2OUT:1;
+  unsigned C3OUT:1;
+  unsigned :5;
+  unsigned CVREFSEL:1;
+  unsigned :4;
+  unsigned SIDL:1;
+  unsigned :2;
+  unsigned C1EVT:1;
+  unsigned C2EVT:1;
+  unsigned C3EVT:1;
+} __CMSTATbits_t;
+extern volatile __CMSTATbits_t CMSTATbits __asm__ ("CMSTAT") __attribute__((section("sfrs")));
+extern volatile unsigned int        CMSTATCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        CMSTATSET __attribute__((section("sfrs")));
+extern volatile unsigned int        CMSTATINV __attribute__((section("sfrs")));
 #define CM1CON CM1CON
 extern volatile unsigned int   CM1CON __attribute__((section("sfrs")));
 typedef struct {
@@ -2515,20 +2526,20 @@ extern volatile __CM3CONbits_t CM3CONbits __asm__ ("CM3CON") __attribute__((sect
 extern volatile unsigned int        CM3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CM3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CM3CONINV __attribute__((section("sfrs")));
-#define VR1CON VR1CON
-extern volatile unsigned int   VR1CON __attribute__((section("sfrs")));
+#define DAC1CON DAC1CON
+extern volatile unsigned int   DAC1CON __attribute__((section("sfrs")));
 typedef struct {
   unsigned REFSEL:2;
   unsigned :6;
-  unsigned VROE:1;
+  unsigned DACOE:1;
   unsigned :6;
   unsigned ON:1;
-  unsigned VRDAT:16;
-} __VR1CONbits_t;
-extern volatile __VR1CONbits_t VR1CONbits __asm__ ("VR1CON") __attribute__((section("sfrs")));
-extern volatile unsigned int        VR1CONCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        VR1CONSET __attribute__((section("sfrs")));
-extern volatile unsigned int        VR1CONINV __attribute__((section("sfrs")));
+  unsigned DACDAT:16;
+} __DAC1CONbits_t;
+extern volatile __DAC1CONbits_t DAC1CONbits __asm__ ("DAC1CON") __attribute__((section("sfrs")));
+extern volatile unsigned int        DAC1CONCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DAC1CONSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DAC1CONINV __attribute__((section("sfrs")));
 #define CLC1CON CLC1CON
 extern volatile unsigned int   CLC1CON __attribute__((section("sfrs")));
 typedef struct {
@@ -2850,7 +2861,10 @@ typedef struct {
   unsigned NOSC:3;
   unsigned :1;
   unsigned COSC:3;
-  unsigned :9;
+  unsigned :6;
+  unsigned SLP2SPD:1;
+  unsigned :1;
+  unsigned DRMEN:1;
   unsigned FRCDIV:3;
 } __OSCCONbits_t;
 extern volatile __OSCCONbits_t OSCCONbits __asm__ ("OSCCON") __attribute__((section("sfrs")));
@@ -2994,6 +3008,15 @@ extern volatile unsigned int        CLKSTATINV __attribute__((section("sfrs")));
 extern volatile unsigned int   OSCTUN __attribute__((section("sfrs")));
 typedef struct {
   unsigned TUN:6;
+  unsigned :2;
+  unsigned ORPOL:1;
+  unsigned OR:1;
+  unsigned POL:1;
+  unsigned LOCK:1;
+  unsigned SRC:1;
+  unsigned SIDL:1;
+  unsigned :1;
+  unsigned ON:1;
 } __OSCTUNbits_t;
 extern volatile __OSCTUNbits_t OSCTUNbits __asm__ ("OSCTUN") __attribute__((section("sfrs")));
 extern volatile unsigned int        OSCTUNCLR __attribute__((section("sfrs")));
@@ -3003,7 +3026,16 @@ extern volatile unsigned int        OSCTUNINV __attribute__((section("sfrs")));
 extern volatile unsigned int   DCOCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned TUN:6;
-  unsigned :18;
+  unsigned :2;
+  unsigned ORPOL:1;
+  unsigned OR:1;
+  unsigned POL:1;
+  unsigned LOCK:1;
+  unsigned SRC:1;
+  unsigned SIDL:1;
+  unsigned :1;
+  unsigned CREN:1;
+  unsigned :8;
   unsigned DCOFSEL:4;
   unsigned :1;
   unsigned ON:1;
@@ -3012,15 +3044,24 @@ extern volatile __DCOCONbits_t DCOCONbits __asm__ ("DCOCON") __attribute__((sect
 extern volatile unsigned int        DCOCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCOCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCOCONINV __attribute__((section("sfrs")));
-#define SYSKEY SYSKEY
-extern volatile unsigned int   SYSKEY __attribute__((section("sfrs")));
-typedef struct {
-  unsigned SYSKEY:32;
-} __SYSKEYbits_t;
-extern volatile __SYSKEYbits_t SYSKEYbits __asm__ ("SYSKEY") __attribute__((section("sfrs")));
-extern volatile unsigned int        SYSKEYCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        SYSKEYSET __attribute__((section("sfrs")));
-extern volatile unsigned int        SYSKEYINV __attribute__((section("sfrs")));
+#define ANCFG ANCFG
+extern volatile unsigned int   ANCFG __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :1;
+    unsigned BGCMP:1;
+    unsigned BGADC:1;
+  };
+  struct {
+    unsigned :1;
+    unsigned VBGCMP:1;
+    unsigned VBGADC:1;
+  };
+} __ANCFGbits_t;
+extern volatile __ANCFGbits_t ANCFGbits __asm__ ("ANCFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ANCFGCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        ANCFGSET __attribute__((section("sfrs")));
+extern volatile unsigned int        ANCFGINV __attribute__((section("sfrs")));
 #define HLVDCON HLVDCON
 extern volatile unsigned int   HLVDCON __attribute__((section("sfrs")));
 typedef struct {
@@ -3123,15 +3164,32 @@ extern volatile __NVMBWPbits_t NVMBWPbits __asm__ ("NVMBWP") __attribute__((sect
 extern volatile unsigned int        NVMBWPCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMBWPSET __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMBWPINV __attribute__((section("sfrs")));
+#define RPCON RPCON
+extern volatile unsigned int   RPCON __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :11;
+  unsigned IOLOCK:1;
+} __RPCONbits_t;
+extern volatile __RPCONbits_t RPCONbits __asm__ ("RPCON") __attribute__((section("sfrs")));
+extern volatile unsigned int        RPCONCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        RPCONSET __attribute__((section("sfrs")));
+extern volatile unsigned int        RPCONINV __attribute__((section("sfrs")));
 #define RPINR1 RPINR1
 extern volatile unsigned int   RPINR1 __attribute__((section("sfrs")));
+typedef struct {
+  unsigned INT4R:5;
+} __RPINR1bits_t;
+extern volatile __RPINR1bits_t RPINR1bits __asm__ ("RPINR1") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR1INV __attribute__((section("sfrs")));
 #define RPINR2 RPINR2
 extern volatile unsigned int   RPINR2 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned INT4R:5;
+  unsigned :16;
+  unsigned ICM1R:5;
+  unsigned :3;
+  unsigned ICM2R:5;
 } __RPINR2bits_t;
 extern volatile __RPINR2bits_t RPINR2bits __asm__ ("RPINR2") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR2CLR __attribute__((section("sfrs")));
@@ -3140,38 +3198,32 @@ extern volatile unsigned int        RPINR2INV __attribute__((section("sfrs")));
 #define RPINR3 RPINR3
 extern volatile unsigned int   RPINR3 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :16;
-  unsigned ICM1R:5;
+  unsigned ICM3R:5;
   unsigned :3;
-  unsigned ICM2R:5;
+  unsigned ICM4R:5;
 } __RPINR3bits_t;
 extern volatile __RPINR3bits_t RPINR3bits __asm__ ("RPINR3") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR3INV __attribute__((section("sfrs")));
-#define RPINR4 RPINR4
-extern volatile unsigned int   RPINR4 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ICM3R:5;
-  unsigned :3;
-  unsigned ICM4R:5;
-} __RPINR4bits_t;
-extern volatile __RPINR4bits_t RPINR4bits __asm__ ("RPINR4") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR4CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR4SET __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR4INV __attribute__((section("sfrs")));
 #define RPINR5 RPINR5
 extern volatile unsigned int   RPINR5 __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :16;
+  unsigned OCFAR:5;
+  unsigned :3;
+  unsigned OCFBR:5;
+} __RPINR5bits_t;
+extern volatile __RPINR5bits_t RPINR5bits __asm__ ("RPINR5") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR5INV __attribute__((section("sfrs")));
 #define RPINR6 RPINR6
 extern volatile unsigned int   RPINR6 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :16;
-  unsigned OCFAR:5;
+  unsigned TCKIAR:5;
   unsigned :3;
-  unsigned OCFBR:5;
+  unsigned TCKIBR:5;
 } __RPINR6bits_t;
 extern volatile __RPINR6bits_t RPINR6bits __asm__ ("RPINR6") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR6CLR __attribute__((section("sfrs")));
@@ -3180,9 +3232,13 @@ extern volatile unsigned int        RPINR6INV __attribute__((section("sfrs")));
 #define RPINR7 RPINR7
 extern volatile unsigned int   RPINR7 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned TCKIAR:5;
+  unsigned ICM5R:5;
   unsigned :3;
-  unsigned TCKIBR:5;
+  unsigned ICM6R:5;
+  unsigned :3;
+  unsigned ICM7R:5;
+  unsigned :3;
+  unsigned ICM8R:5;
 } __RPINR7bits_t;
 extern volatile __RPINR7bits_t RPINR7bits __asm__ ("RPINR7") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR7CLR __attribute__((section("sfrs")));
@@ -3191,13 +3247,9 @@ extern volatile unsigned int        RPINR7INV __attribute__((section("sfrs")));
 #define RPINR8 RPINR8
 extern volatile unsigned int   RPINR8 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned ICM5R:5;
-  unsigned :3;
-  unsigned ICM6R:5;
-  unsigned :3;
-  unsigned ICM7R:5;
-  unsigned :3;
-  unsigned ICM8R:5;
+  unsigned ICM9R:5;
+  unsigned :19;
+  unsigned U3RX:5;
 } __RPINR8bits_t;
 extern volatile __RPINR8bits_t RPINR8bits __asm__ ("RPINR8") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR8CLR __attribute__((section("sfrs")));
@@ -3206,9 +3258,10 @@ extern volatile unsigned int        RPINR8INV __attribute__((section("sfrs")));
 #define RPINR9 RPINR9
 extern volatile unsigned int   RPINR9 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned ICM9R:5;
-  unsigned :19;
-  unsigned U3RX:5;
+  unsigned :16;
+  unsigned U2RXR:5;
+  unsigned :3;
+  unsigned U2CTSR:5;
 } __RPINR9bits_t;
 extern volatile __RPINR9bits_t RPINR9bits __asm__ ("RPINR9") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR9CLR __attribute__((section("sfrs")));
@@ -3217,10 +3270,8 @@ extern volatile unsigned int        RPINR9INV __attribute__((section("sfrs")));
 #define RPINR10 RPINR10
 extern volatile unsigned int   RPINR10 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :16;
-  unsigned U2RXR:5;
-  unsigned :3;
-  unsigned U2CTSR:5;
+  unsigned :24;
+  unsigned U3CTS:5;
 } __RPINR10bits_t;
 extern volatile __RPINR10bits_t RPINR10bits __asm__ ("RPINR10") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR10CLR __attribute__((section("sfrs")));
@@ -3229,8 +3280,11 @@ extern volatile unsigned int        RPINR10INV __attribute__((section("sfrs")));
 #define RPINR11 RPINR11
 extern volatile unsigned int   RPINR11 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :24;
-  unsigned U3CTS:5;
+  unsigned SDI2R:5;
+  unsigned :3;
+  unsigned SCK2INR:5;
+  unsigned :3;
+  unsigned SS2INR:5;
 } __RPINR11bits_t;
 extern volatile __RPINR11bits_t RPINR11bits __asm__ ("RPINR11") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR11CLR __attribute__((section("sfrs")));
@@ -3239,52 +3293,25 @@ extern volatile unsigned int        RPINR11INV __attribute__((section("sfrs")));
 #define RPINR12 RPINR12
 extern volatile unsigned int   RPINR12 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned SDI2R:5;
+  unsigned :16;
+  unsigned CLCINAR:5;
   unsigned :3;
-  unsigned SCK2INR:5;
-  unsigned :3;
-  unsigned SS2INR:5;
+  unsigned CLCINBR:5;
 } __RPINR12bits_t;
 extern volatile __RPINR12bits_t RPINR12bits __asm__ ("RPINR12") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        RPINR12INV __attribute__((section("sfrs")));
-#define RPINR13 RPINR13
-extern volatile unsigned int   RPINR13 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned :16;
-  unsigned CLCINAR:5;
-  unsigned :3;
-  unsigned CLCINBR:5;
-} __RPINR13bits_t;
-extern volatile __RPINR13bits_t RPINR13bits __asm__ ("RPINR13") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR13CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR13SET __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR13INV __attribute__((section("sfrs")));
-#define RPINR14 RPINR14
-extern volatile unsigned int   RPINR14 __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR14CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR14SET __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR14INV __attribute__((section("sfrs")));
-#define RPINR15 RPINR15
-extern volatile unsigned int   RPINR15 __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR15CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR15SET __attribute__((section("sfrs")));
-#define RPINR16 RPINR16
-extern volatile unsigned int   RPINR16 __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR16CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR16SET __attribute__((section("sfrs")));
-extern volatile unsigned int        RPINR16INV __attribute__((section("sfrs")));
 #define RPOR0 RPOR0
 extern volatile unsigned int   RPOR0 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RP1R:4;
-  unsigned :4;
-  unsigned RP2R:4;
-  unsigned :4;
-  unsigned RP3R:4;
-  unsigned :4;
-  unsigned RP4R:4;
+  unsigned RP1R:5;
+  unsigned :3;
+  unsigned RP2R:5;
+  unsigned :3;
+  unsigned RP3R:5;
+  unsigned :3;
+  unsigned RP4R:5;
 } __RPOR0bits_t;
 extern volatile __RPOR0bits_t RPOR0bits __asm__ ("RPOR0") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR0CLR __attribute__((section("sfrs")));
@@ -3293,13 +3320,13 @@ extern volatile unsigned int        RPOR0INV __attribute__((section("sfrs")));
 #define RPOR1 RPOR1
 extern volatile unsigned int   RPOR1 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RP5R:4;
-  unsigned :4;
-  unsigned RP6R:4;
-  unsigned :4;
-  unsigned RP7R:4;
-  unsigned :4;
-  unsigned RP8R:4;
+  unsigned RP5R:5;
+  unsigned :3;
+  unsigned RP6R:5;
+  unsigned :3;
+  unsigned RP7R:5;
+  unsigned :3;
+  unsigned RP8R:5;
 } __RPOR1bits_t;
 extern volatile __RPOR1bits_t RPOR1bits __asm__ ("RPOR1") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR1CLR __attribute__((section("sfrs")));
@@ -3308,13 +3335,13 @@ extern volatile unsigned int        RPOR1INV __attribute__((section("sfrs")));
 #define RPOR2 RPOR2
 extern volatile unsigned int   RPOR2 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RP9R:4;
-  unsigned :4;
-  unsigned RP10R:4;
-  unsigned :4;
-  unsigned RP11R:4;
-  unsigned :4;
-  unsigned RP12R:4;
+  unsigned RP9R:5;
+  unsigned :3;
+  unsigned RP10R:5;
+  unsigned :3;
+  unsigned RP11R:5;
+  unsigned :3;
+  unsigned RP12R:5;
 } __RPOR2bits_t;
 extern volatile __RPOR2bits_t RPOR2bits __asm__ ("RPOR2") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR2CLR __attribute__((section("sfrs")));
@@ -3323,13 +3350,13 @@ extern volatile unsigned int        RPOR2INV __attribute__((section("sfrs")));
 #define RPOR3 RPOR3
 extern volatile unsigned int   RPOR3 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RP13R:4;
-  unsigned :4;
-  unsigned RP14R:4;
-  unsigned :4;
-  unsigned RP15R:4;
-  unsigned :4;
-  unsigned RP16R:4;
+  unsigned RP13R:5;
+  unsigned :3;
+  unsigned RP14R:5;
+  unsigned :3;
+  unsigned RP15R:5;
+  unsigned :3;
+  unsigned RP16R:5;
 } __RPOR3bits_t;
 extern volatile __RPOR3bits_t RPOR3bits __asm__ ("RPOR3") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR3CLR __attribute__((section("sfrs")));
@@ -3338,13 +3365,13 @@ extern volatile unsigned int        RPOR3INV __attribute__((section("sfrs")));
 #define RPOR4 RPOR4
 extern volatile unsigned int   RPOR4 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RP17R:4;
-  unsigned :4;
-  unsigned RP18R:4;
-  unsigned :4;
-  unsigned RP19R:4;
-  unsigned :4;
-  unsigned RP20R:4;
+  unsigned RP17R:5;
+  unsigned :3;
+  unsigned RP18R:5;
+  unsigned :3;
+  unsigned RP19R:5;
+  unsigned :3;
+  unsigned RP20R:5;
 } __RPOR4bits_t;
 extern volatile __RPOR4bits_t RPOR4bits __asm__ ("RPOR4") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR4CLR __attribute__((section("sfrs")));
@@ -3353,13 +3380,13 @@ extern volatile unsigned int        RPOR4INV __attribute__((section("sfrs")));
 #define RPOR5 RPOR5
 extern volatile unsigned int   RPOR5 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RPOR21:4;
-  unsigned :4;
-  unsigned RPOR22:4;
-  unsigned :4;
-  unsigned RPOR23:4;
-  unsigned :4;
-  unsigned RPOR24:4;
+  unsigned RPOR21:5;
+  unsigned :3;
+  unsigned RPOR22:5;
+  unsigned :3;
+  unsigned RPOR23:5;
+  unsigned :3;
+  unsigned RPOR24:5;
 } __RPOR5bits_t;
 extern volatile __RPOR5bits_t RPOR5bits __asm__ ("RPOR5") __attribute__((section("sfrs")));
 extern volatile unsigned int        RPOR5CLR __attribute__((section("sfrs")));
@@ -3582,17 +3609,8 @@ extern volatile unsigned int        CNFASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNFAINV __attribute__((section("sfrs")));
 #define SR0A SR0A
 extern volatile unsigned int   SR0A __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned SR0A0:1;
-    unsigned SR0A1:1;
-    unsigned SR0A2:1;
-    unsigned SR0A3:1;
-    unsigned SR0A4:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR0Abits_t;
 extern volatile __SR0Abits_t SR0Abits __asm__ ("SR0A") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0ACLR __attribute__((section("sfrs")));
@@ -3600,22 +3618,57 @@ extern volatile unsigned int        SR0ASET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0AINV __attribute__((section("sfrs")));
 #define SR1A SR1A
 extern volatile unsigned int   SR1A __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned SR0A0:1;
-    unsigned SR0A1:1;
-    unsigned SR0A2:1;
-    unsigned SR0A3:1;
-    unsigned SR0A4:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR1Abits_t;
 extern volatile __SR1Abits_t SR1Abits __asm__ ("SR1A") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1ACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1ASET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1AINV __attribute__((section("sfrs")));
+#define ANSELB ANSELB
+extern volatile unsigned int   ANSELB __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ANSB0:1;
+    unsigned ANSB1:1;
+    unsigned ANSB2:1;
+    unsigned ANSB3:1;
+    unsigned ANSB4:1;
+    unsigned :8;
+    unsigned ANSB13:1;
+    unsigned ANSB14:1;
+    unsigned ANSA15:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __ANSELBbits_t;
+extern volatile __ANSELBbits_t ANSELBbits __asm__ ("ANSELB") __attribute__((section("sfrs")));
+#define B B
+extern volatile unsigned int   B __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ANSB0:1;
+    unsigned ANSB1:1;
+    unsigned ANSB2:1;
+    unsigned ANSB3:1;
+    unsigned ANSB4:1;
+    unsigned :8;
+    unsigned ANSB13:1;
+    unsigned ANSB14:1;
+    unsigned ANSA15:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __Bbits_t;
+extern volatile __Bbits_t Bbits __asm__ ("B") __attribute__((section("sfrs")));
+extern volatile unsigned int        ANSELBCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        BCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        ANSELBSET __attribute__((section("sfrs")));
+extern volatile unsigned int        BSET __attribute__((section("sfrs")));
+extern volatile unsigned int        ANSELBINV __attribute__((section("sfrs")));
+extern volatile unsigned int        BINV __attribute__((section("sfrs")));
 #define TRISB TRISB
 extern volatile unsigned int   TRISB __attribute__((section("sfrs")));
 typedef union {
@@ -3632,7 +3685,7 @@ typedef union {
     unsigned TRISB9:1;
     unsigned TRISB10:1;
     unsigned TRISB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned TRISB13:1;
     unsigned TRISB14:1;
     unsigned TRISB15:1;
@@ -3661,7 +3714,7 @@ typedef union {
     unsigned RB9:1;
     unsigned RB10:1;
     unsigned RB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned RB13:1;
     unsigned RB14:1;
     unsigned RB15:1;
@@ -3690,7 +3743,7 @@ typedef union {
     unsigned LATB9:1;
     unsigned LATB10:1;
     unsigned LATB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned LATB13:1;
     unsigned LATB14:1;
     unsigned LATB15:1;
@@ -3719,7 +3772,7 @@ typedef union {
     unsigned ODCB9:1;
     unsigned ODCB10:1;
     unsigned ODCB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned ODCB13:1;
     unsigned ODCB14:1;
     unsigned ODCB15:1;
@@ -3748,7 +3801,7 @@ typedef union {
     unsigned CNPUB9:1;
     unsigned CNPUB10:1;
     unsigned CNPUB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNPUB13:1;
     unsigned CNPUB14:1;
     unsigned CNPUB15:1;
@@ -3777,7 +3830,7 @@ typedef union {
     unsigned CNPDB9:1;
     unsigned CNPDB10:1;
     unsigned CNPDB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNPDB13:1;
     unsigned CNPDB14:1;
     unsigned CNPDB15:1;
@@ -3824,7 +3877,7 @@ typedef union {
     unsigned CNIE0B9:1;
     unsigned CNIE0B10:1;
     unsigned CNIE0B11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNIE0B13:1;
     unsigned CNIE0B14:1;
     unsigned CNIE0B15:1;
@@ -3853,7 +3906,7 @@ typedef union {
     unsigned CNSTATB9:1;
     unsigned CNSTATB10:1;
     unsigned CNSTATB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNSTATB13:1;
     unsigned CNSTATB14:1;
     unsigned CNSTATB15:1;
@@ -3882,7 +3935,7 @@ typedef union {
     unsigned CNIE1B9:1;
     unsigned CNIE1B10:1;
     unsigned CNIE1B11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNIE1B13:1;
     unsigned CNIE1B14:1;
     unsigned CNIE1B15:1;
@@ -3911,7 +3964,7 @@ typedef union {
     unsigned CNFB9:1;
     unsigned CNFB10:1;
     unsigned CNFB11:1;
-    unsigned VBUSBIAS:1;
+    unsigned :1;
     unsigned CNFB13:1;
     unsigned CNFB14:1;
     unsigned CNFB15:1;
@@ -3926,28 +3979,8 @@ extern volatile unsigned int        CNFBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNFBINV __attribute__((section("sfrs")));
 #define SR0B SR0B
 extern volatile unsigned int   SR0B __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned SR0B0:1;
-    unsigned SR0B1:1;
-    unsigned SR0B2:1;
-    unsigned SR0B3:1;
-    unsigned SR0B4:1;
-    unsigned SR0B5:1;
-    unsigned SR0B6:1;
-    unsigned SR0B7:1;
-    unsigned SR0B8:1;
-    unsigned SR0B9:1;
-    unsigned SR0B10:1;
-    unsigned SR0B11:1;
-    unsigned SR0B12:1;
-    unsigned SR0B13:1;
-    unsigned SR0B14:1;
-    unsigned SR0B15:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR0Bbits_t;
 extern volatile __SR0Bbits_t SR0Bbits __asm__ ("SR0B") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0BCLR __attribute__((section("sfrs")));
@@ -3955,28 +3988,8 @@ extern volatile unsigned int        SR0BSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0BINV __attribute__((section("sfrs")));
 #define SR1B SR1B
 extern volatile unsigned int   SR1B __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned SR0B0:1;
-    unsigned SR0B1:1;
-    unsigned SR0B2:1;
-    unsigned SR0B3:1;
-    unsigned SR0B4:1;
-    unsigned SR0B5:1;
-    unsigned SR0B6:1;
-    unsigned SR0B7:1;
-    unsigned SR0B8:1;
-    unsigned SR0B9:1;
-    unsigned SR0B10:1;
-    unsigned SR0B11:1;
-    unsigned SR0B12:1;
-    unsigned SR0B13:1;
-    unsigned SR0B14:1;
-    unsigned SR0B15:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR1Bbits_t;
 extern volatile __SR1Bbits_t SR1Bbits __asm__ ("SR1B") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1BCLR __attribute__((section("sfrs")));
@@ -3984,6 +3997,10 @@ extern volatile unsigned int        SR1BSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1BINV __attribute__((section("sfrs")));
 #define ANSELC ANSELC
 extern volatile unsigned int   ANSELC __attribute__((section("sfrs")));
+typedef struct {
+  unsigned w:32;
+} __ANSELCbits_t;
+extern volatile __ANSELCbits_t ANSELCbits __asm__ ("ANSELC") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELCINV __attribute__((section("sfrs")));
@@ -4157,14 +4174,8 @@ extern volatile unsigned int        CNFCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNFCINV __attribute__((section("sfrs")));
 #define SR0C SR0C
 extern volatile unsigned int   SR0C __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned :9;
-    unsigned SR0C9:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR0Cbits_t;
 extern volatile __SR0Cbits_t SR0Cbits __asm__ ("SR0C") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0CCLR __attribute__((section("sfrs")));
@@ -4172,102 +4183,13 @@ extern volatile unsigned int        SR0CSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR0CINV __attribute__((section("sfrs")));
 #define SR1C SR1C
 extern volatile unsigned int   SR1C __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned :9;
-    unsigned SR0C9:1;
-  };
-  struct {
-    unsigned w:32;
-  };
+typedef struct {
+  unsigned w:32;
 } __SR1Cbits_t;
 extern volatile __SR1Cbits_t SR1Cbits __asm__ ("SR1C") __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1CCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1CSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SR1CINV __attribute__((section("sfrs")));
-#define ANSELD ANSELD
-extern volatile unsigned int   ANSELD __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELDINV __attribute__((section("sfrs")));
-#define TRISD TRISD
-extern volatile unsigned int   TRISD __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISDINV __attribute__((section("sfrs")));
-#define PORTD PORTD
-extern volatile unsigned int   PORTD __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTDINV __attribute__((section("sfrs")));
-#define LATD LATD
-extern volatile unsigned int   LATD __attribute__((section("sfrs")));
-extern volatile unsigned int        LATDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        LATDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        LATDINV __attribute__((section("sfrs")));
-#define ODCD ODCD
-extern volatile unsigned int   ODCD __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCDINV __attribute__((section("sfrs")));
-#define CNPUD CNPUD
-extern volatile unsigned int   CNPUD __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUDINV __attribute__((section("sfrs")));
-#define CNPDD CNPDD
-extern volatile unsigned int   CNPDD __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDDINV __attribute__((section("sfrs")));
-#define CNCOND CNCOND
-extern volatile unsigned int   CNCOND __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned :10;
-    unsigned PORT32:1;
-    unsigned CNSTYLE:1;
-    unsigned :3;
-    unsigned ON:1;
-  };
-  struct {
-    unsigned w:32;
-  };
-} __CNCONDbits_t;
-extern volatile __CNCONDbits_t CNCONDbits __asm__ ("CNCOND") __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONDINV __attribute__((section("sfrs")));
-#define CNEN0D CNEN0D
-extern volatile unsigned int   CNEN0D __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN0DCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN0DSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN0DINV __attribute__((section("sfrs")));
-#define CNSTATD CNSTATD
-extern volatile unsigned int   CNSTATD __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATDINV __attribute__((section("sfrs")));
-#define CNEN1D CNEN1D
-extern volatile unsigned int   CNEN1D __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN1DCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN1DSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEN1DINV __attribute__((section("sfrs")));
-#define CNFD CNFD
-extern volatile unsigned int   CNFD __attribute__((section("sfrs")));
-extern volatile unsigned int        CNFDCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CNFDSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CNFDINV __attribute__((section("sfrs")));
-#define SR0D SR0D
-extern volatile unsigned int   SR0D __attribute__((section("sfrs")));
-extern volatile unsigned int        SR0DCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        SR0DSET __attribute__((section("sfrs")));
-extern volatile unsigned int        SR0DINV __attribute__((section("sfrs")));
-#define SR1D SR1D
-extern volatile unsigned int   SR1D __attribute__((section("sfrs")));
-extern volatile unsigned int        SR1DCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        SR1DSET __attribute__((section("sfrs")));
-extern volatile unsigned int        SR1DINV __attribute__((section("sfrs")));
 #define PMDCON PMDCON
 extern volatile unsigned int   PMDCON __attribute__((section("sfrs")));
 typedef struct {
@@ -4378,16 +4300,6 @@ extern volatile __PMD7bits_t PMD7bits __asm__ ("PMD7") __attribute__((section("s
 extern volatile unsigned int        PMD7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD7INV __attribute__((section("sfrs")));
-#define RPCON RPCON
-extern volatile unsigned int   RPCON __attribute__((section("sfrs")));
-typedef struct {
-  unsigned :11;
-  unsigned IOLOCK:1;
-} __RPCONbits_t;
-extern volatile __RPCONbits_t RPCONbits __asm__ ("RPCON") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPCONCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        RPCONSET __attribute__((section("sfrs")));
-extern volatile unsigned int        RPCONINV __attribute__((section("sfrs")));
 #define CFGCON CFGCON
 extern volatile unsigned int   CFGCON __attribute__((section("sfrs")));
 typedef struct {
@@ -5522,6 +5434,133 @@ extern volatile unsigned int   DCRCXOR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORINV __attribute__((section("sfrs")));
+#define DCH0CON DCH0CON
+extern volatile unsigned int   DCH0CON __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned CHPRI:2;
+    unsigned CHEDET:1;
+    unsigned :1;
+    unsigned CHAEN:1;
+    unsigned CHCHN:1;
+    unsigned CHAED:1;
+    unsigned CHEN:1;
+    unsigned CHCHNS:1;
+    unsigned :6;
+    unsigned CHBUSY:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DCH0CONbits_t;
+extern volatile __DCH0CONbits_t DCH0CONbits __asm__ ("DCH0CON") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CONCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CONSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CONINV __attribute__((section("sfrs")));
+#define DCH0ECON DCH0ECON
+extern volatile unsigned int   DCH0ECON __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :3;
+    unsigned AIRQEN:1;
+    unsigned SIRQEN:1;
+    unsigned PATEN:1;
+    unsigned CABORT:1;
+    unsigned CFORCE:1;
+    unsigned CHSIRQ:8;
+    unsigned CHAIRQ:8;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DCH0ECONbits_t;
+extern volatile __DCH0ECONbits_t DCH0ECONbits __asm__ ("DCH0ECON") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0ECONCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0ECONSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0ECONINV __attribute__((section("sfrs")));
+#define DCH0INT DCH0INT
+extern volatile unsigned int   DCH0INT __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned CHERIF:1;
+    unsigned CHTAIF:1;
+    unsigned CHCCIF:1;
+    unsigned CHBCIF:1;
+    unsigned CHDHIF:1;
+    unsigned CHDDIF:1;
+    unsigned CHSHIF:1;
+    unsigned CHSDIF:1;
+    unsigned :8;
+    unsigned CHERIE:1;
+    unsigned CHTAIE:1;
+    unsigned CHCCIE:1;
+    unsigned CHBCIE:1;
+    unsigned CHDHIE:1;
+    unsigned CHDDIE:1;
+    unsigned CHSHIE:1;
+    unsigned CHSDIE:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DCH0INTbits_t;
+extern volatile __DCH0INTbits_t DCH0INTbits __asm__ ("DCH0INT") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0INTCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0INTSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0INTINV __attribute__((section("sfrs")));
+#define DCH0SSA DCH0SSA
+extern volatile unsigned int   DCH0SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH0SSAbits_t;
+extern volatile __DCH0SSAbits_t DCH0SSAbits __asm__ ("DCH0SSA") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSACLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSASET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSAINV __attribute__((section("sfrs")));
+#define DCH0DSA DCH0DSA
+extern volatile unsigned int   DCH0DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH0DSAbits_t;
+extern volatile __DCH0DSAbits_t DCH0DSAbits __asm__ ("DCH0DSA") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSACLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSASET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSAINV __attribute__((section("sfrs")));
+#define DCH0SSIZ DCH0SSIZ
+extern volatile unsigned int   DCH0SSIZ __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSIZCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSIZSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SSIZINV __attribute__((section("sfrs")));
+#define DCH0DSIZ DCH0DSIZ
+extern volatile unsigned int   DCH0DSIZ __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSIZCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSIZSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DSIZINV __attribute__((section("sfrs")));
+#define DCH0SPTR DCH0SPTR
+extern volatile unsigned int   DCH0SPTR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0SPTRINV __attribute__((section("sfrs")));
+#define DCH0DPTR DCH0DPTR
+extern volatile unsigned int   DCH0DPTR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DPTRINV __attribute__((section("sfrs")));
+#define DCH0CSIZ DCH0CSIZ
+extern volatile unsigned int   DCH0CSIZ __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CSIZCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CSIZSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CSIZINV __attribute__((section("sfrs")));
+#define DCH0CPTR DCH0CPTR
+extern volatile unsigned int   DCH0CPTR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRINV __attribute__((section("sfrs")));
+#define DCH0DAT DCH0DAT
+extern volatile unsigned int   DCH0DAT __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DATCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DATSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0DATINV __attribute__((section("sfrs")));
 #define DCH1CON DCH1CON
 extern volatile unsigned int   DCH1CON __attribute__((section("sfrs")));
 typedef union {
@@ -5903,133 +5942,6 @@ extern volatile unsigned int   DCH3DAT __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATINV __attribute__((section("sfrs")));
-#define DCH4CON DCH4CON
-extern volatile unsigned int   DCH4CON __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned CHPRI:2;
-    unsigned CHEDET:1;
-    unsigned :1;
-    unsigned CHAEN:1;
-    unsigned CHCHN:1;
-    unsigned CHAED:1;
-    unsigned CHEN:1;
-    unsigned CHCHNS:1;
-    unsigned :6;
-    unsigned CHBUSY:1;
-  };
-  struct {
-    unsigned w:32;
-  };
-} __DCH4CONbits_t;
-extern volatile __DCH4CONbits_t DCH4CONbits __asm__ ("DCH4CON") __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CONCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CONSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CONINV __attribute__((section("sfrs")));
-#define DCH4ECON DCH4ECON
-extern volatile unsigned int   DCH4ECON __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned :3;
-    unsigned AIRQEN:1;
-    unsigned SIRQEN:1;
-    unsigned PATEN:1;
-    unsigned CABORT:1;
-    unsigned CFORCE:1;
-    unsigned CHSIRQ:8;
-    unsigned CHAIRQ:8;
-  };
-  struct {
-    unsigned w:32;
-  };
-} __DCH4ECONbits_t;
-extern volatile __DCH4ECONbits_t DCH4ECONbits __asm__ ("DCH4ECON") __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4ECONCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4ECONSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4ECONINV __attribute__((section("sfrs")));
-#define DCH4INT DCH4INT
-extern volatile unsigned int   DCH4INT __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned CHERIF:1;
-    unsigned CHTAIF:1;
-    unsigned CHCCIF:1;
-    unsigned CHBCIF:1;
-    unsigned CHDHIF:1;
-    unsigned CHDDIF:1;
-    unsigned CHSHIF:1;
-    unsigned CHSDIF:1;
-    unsigned :8;
-    unsigned CHERIE:1;
-    unsigned CHTAIE:1;
-    unsigned CHCCIE:1;
-    unsigned CHBCIE:1;
-    unsigned CHDHIE:1;
-    unsigned CHDDIE:1;
-    unsigned CHSHIE:1;
-    unsigned CHSDIE:1;
-  };
-  struct {
-    unsigned w:32;
-  };
-} __DCH4INTbits_t;
-extern volatile __DCH4INTbits_t DCH4INTbits __asm__ ("DCH4INT") __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4INTCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4INTSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4INTINV __attribute__((section("sfrs")));
-#define DCH4SSA DCH4SSA
-extern volatile unsigned int   DCH4SSA __attribute__((section("sfrs")));
-typedef struct {
-  unsigned CHSSA:32;
-} __DCH4SSAbits_t;
-extern volatile __DCH4SSAbits_t DCH4SSAbits __asm__ ("DCH4SSA") __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSACLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSASET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSAINV __attribute__((section("sfrs")));
-#define DCH4DSA DCH4DSA
-extern volatile unsigned int   DCH4DSA __attribute__((section("sfrs")));
-typedef struct {
-  unsigned CHDSA:32;
-} __DCH4DSAbits_t;
-extern volatile __DCH4DSAbits_t DCH4DSAbits __asm__ ("DCH4DSA") __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSACLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSASET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSAINV __attribute__((section("sfrs")));
-#define DCH4SSIZ DCH4SSIZ
-extern volatile unsigned int   DCH4SSIZ __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSIZCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSIZSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SSIZINV __attribute__((section("sfrs")));
-#define DCH4DSIZ DCH4DSIZ
-extern volatile unsigned int   DCH4DSIZ __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSIZCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSIZSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DSIZINV __attribute__((section("sfrs")));
-#define DCH4SPTR DCH4SPTR
-extern volatile unsigned int   DCH4SPTR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SPTRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SPTRSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4SPTRINV __attribute__((section("sfrs")));
-#define DCH4DPTR DCH4DPTR
-extern volatile unsigned int   DCH4DPTR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DPTRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DPTRSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DPTRINV __attribute__((section("sfrs")));
-#define DCH4CSIZ DCH4CSIZ
-extern volatile unsigned int   DCH4CSIZ __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CSIZCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CSIZSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CSIZINV __attribute__((section("sfrs")));
-#define DCH4CPTR DCH4CPTR
-extern volatile unsigned int   DCH4CPTR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CPTRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CPTRSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4CPTRINV __attribute__((section("sfrs")));
-#define DCH4DAT DCH4DAT
-extern volatile unsigned int   DCH4DAT __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DATCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DATSET __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH4DATINV __attribute__((section("sfrs")));
 #define INTCON INTCON
 extern volatile unsigned int   INTCON __attribute__((section("sfrs")));
 typedef struct {
@@ -6046,6 +5958,9 @@ typedef struct {
   unsigned VS:7;
 } __INTCONbits_t;
 extern volatile __INTCONbits_t INTCONbits __asm__ ("INTCON") __attribute__((section("sfrs")));
+extern volatile unsigned int        INTCONCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        INTCONSET __attribute__((section("sfrs")));
+extern volatile unsigned int        INTCONINV __attribute__((section("sfrs")));
 #define PRISS PRISS
 extern volatile unsigned int   PRISS __attribute__((section("sfrs")));
 typedef struct {
@@ -6112,7 +6027,7 @@ typedef union {
     unsigned CMP1IF:1;
     unsigned CMP2IF:1;
     unsigned CMP3IF:1;
-    unsigned :4;
+    unsigned :3;
     unsigned USBIF:1;
   };
   struct {
@@ -6171,8 +6086,8 @@ typedef struct {
   unsigned I2C1MIF:1;
   unsigned I2C1BCIF:1;
   unsigned I2C2SIF:1;
-  unsigned I2CMIF:1;
-  unsigned I2CBCIF:1;
+  unsigned I2C2MIF:1;
+  unsigned I2C2BCIF:1;
   unsigned I2C3SIF:1;
   unsigned I2C3MIF:1;
   unsigned I2C3BCIF:1;
@@ -6206,7 +6121,7 @@ extern volatile unsigned int        IFS2INV __attribute__((section("sfrs")));
 #define IFS3 IFS3
 extern volatile unsigned int   IFS3 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :1;
+  unsigned FDCIE:1;
   unsigned ECCBEIF:1;
   unsigned DMA0IF:1;
   unsigned DMA1IF:1;
@@ -6241,7 +6156,7 @@ typedef union {
     unsigned CMP1IE:1;
     unsigned CMP2IE:1;
     unsigned CMP3IE:1;
-    unsigned :4;
+    unsigned :3;
     unsigned USBIE:1;
   };
   struct {
@@ -6302,7 +6217,7 @@ typedef union {
     unsigned I2C1BCIE:1;
     unsigned I2C2SIE:1;
     unsigned I2C2MIE:1;
-    unsigned I2CBCIE:1;
+    unsigned I2C2BCIE:1;
     unsigned I2C3SIE:1;
     unsigned I2C3MIE:1;
     unsigned I2C3BCIE:1;
@@ -6338,6 +6253,7 @@ extern volatile unsigned int        IEC2INV __attribute__((section("sfrs")));
 extern volatile unsigned int   IEC3 __attribute__((section("sfrs")));
 typedef union {
   struct {
+    unsigned FDCIE:1;
     unsigned ECCBEIE:1;
     unsigned DMA0IE:1;
     unsigned DMA1IE:1;
@@ -6630,8 +6546,8 @@ extern volatile unsigned int        IPC13INV __attribute__((section("sfrs")));
 extern volatile unsigned int   IPC14 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned U1RXIS:2;
-    unsigned U1RXIP:3;
+    unsigned U2RXIS:2;
+    unsigned U2RXIP:3;
     unsigned :3;
     unsigned U2TXIS:2;
     unsigned U2TXIP:3;
@@ -6886,8 +6802,6 @@ typedef union {
     unsigned :2;
     unsigned JTAGEN:1;
     unsigned ICS:2;
-    unsigned :2;
-    unsigned UXDDIS:1;
   };
   struct {
     unsigned w:32;
@@ -6957,6 +6871,99 @@ typedef union {
   };
 } __FSECbits_t;
 extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("sfrs")));
+#define AFDEVOPT AFDEVOPT
+extern volatile unsigned int   AFDEVOPT __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :3;
+    unsigned SOSCHP:1;
+    unsigned ALTI2C:1;
+    unsigned :9;
+    unsigned FUSBIDIO:1;
+    unsigned FVBUSIO:1;
+    unsigned USERID:16;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFDEVOPTbits_t;
+extern volatile __AFDEVOPTbits_t AFDEVOPTbits __asm__ ("AFDEVOPT") __attribute__((section("sfrs")));
+#define AFICD AFICD
+extern volatile unsigned int   AFICD __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :2;
+    unsigned JTAGEN:1;
+    unsigned ICS:2;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFICDbits_t;
+extern volatile __AFICDbits_t AFICDbits __asm__ ("AFICD") __attribute__((section("sfrs")));
+#define AFPOR AFPOR
+extern volatile unsigned int   AFPOR __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned BOREN:2;
+    unsigned RETVR:1;
+    unsigned LPBOREN:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFPORbits_t;
+extern volatile __AFPORbits_t AFPORbits __asm__ ("AFPOR") __attribute__((section("sfrs")));
+#define AFWDT AFWDT
+extern volatile unsigned int   AFWDT __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned SWDTPS:5;
+    unsigned FWDTWINSZ:2;
+    unsigned WINDIS:1;
+    unsigned RWDTPS:5;
+    unsigned RCLKSEL:2;
+    unsigned FWDTEN:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFWDTbits_t;
+extern volatile __AFWDTbits_t AFWDTbits __asm__ ("AFWDT") __attribute__((section("sfrs")));
+#define AFOSCSEL AFOSCSEL
+extern volatile unsigned int   AFOSCSEL __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned FNOSC:3;
+    unsigned :1;
+    unsigned PLLSRC:1;
+    unsigned :1;
+    unsigned SOSCEN:1;
+    unsigned IESO:1;
+    unsigned POSCMOD:2;
+    unsigned OSCIOFNC:1;
+    unsigned :1;
+    unsigned SOSCSEL:1;
+    unsigned :1;
+    unsigned FCKSM:2;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFOSCSELbits_t;
+extern volatile __AFOSCSELbits_t AFOSCSELbits __asm__ ("AFOSCSEL") __attribute__((section("sfrs")));
+#define AFSEC AFSEC
+extern volatile unsigned int   AFSEC __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :31;
+    unsigned CP:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AFSECbits_t;
+extern volatile __AFSECbits_t AFSECbits __asm__ ("AFSEC") __attribute__((section("sfrs")));
 #ifdef __cplusplus
 }
 #endif
@@ -7556,6 +7563,10 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern AD1CHITCLR       /* 0xBF8022D4 */
   .extern AD1CHITSET       /* 0xBF8022D8 */
   .extern AD1CHITINV       /* 0xBF8022DC */
+  .extern CMSTAT           /* 0xBF802300 */
+  .extern CMSTATCLR        /* 0xBF802304 */
+  .extern CMSTATSET        /* 0xBF802308 */
+  .extern CMSTATINV        /* 0xBF80230C */
   .extern CM1CON           /* 0xBF802310 */
   .extern CM1CONCLR        /* 0xBF802314 */
   .extern CM1CONSET        /* 0xBF802318 */
@@ -7568,10 +7579,10 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern CM3CONCLR        /* 0xBF802354 */
   .extern CM3CONSET        /* 0xBF802358 */
   .extern CM3CONINV        /* 0xBF80235C */
-  .extern VR1CON           /* 0xBF802380 */
-  .extern VR1CONCLR        /* 0xBF802384 */
-  .extern VR1CONSET        /* 0xBF802388 */
-  .extern VR1CONINV        /* 0xBF80238C */
+  .extern DAC1CON          /* 0xBF802380 */
+  .extern DAC1CONCLR       /* 0xBF802384 */
+  .extern DAC1CONSET       /* 0xBF802388 */
+  .extern DAC1CONINV       /* 0xBF80238C */
   .extern CLC1CON          /* 0xBF802480 */
   .extern CLC1CONCLR       /* 0xBF802484 */
   .extern CLC1CONSET       /* 0xBF802488 */
@@ -7664,10 +7675,10 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern DCOCONCLR        /* 0xBF802904 */
   .extern DCOCONSET        /* 0xBF802908 */
   .extern DCOCONINV        /* 0xBF80290C */
-  .extern SYSKEY           /* 0xBF803670 */
-  .extern SYSKEYCLR        /* 0xBF803674 */
-  .extern SYSKEYSET        /* 0xBF803678 */
-  .extern SYSKEYINV        /* 0xBF80367C */
+  .extern ANCFG            /* 0xBF802910 */
+  .extern ANCFGCLR         /* 0xBF802914 */
+  .extern ANCFGSET         /* 0xBF802918 */
+  .extern ANCFGINV         /* 0xBF80291C */
   .extern HLVDCON          /* 0xBF802920 */
   .extern HLVDCONCLR       /* 0xBF802924 */
   .extern HLVDCONSET       /* 0xBF802928 */
@@ -7704,93 +7715,78 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern NVMBWPCLR        /* 0xBF8029A4 */
   .extern NVMBWPSET        /* 0xBF8029A8 */
   .extern NVMBWPINV        /* 0xBF8029AC */
-  .extern RPINR1           /* 0xBF802A00 */
-  .extern RPINR1CLR        /* 0xBF802A04 */
-  .extern RPINR1SET        /* 0xBF802A08 */
-  .extern RPINR1INV        /* 0xBF802A0C */
-  .extern RPINR2           /* 0xBF802A10 */
-  .extern RPINR2CLR        /* 0xBF802A14 */
-  .extern RPINR2SET        /* 0xBF802A18 */
-  .extern RPINR2INV        /* 0xBF802A1C */
-  .extern RPINR3           /* 0xBF802A20 */
-  .extern RPINR3CLR        /* 0xBF802A24 */
-  .extern RPINR3SET        /* 0xBF802A28 */
-  .extern RPINR3INV        /* 0xBF802A2C */
-  .extern RPINR4           /* 0xBF802A30 */
-  .extern RPINR4CLR        /* 0xBF802A34 */
-  .extern RPINR4SET        /* 0xBF802A38 */
-  .extern RPINR4INV        /* 0xBF802A3C */
-  .extern RPINR5           /* 0xBF802A40 */
-  .extern RPINR5CLR        /* 0xBF802A44 */
-  .extern RPINR5SET        /* 0xBF802A48 */
-  .extern RPINR5INV        /* 0xBF802A4C */
-  .extern RPINR6           /* 0xBF802A50 */
-  .extern RPINR6CLR        /* 0xBF802A54 */
-  .extern RPINR6SET        /* 0xBF802A58 */
-  .extern RPINR6INV        /* 0xBF802A5C */
-  .extern RPINR7           /* 0xBF802A60 */
-  .extern RPINR7CLR        /* 0xBF802A64 */
-  .extern RPINR7SET        /* 0xBF802A68 */
-  .extern RPINR7INV        /* 0xBF802A6C */
-  .extern RPINR8           /* 0xBF802A70 */
-  .extern RPINR8CLR        /* 0xBF802A74 */
-  .extern RPINR8SET        /* 0xBF802A78 */
-  .extern RPINR8INV        /* 0xBF802A7C */
-  .extern RPINR9           /* 0xBF802A80 */
-  .extern RPINR9CLR        /* 0xBF802A84 */
-  .extern RPINR9SET        /* 0xBF802A88 */
-  .extern RPINR9INV        /* 0xBF802A8C */
-  .extern RPINR10          /* 0xBF802A90 */
-  .extern RPINR10CLR       /* 0xBF802A94 */
-  .extern RPINR10SET       /* 0xBF802A98 */
-  .extern RPINR10INV       /* 0xBF802A9C */
-  .extern RPINR11          /* 0xBF802AA0 */
-  .extern RPINR11CLR       /* 0xBF802AA4 */
-  .extern RPINR11SET       /* 0xBF802AA8 */
-  .extern RPINR11INV       /* 0xBF802AAC */
-  .extern RPINR12          /* 0xBF802AB0 */
-  .extern RPINR12CLR       /* 0xBF802AB4 */
-  .extern RPINR12SET       /* 0xBF802AB8 */
-  .extern RPINR12INV       /* 0xBF802ABC */
-  .extern RPINR13          /* 0xBF802AC0 */
-  .extern RPINR13CLR       /* 0xBF802AC4 */
-  .extern RPINR13SET       /* 0xBF802AC8 */
-  .extern RPINR13INV       /* 0xBF802ACC */
-  .extern RPINR14          /* 0xBF802AD0 */
-  .extern RPINR14CLR       /* 0xBF802AD4 */
-  .extern RPINR14SET       /* 0xBF802AD8 */
-  .extern RPINR14INV       /* 0xBF802ADC */
-  .extern RPINR15          /* 0xBF802AE0 */
-  .extern RPINR15CLR       /* 0xBF802AE4 */
-  .extern RPINR15SET       /* 0xBF802AE8 */
-  .extern RPINR16          /* 0xBF802AF0 */
-  .extern RPINR16CLR       /* 0xBF802AF4 */
-  .extern RPINR16SET       /* 0xBF802AF8 */
-  .extern RPINR16INV       /* 0xBF802AFC */
-  .extern RPOR0            /* 0xBF802B00 */
-  .extern RPOR0CLR         /* 0xBF802B04 */
-  .extern RPOR0SET         /* 0xBF802B08 */
-  .extern RPOR0INV         /* 0xBF802B0C */
-  .extern RPOR1            /* 0xBF802B10 */
-  .extern RPOR1CLR         /* 0xBF802B14 */
-  .extern RPOR1SET         /* 0xBF802B18 */
-  .extern RPOR1INV         /* 0xBF802B1C */
-  .extern RPOR2            /* 0xBF802B20 */
-  .extern RPOR2CLR         /* 0xBF802B24 */
-  .extern RPOR2SET         /* 0xBF802B28 */
-  .extern RPOR2INV         /* 0xBF802B2C */
-  .extern RPOR3            /* 0xBF802B30 */
-  .extern RPOR3CLR         /* 0xBF802B34 */
-  .extern RPOR3SET         /* 0xBF802B38 */
-  .extern RPOR3INV         /* 0xBF802B3C */
-  .extern RPOR4            /* 0xBF802B40 */
-  .extern RPOR4CLR         /* 0xBF802B44 */
-  .extern RPOR4SET         /* 0xBF802B48 */
-  .extern RPOR4INV         /* 0xBF802B4C */
-  .extern RPOR5            /* 0xBF802B50 */
-  .extern RPOR5CLR         /* 0xBF802B54 */
-  .extern RPOR5SET         /* 0xBF802B58 */
-  .extern RPOR5INV         /* 0xBF802B5C */
+  .extern RPCON            /* 0xBF802A00 */
+  .extern RPCONCLR         /* 0xBF802A04 */
+  .extern RPCONSET         /* 0xBF802A08 */
+  .extern RPCONINV         /* 0xBF802A0C */
+  .extern RPINR1           /* 0xBF802A20 */
+  .extern RPINR1CLR        /* 0xBF802A24 */
+  .extern RPINR1SET        /* 0xBF802A28 */
+  .extern RPINR1INV        /* 0xBF802A2C */
+  .extern RPINR2           /* 0xBF802A30 */
+  .extern RPINR2CLR        /* 0xBF802A34 */
+  .extern RPINR2SET        /* 0xBF802A38 */
+  .extern RPINR2INV        /* 0xBF802A3C */
+  .extern RPINR3           /* 0xBF802A40 */
+  .extern RPINR3CLR        /* 0xBF802A44 */
+  .extern RPINR3SET        /* 0xBF802A48 */
+  .extern RPINR3INV        /* 0xBF802A4C */
+  .extern RPINR5           /* 0xBF802A60 */
+  .extern RPINR5CLR        /* 0xBF802A64 */
+  .extern RPINR5SET        /* 0xBF802A68 */
+  .extern RPINR5INV        /* 0xBF802A6C */
+  .extern RPINR6           /* 0xBF802A70 */
+  .extern RPINR6CLR        /* 0xBF802A74 */
+  .extern RPINR6SET        /* 0xBF802A78 */
+  .extern RPINR6INV        /* 0xBF802A7C */
+  .extern RPINR7           /* 0xBF802A80 */
+  .extern RPINR7CLR        /* 0xBF802A84 */
+  .extern RPINR7SET        /* 0xBF802A88 */
+  .extern RPINR7INV        /* 0xBF802A8C */
+  .extern RPINR8           /* 0xBF802A90 */
+  .extern RPINR8CLR        /* 0xBF802A94 */
+  .extern RPINR8SET        /* 0xBF802A98 */
+  .extern RPINR8INV        /* 0xBF802A9C */
+  .extern RPINR9           /* 0xBF802AA0 */
+  .extern RPINR9CLR        /* 0xBF802AA4 */
+  .extern RPINR9SET        /* 0xBF802AA8 */
+  .extern RPINR9INV        /* 0xBF802AAC */
+  .extern RPINR10          /* 0xBF802AB0 */
+  .extern RPINR10CLR       /* 0xBF802AB4 */
+  .extern RPINR10SET       /* 0xBF802AB8 */
+  .extern RPINR10INV       /* 0xBF802ABC */
+  .extern RPINR11          /* 0xBF802AC0 */
+  .extern RPINR11CLR       /* 0xBF802AC4 */
+  .extern RPINR11SET       /* 0xBF802AC8 */
+  .extern RPINR11INV       /* 0xBF802ACC */
+  .extern RPINR12          /* 0xBF802AD0 */
+  .extern RPINR12CLR       /* 0xBF802AD4 */
+  .extern RPINR12SET       /* 0xBF802AD8 */
+  .extern RPINR12INV       /* 0xBF802ADC */
+  .extern RPOR0            /* 0xBF802B10 */
+  .extern RPOR0CLR         /* 0xBF802B14 */
+  .extern RPOR0SET         /* 0xBF802B18 */
+  .extern RPOR0INV         /* 0xBF802B1C */
+  .extern RPOR1            /* 0xBF802B20 */
+  .extern RPOR1CLR         /* 0xBF802B24 */
+  .extern RPOR1SET         /* 0xBF802B28 */
+  .extern RPOR1INV         /* 0xBF802B2C */
+  .extern RPOR2            /* 0xBF802B30 */
+  .extern RPOR2CLR         /* 0xBF802B34 */
+  .extern RPOR2SET         /* 0xBF802B38 */
+  .extern RPOR2INV         /* 0xBF802B3C */
+  .extern RPOR3            /* 0xBF802B40 */
+  .extern RPOR3CLR         /* 0xBF802B44 */
+  .extern RPOR3SET         /* 0xBF802B48 */
+  .extern RPOR3INV         /* 0xBF802B4C */
+  .extern RPOR4            /* 0xBF802B50 */
+  .extern RPOR4CLR         /* 0xBF802B54 */
+  .extern RPOR4SET         /* 0xBF802B58 */
+  .extern RPOR4INV         /* 0xBF802B5C */
+  .extern RPOR5            /* 0xBF802B60 */
+  .extern RPOR5CLR         /* 0xBF802B64 */
+  .extern RPOR5SET         /* 0xBF802B68 */
+  .extern RPOR5INV         /* 0xBF802B6C */
   .extern ANSELA           /* 0xBF802BB0 */
   .extern ANSELACLR        /* 0xBF802BB4 */
   .extern ANSELASET        /* 0xBF802BB8 */
@@ -7847,6 +7843,14 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern SR1ACLR          /* 0xBF802C84 */
   .extern SR1ASET          /* 0xBF802C88 */
   .extern SR1AINV          /* 0xBF802C8C */
+  .extern ANSELB           /* 0xBF802CB0 */
+  .extern B                /* 0xBF802CB0 */
+  .extern ANSELBCLR        /* 0xBF802CB4 */
+  .extern BCLR             /* 0xBF802CB4 */
+  .extern ANSELBSET        /* 0xBF802CB8 */
+  .extern BSET             /* 0xBF802CB8 */
+  .extern ANSELBINV        /* 0xBF802CBC */
+  .extern BINV             /* 0xBF802CBC */
   .extern TRISB            /* 0xBF802CC0 */
   .extern TRISBCLR         /* 0xBF802CC4 */
   .extern TRISBSET         /* 0xBF802CC8 */
@@ -7955,62 +7959,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern SR1CCLR          /* 0xBF802E84 */
   .extern SR1CSET          /* 0xBF802E88 */
   .extern SR1CINV          /* 0xBF802E8C */
-  .extern ANSELD           /* 0xBF802EB0 */
-  .extern ANSELDCLR        /* 0xBF802EB4 */
-  .extern ANSELDSET        /* 0xBF802EB8 */
-  .extern ANSELDINV        /* 0xBF802EBC */
-  .extern TRISD            /* 0xBF802EC0 */
-  .extern TRISDCLR         /* 0xBF802EC4 */
-  .extern TRISDSET         /* 0xBF802EC8 */
-  .extern TRISDINV         /* 0xBF802ECC */
-  .extern PORTD            /* 0xBF802ED0 */
-  .extern PORTDCLR         /* 0xBF802ED4 */
-  .extern PORTDSET         /* 0xBF802ED8 */
-  .extern PORTDINV         /* 0xBF802EDC */
-  .extern LATD             /* 0xBF802EE0 */
-  .extern LATDCLR          /* 0xBF802EE4 */
-  .extern LATDSET          /* 0xBF802EE8 */
-  .extern LATDINV          /* 0xBF802EEC */
-  .extern ODCD             /* 0xBF802EF0 */
-  .extern ODCDCLR          /* 0xBF802EF4 */
-  .extern ODCDSET          /* 0xBF802EF8 */
-  .extern ODCDINV          /* 0xBF802EFC */
-  .extern CNPUD            /* 0xBF802F00 */
-  .extern CNPUDCLR         /* 0xBF802F04 */
-  .extern CNPUDSET         /* 0xBF802F08 */
-  .extern CNPUDINV         /* 0xBF802F0C */
-  .extern CNPDD            /* 0xBF802F10 */
-  .extern CNPDDCLR         /* 0xBF802F14 */
-  .extern CNPDDSET         /* 0xBF802F18 */
-  .extern CNPDDINV         /* 0xBF802F1C */
-  .extern CNCOND           /* 0xBF802F20 */
-  .extern CNCONDCLR        /* 0xBF802F24 */
-  .extern CNCONDSET        /* 0xBF802F28 */
-  .extern CNCONDINV        /* 0xBF802F2C */
-  .extern CNEN0D           /* 0xBF802F30 */
-  .extern CNEN0DCLR        /* 0xBF802F34 */
-  .extern CNEN0DSET        /* 0xBF802F38 */
-  .extern CNEN0DINV        /* 0xBF802F3C */
-  .extern CNSTATD          /* 0xBF802F40 */
-  .extern CNSTATDCLR       /* 0xBF802F44 */
-  .extern CNSTATDSET       /* 0xBF802F48 */
-  .extern CNSTATDINV       /* 0xBF802F4C */
-  .extern CNEN1D           /* 0xBF802F50 */
-  .extern CNEN1DCLR        /* 0xBF802F54 */
-  .extern CNEN1DSET        /* 0xBF802F58 */
-  .extern CNEN1DINV        /* 0xBF802F5C */
-  .extern CNFD             /* 0xBF802F60 */
-  .extern CNFDCLR          /* 0xBF802F64 */
-  .extern CNFDSET          /* 0xBF802F68 */
-  .extern CNFDINV          /* 0xBF802F6C */
-  .extern SR0D             /* 0xBF802F70 */
-  .extern SR0DCLR          /* 0xBF802F74 */
-  .extern SR0DSET          /* 0xBF802F78 */
-  .extern SR0DINV          /* 0xBF802F7C */
-  .extern SR1D             /* 0xBF802F80 */
-  .extern SR1DCLR          /* 0xBF802F84 */
-  .extern SR1DSET          /* 0xBF802F88 */
-  .extern SR1DINV          /* 0xBF802F8C */
   .extern PMDCON           /* 0xBF8035B0 */
   .extern PMDCONCLR        /* 0xBF8035B4 */
   .extern PMDCONSET        /* 0xBF8035B8 */
@@ -8043,10 +7991,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern PMD7CLR          /* 0xBF803624 */
   .extern PMD7SET          /* 0xBF803628 */
   .extern PMD7INV          /* 0xBF80362C */
-  .extern RPCON            /* 0xBF803630 */
-  .extern RPCONCLR         /* 0xBF803634 */
-  .extern RPCONSET         /* 0xBF803638 */
-  .extern RPCONINV         /* 0xBF80363C */
   .extern CFGCON           /* 0xBF803640 */
   .extern CFGCONCLR        /* 0xBF803644 */
   .extern CFGCONSET        /* 0xBF803648 */
@@ -8150,132 +8094,132 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern SPI3CON2CLR      /* 0xBF808344 */
   .extern SPI3CON2SET      /* 0xBF808348 */
   .extern SPI3CON2INV      /* 0xBF80834C */
-  .extern U1OTGIR          /* 0xBF808400 */
-  .extern U1OTGIRCLR       /* 0xBF808404 */
-  .extern U1OTGIE          /* 0xBF808410 */
-  .extern U1OTGIECLR       /* 0xBF808414 */
-  .extern U1OTGIESET       /* 0xBF808418 */
-  .extern U1OTGIEINV       /* 0xBF80841C */
-  .extern U1OTGSTAT        /* 0xBF808420 */
-  .extern U1OTGCON         /* 0xBF808430 */
-  .extern U1OTGCONCLR      /* 0xBF808434 */
-  .extern U1OTGCONSET      /* 0xBF808438 */
-  .extern U1OTGCONINV      /* 0xBF80843C */
-  .extern U1PWRC           /* 0xBF808440 */
-  .extern U1PWRCCLR        /* 0xBF808444 */
-  .extern U1PWRCSET        /* 0xBF808448 */
-  .extern U1PWRCINV        /* 0xBF80844C */
-  .extern U1IR             /* 0xBF8085C0 */
-  .extern U1IRCLR          /* 0xBF8085C4 */
-  .extern U1IE             /* 0xBF8085D0 */
-  .extern U1IECLR          /* 0xBF8085D4 */
-  .extern U1IESET          /* 0xBF8085D8 */
-  .extern U1IEINV          /* 0xBF8085DC */
-  .extern U1EIR            /* 0xBF8085E0 */
-  .extern U1EIRCLR         /* 0xBF8085E4 */
-  .extern U1EIE            /* 0xBF8085F0 */
-  .extern U1EIECLR         /* 0xBF8085F4 */
-  .extern U1EIESET         /* 0xBF8085F8 */
-  .extern U1EIEINV         /* 0xBF8085FC */
-  .extern U1STAT           /* 0xBF808600 */
-  .extern U1CON            /* 0xBF808610 */
-  .extern U1CONCLR         /* 0xBF808614 */
-  .extern U1CONSET         /* 0xBF808618 */
-  .extern U1CONINV         /* 0xBF80861C */
-  .extern U1ADDR           /* 0xBF808620 */
-  .extern U1ADDRCLR        /* 0xBF808624 */
-  .extern U1ADDRSET        /* 0xBF808628 */
-  .extern U1ADDRINV        /* 0xBF80862C */
-  .extern U1BDTP1          /* 0xBF808630 */
-  .extern U1BDTP1CLR       /* 0xBF808634 */
-  .extern U1BDTP1SET       /* 0xBF808638 */
-  .extern U1BDTP1INV       /* 0xBF80863C */
-  .extern U1FRML           /* 0xBF808640 */
-  .extern U1FRMH           /* 0xBF808650 */
-  .extern U1TOK            /* 0xBF808660 */
-  .extern U1TOKCLR         /* 0xBF808664 */
-  .extern U1TOKSET         /* 0xBF808668 */
-  .extern U1TOKINV         /* 0xBF80866C */
-  .extern U1SOF            /* 0xBF808670 */
-  .extern U1SOFCLR         /* 0xBF808674 */
-  .extern U1SOFSET         /* 0xBF808678 */
-  .extern U1SOFINV         /* 0xBF80867C */
-  .extern U1BDTP2          /* 0xBF808680 */
-  .extern U1BDTP2CLR       /* 0xBF808684 */
-  .extern U1BDTP2SET       /* 0xBF808688 */
-  .extern U1BDTP2INV       /* 0xBF80868C */
-  .extern U1BDTP3          /* 0xBF808690 */
-  .extern U1BDTP3CLR       /* 0xBF808694 */
-  .extern U1BDTP3SET       /* 0xBF808698 */
-  .extern U1BDTP3INV       /* 0xBF80869C */
-  .extern U1CNFG1          /* 0xBF8086A0 */
-  .extern U1CNFG1CLR       /* 0xBF8086A4 */
-  .extern U1CNFG1SET       /* 0xBF8086A8 */
-  .extern U1CNFG1INV       /* 0xBF8086AC */
-  .extern U1EP0            /* 0xBF8086C0 */
-  .extern U1EP0CLR         /* 0xBF8086C4 */
-  .extern U1EP0SET         /* 0xBF8086C8 */
-  .extern U1EP0INV         /* 0xBF8086CC */
-  .extern U1EP1            /* 0xBF8086D0 */
-  .extern U1EP1CLR         /* 0xBF8086D4 */
-  .extern U1EP1SET         /* 0xBF8086D8 */
-  .extern U1EP1INV         /* 0xBF8086DC */
-  .extern U1EP2            /* 0xBF8086E0 */
-  .extern U1EP2CLR         /* 0xBF8086E4 */
-  .extern U1EP2SET         /* 0xBF8086E8 */
-  .extern U1EP2INV         /* 0xBF8086EC */
-  .extern U1EP3            /* 0xBF8086F0 */
-  .extern U1EP3CLR         /* 0xBF8086F4 */
-  .extern U1EP3SET         /* 0xBF8086F8 */
-  .extern U1EP3INV         /* 0xBF8086FC */
-  .extern U1EP4            /* 0xBF808700 */
-  .extern U1EP4CLR         /* 0xBF808704 */
-  .extern U1EP4SET         /* 0xBF808708 */
-  .extern U1EP4INV         /* 0xBF80870C */
-  .extern U1EP5            /* 0xBF808710 */
-  .extern U1EP5CLR         /* 0xBF808714 */
-  .extern U1EP5SET         /* 0xBF808718 */
-  .extern U1EP5INV         /* 0xBF80871C */
-  .extern U1EP6            /* 0xBF808720 */
-  .extern U1EP6CLR         /* 0xBF808724 */
-  .extern U1EP6SET         /* 0xBF808728 */
-  .extern U1EP6INV         /* 0xBF80872C */
-  .extern U1EP7            /* 0xBF808730 */
-  .extern U1EP7CLR         /* 0xBF808734 */
-  .extern U1EP7SET         /* 0xBF808738 */
-  .extern U1EP7INV         /* 0xBF80873C */
-  .extern U1EP8            /* 0xBF808740 */
-  .extern U1EP8CLR         /* 0xBF808744 */
-  .extern U1EP8SET         /* 0xBF808748 */
-  .extern U1EP8INV         /* 0xBF80874C */
-  .extern U1EP9            /* 0xBF808750 */
-  .extern U1EP9CLR         /* 0xBF808754 */
-  .extern U1EP9SET         /* 0xBF808758 */
-  .extern U1EP9INV         /* 0xBF80875C */
-  .extern U1EP10           /* 0xBF808760 */
-  .extern U1EP10CLR        /* 0xBF808764 */
-  .extern U1EP10SET        /* 0xBF808768 */
-  .extern U1EP10INV        /* 0xBF80876C */
-  .extern U1EP11           /* 0xBF808770 */
-  .extern U1EP11CLR        /* 0xBF808774 */
-  .extern U1EP11SET        /* 0xBF808778 */
-  .extern U1EP11INV        /* 0xBF80877C */
-  .extern U1EP12           /* 0xBF808780 */
-  .extern U1EP12CLR        /* 0xBF808784 */
-  .extern U1EP12SET        /* 0xBF808788 */
-  .extern U1EP12INV        /* 0xBF80878C */
-  .extern U1EP13           /* 0xBF808790 */
-  .extern U1EP13CLR        /* 0xBF808794 */
-  .extern U1EP13SET        /* 0xBF808798 */
-  .extern U1EP13INV        /* 0xBF80879C */
-  .extern U1EP14           /* 0xBF8087A0 */
-  .extern U1EP14CLR        /* 0xBF8087A4 */
-  .extern U1EP14SET        /* 0xBF8087A8 */
-  .extern U1EP14INV        /* 0xBF8087AC */
-  .extern U1EP15           /* 0xBF8087B0 */
-  .extern U1EP15CLR        /* 0xBF8087B4 */
-  .extern U1EP15SET        /* 0xBF8087B8 */
-  .extern U1EP15INV        /* 0xBF8087BC */
+  .extern U1OTGIR          /* 0xBF808440 */
+  .extern U1OTGIRCLR       /* 0xBF808444 */
+  .extern U1OTGIE          /* 0xBF808450 */
+  .extern U1OTGIECLR       /* 0xBF808454 */
+  .extern U1OTGIESET       /* 0xBF808458 */
+  .extern U1OTGIEINV       /* 0xBF80845C */
+  .extern U1OTGSTAT        /* 0xBF808460 */
+  .extern U1OTGCON         /* 0xBF808470 */
+  .extern U1OTGCONCLR      /* 0xBF808474 */
+  .extern U1OTGCONSET      /* 0xBF808478 */
+  .extern U1OTGCONINV      /* 0xBF80847C */
+  .extern U1PWRC           /* 0xBF808480 */
+  .extern U1PWRCCLR        /* 0xBF808484 */
+  .extern U1PWRCSET        /* 0xBF808488 */
+  .extern U1PWRCINV        /* 0xBF80848C */
+  .extern U1IR             /* 0xBF808600 */
+  .extern U1IRCLR          /* 0xBF808604 */
+  .extern U1IE             /* 0xBF808610 */
+  .extern U1IECLR          /* 0xBF808614 */
+  .extern U1IESET          /* 0xBF808618 */
+  .extern U1IEINV          /* 0xBF80861C */
+  .extern U1EIR            /* 0xBF808620 */
+  .extern U1EIRCLR         /* 0xBF808624 */
+  .extern U1EIE            /* 0xBF808630 */
+  .extern U1EIECLR         /* 0xBF808634 */
+  .extern U1EIESET         /* 0xBF808638 */
+  .extern U1EIEINV         /* 0xBF80863C */
+  .extern U1STAT           /* 0xBF808640 */
+  .extern U1CON            /* 0xBF808650 */
+  .extern U1CONCLR         /* 0xBF808654 */
+  .extern U1CONSET         /* 0xBF808658 */
+  .extern U1CONINV         /* 0xBF80865C */
+  .extern U1ADDR           /* 0xBF808660 */
+  .extern U1ADDRCLR        /* 0xBF808664 */
+  .extern U1ADDRSET        /* 0xBF808668 */
+  .extern U1ADDRINV        /* 0xBF80866C */
+  .extern U1BDTP1          /* 0xBF808670 */
+  .extern U1BDTP1CLR       /* 0xBF808674 */
+  .extern U1BDTP1SET       /* 0xBF808678 */
+  .extern U1BDTP1INV       /* 0xBF80867C */
+  .extern U1FRML           /* 0xBF808680 */
+  .extern U1FRMH           /* 0xBF808690 */
+  .extern U1TOK            /* 0xBF8086A0 */
+  .extern U1TOKCLR         /* 0xBF8086A4 */
+  .extern U1TOKSET         /* 0xBF8086A8 */
+  .extern U1TOKINV         /* 0xBF8086AC */
+  .extern U1SOF            /* 0xBF8086B0 */
+  .extern U1SOFCLR         /* 0xBF8086B4 */
+  .extern U1SOFSET         /* 0xBF8086B8 */
+  .extern U1SOFINV         /* 0xBF8086BC */
+  .extern U1BDTP2          /* 0xBF8086C0 */
+  .extern U1BDTP2CLR       /* 0xBF8086C4 */
+  .extern U1BDTP2SET       /* 0xBF8086C8 */
+  .extern U1BDTP2INV       /* 0xBF8086CC */
+  .extern U1BDTP3          /* 0xBF8086D0 */
+  .extern U1BDTP3CLR       /* 0xBF8086D4 */
+  .extern U1BDTP3SET       /* 0xBF8086D8 */
+  .extern U1BDTP3INV       /* 0xBF8086DC */
+  .extern U1CNFG1          /* 0xBF8086E0 */
+  .extern U1CNFG1CLR       /* 0xBF8086E4 */
+  .extern U1CNFG1SET       /* 0xBF8086E8 */
+  .extern U1CNFG1INV       /* 0xBF8086EC */
+  .extern U1EP0            /* 0xBF808700 */
+  .extern U1EP0CLR         /* 0xBF808704 */
+  .extern U1EP0SET         /* 0xBF808708 */
+  .extern U1EP0INV         /* 0xBF80870C */
+  .extern U1EP1            /* 0xBF808710 */
+  .extern U1EP1CLR         /* 0xBF808714 */
+  .extern U1EP1SET         /* 0xBF808718 */
+  .extern U1EP1INV         /* 0xBF80871C */
+  .extern U1EP2            /* 0xBF808720 */
+  .extern U1EP2CLR         /* 0xBF808724 */
+  .extern U1EP2SET         /* 0xBF808728 */
+  .extern U1EP2INV         /* 0xBF80872C */
+  .extern U1EP3            /* 0xBF808730 */
+  .extern U1EP3CLR         /* 0xBF808734 */
+  .extern U1EP3SET         /* 0xBF808738 */
+  .extern U1EP3INV         /* 0xBF80873C */
+  .extern U1EP4            /* 0xBF808740 */
+  .extern U1EP4CLR         /* 0xBF808744 */
+  .extern U1EP4SET         /* 0xBF808748 */
+  .extern U1EP4INV         /* 0xBF80874C */
+  .extern U1EP5            /* 0xBF808750 */
+  .extern U1EP5CLR         /* 0xBF808754 */
+  .extern U1EP5SET         /* 0xBF808758 */
+  .extern U1EP5INV         /* 0xBF80875C */
+  .extern U1EP6            /* 0xBF808760 */
+  .extern U1EP6CLR         /* 0xBF808764 */
+  .extern U1EP6SET         /* 0xBF808768 */
+  .extern U1EP6INV         /* 0xBF80876C */
+  .extern U1EP7            /* 0xBF808770 */
+  .extern U1EP7CLR         /* 0xBF808774 */
+  .extern U1EP7SET         /* 0xBF808778 */
+  .extern U1EP7INV         /* 0xBF80877C */
+  .extern U1EP8            /* 0xBF808780 */
+  .extern U1EP8CLR         /* 0xBF808784 */
+  .extern U1EP8SET         /* 0xBF808788 */
+  .extern U1EP8INV         /* 0xBF80878C */
+  .extern U1EP9            /* 0xBF808790 */
+  .extern U1EP9CLR         /* 0xBF808794 */
+  .extern U1EP9SET         /* 0xBF808798 */
+  .extern U1EP9INV         /* 0xBF80879C */
+  .extern U1EP10           /* 0xBF8087A0 */
+  .extern U1EP10CLR        /* 0xBF8087A4 */
+  .extern U1EP10SET        /* 0xBF8087A8 */
+  .extern U1EP10INV        /* 0xBF8087AC */
+  .extern U1EP11           /* 0xBF8087B0 */
+  .extern U1EP11CLR        /* 0xBF8087B4 */
+  .extern U1EP11SET        /* 0xBF8087B8 */
+  .extern U1EP11INV        /* 0xBF8087BC */
+  .extern U1EP12           /* 0xBF8087C0 */
+  .extern U1EP12CLR        /* 0xBF8087C4 */
+  .extern U1EP12SET        /* 0xBF8087C8 */
+  .extern U1EP12INV        /* 0xBF8087CC */
+  .extern U1EP13           /* 0xBF8087D0 */
+  .extern U1EP13CLR        /* 0xBF8087D4 */
+  .extern U1EP13SET        /* 0xBF8087D8 */
+  .extern U1EP13INV        /* 0xBF8087DC */
+  .extern U1EP14           /* 0xBF8087E0 */
+  .extern U1EP14CLR        /* 0xBF8087E4 */
+  .extern U1EP14SET        /* 0xBF8087E8 */
+  .extern U1EP14INV        /* 0xBF8087EC */
+  .extern U1EP15           /* 0xBF8087F0 */
+  .extern U1EP15CLR        /* 0xBF8087F4 */
+  .extern U1EP15SET        /* 0xBF8087F8 */
+  .extern U1EP15INV        /* 0xBF8087FC */
   .extern DMACON           /* 0xBF808900 */
   .extern DMACONCLR        /* 0xBF808904 */
   .extern DMACONSET        /* 0xBF808908 */
@@ -8300,199 +8244,202 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern DCRCXORCLR       /* 0xBF808954 */
   .extern DCRCXORSET       /* 0xBF808958 */
   .extern DCRCXORINV       /* 0xBF80895C */
-  .extern DCH1CON          /* 0xBF808960 */
-  .extern DCH1CONCLR       /* 0xBF808964 */
-  .extern DCH1CONSET       /* 0xBF808968 */
-  .extern DCH1CONINV       /* 0xBF80896C */
-  .extern DCH1ECON         /* 0xBF808970 */
-  .extern DCH1ECONCLR      /* 0xBF808974 */
-  .extern DCH1ECONSET      /* 0xBF808978 */
-  .extern DCH1ECONINV      /* 0xBF80897C */
-  .extern DCH1INT          /* 0xBF808980 */
-  .extern DCH1INTCLR       /* 0xBF808984 */
-  .extern DCH1INTSET       /* 0xBF808988 */
-  .extern DCH1INTINV       /* 0xBF80898C */
-  .extern DCH1SSA          /* 0xBF808990 */
-  .extern DCH1SSACLR       /* 0xBF808994 */
-  .extern DCH1SSASET       /* 0xBF808998 */
-  .extern DCH1SSAINV       /* 0xBF80899C */
-  .extern DCH1DSA          /* 0xBF8089A0 */
-  .extern DCH1DSACLR       /* 0xBF8089A4 */
-  .extern DCH1DSASET       /* 0xBF8089A8 */
-  .extern DCH1DSAINV       /* 0xBF8089AC */
-  .extern DCH1SSIZ         /* 0xBF8089B0 */
-  .extern DCH1SSIZCLR      /* 0xBF8089B4 */
-  .extern DCH1SSIZSET      /* 0xBF8089B8 */
-  .extern DCH1SSIZINV      /* 0xBF8089BC */
-  .extern DCH1DSIZ         /* 0xBF8089C0 */
-  .extern DCH1DSIZCLR      /* 0xBF8089C4 */
-  .extern DCH1DSIZSET      /* 0xBF8089C8 */
-  .extern DCH1DSIZINV      /* 0xBF8089CC */
-  .extern DCH1SPTR         /* 0xBF8089D0 */
-  .extern DCH1SPTRCLR      /* 0xBF8089D4 */
-  .extern DCH1SPTRSET      /* 0xBF8089D8 */
-  .extern DCH1SPTRINV      /* 0xBF8089DC */
-  .extern DCH1DPTR         /* 0xBF8089E0 */
-  .extern DCH1DPTRCLR      /* 0xBF8089E4 */
-  .extern DCH1DPTRSET      /* 0xBF8089E8 */
-  .extern DCH1DPTRINV      /* 0xBF8089EC */
-  .extern DCH1CSIZ         /* 0xBF8089F0 */
-  .extern DCH1CSIZCLR      /* 0xBF8089F4 */
-  .extern DCH1CSIZSET      /* 0xBF8089F8 */
-  .extern DCH1CSIZINV      /* 0xBF8089FC */
-  .extern DCH1CPTR         /* 0xBF808A00 */
-  .extern DCH1CPTRCLR      /* 0xBF808A04 */
-  .extern DCH1CPTRSET      /* 0xBF808A08 */
-  .extern DCH1CPTRINV      /* 0xBF808A0C */
-  .extern DCH1DAT          /* 0xBF808A10 */
-  .extern DCH1DATCLR       /* 0xBF808A14 */
-  .extern DCH1DATSET       /* 0xBF808A18 */
-  .extern DCH1DATINV       /* 0xBF808A1C */
-  .extern DCH2CON          /* 0xBF808A20 */
-  .extern DCH2CONCLR       /* 0xBF808A24 */
-  .extern DCH2CONSET       /* 0xBF808A28 */
-  .extern DCH2CONINV       /* 0xBF808A2C */
-  .extern DCH2ECON         /* 0xBF808A30 */
-  .extern DCH2ECONCLR      /* 0xBF808A34 */
-  .extern DCH2ECONSET      /* 0xBF808A38 */
-  .extern DCH2ECONINV      /* 0xBF808A3C */
-  .extern DCH2INT          /* 0xBF808A40 */
-  .extern DCH2INTCLR       /* 0xBF808A44 */
-  .extern DCH2INTSET       /* 0xBF808A48 */
-  .extern DCH2INTINV       /* 0xBF808A4C */
-  .extern DCH2SSA          /* 0xBF808A50 */
-  .extern DCH2SSACLR       /* 0xBF808A54 */
-  .extern DCH2SSASET       /* 0xBF808A58 */
-  .extern DCH2SSAINV       /* 0xBF808A5C */
-  .extern DCH2DSA          /* 0xBF808A60 */
-  .extern DCH2DSACLR       /* 0xBF808A64 */
-  .extern DCH2DSASET       /* 0xBF808A68 */
-  .extern DCH2DSAINV       /* 0xBF808A6C */
-  .extern DCH2SSIZ         /* 0xBF808A70 */
-  .extern DCH2SSIZCLR      /* 0xBF808A74 */
-  .extern DCH2SSIZSET      /* 0xBF808A78 */
-  .extern DCH2SSIZINV      /* 0xBF808A7C */
-  .extern DCH2DSIZ         /* 0xBF808A80 */
-  .extern DCH2DSIZCLR      /* 0xBF808A84 */
-  .extern DCH2DSIZSET      /* 0xBF808A88 */
-  .extern DCH2DSIZINV      /* 0xBF808A8C */
-  .extern DCH2SPTR         /* 0xBF808A90 */
-  .extern DCH2SPTRCLR      /* 0xBF808A94 */
-  .extern DCH2SPTRSET      /* 0xBF808A98 */
-  .extern DCH2SPTRINV      /* 0xBF808A9C */
-  .extern DCH2DPTR         /* 0xBF808AA0 */
-  .extern DCH2DPTRCLR      /* 0xBF808AA4 */
-  .extern DCH2DPTRSET      /* 0xBF808AA8 */
-  .extern DCH2DPTRINV      /* 0xBF808AAC */
-  .extern DCH2CSIZ         /* 0xBF808AB0 */
-  .extern DCH2CSIZCLR      /* 0xBF808AB4 */
-  .extern DCH2CSIZSET      /* 0xBF808AB8 */
-  .extern DCH2CSIZINV      /* 0xBF808ABC */
-  .extern DCH2CPTR         /* 0xBF808AC0 */
-  .extern DCH2CPTRCLR      /* 0xBF808AC4 */
-  .extern DCH2CPTRSET      /* 0xBF808AC8 */
-  .extern DCH2CPTRINV      /* 0xBF808ACC */
-  .extern DCH2DAT          /* 0xBF808AD0 */
-  .extern DCH2DATCLR       /* 0xBF808AD4 */
-  .extern DCH2DATSET       /* 0xBF808AD8 */
-  .extern DCH2DATINV       /* 0xBF808ADC */
-  .extern DCH3CON          /* 0xBF808AE0 */
-  .extern DCH3CONCLR       /* 0xBF808AE4 */
-  .extern DCH3CONSET       /* 0xBF808AE8 */
-  .extern DCH3CONINV       /* 0xBF808AEC */
-  .extern DCH3ECON         /* 0xBF808AF0 */
-  .extern DCH3ECONCLR      /* 0xBF808AF4 */
-  .extern DCH3ECONSET      /* 0xBF808AF8 */
-  .extern DCH3ECONINV      /* 0xBF808AFC */
-  .extern DCH3INT          /* 0xBF808B00 */
-  .extern DCH3INTCLR       /* 0xBF808B04 */
-  .extern DCH3INTSET       /* 0xBF808B08 */
-  .extern DCH3INTINV       /* 0xBF808B0C */
-  .extern DCH3SSA          /* 0xBF808B10 */
-  .extern DCH3SSACLR       /* 0xBF808B14 */
-  .extern DCH3SSASET       /* 0xBF808B18 */
-  .extern DCH3SSAINV       /* 0xBF808B1C */
-  .extern DCH3DSA          /* 0xBF808B20 */
-  .extern DCH3DSACLR       /* 0xBF808B24 */
-  .extern DCH3DSASET       /* 0xBF808B28 */
-  .extern DCH3DSAINV       /* 0xBF808B2C */
-  .extern DCH3SSIZ         /* 0xBF808B30 */
-  .extern DCH3SSIZCLR      /* 0xBF808B34 */
-  .extern DCH3SSIZSET      /* 0xBF808B38 */
-  .extern DCH3SSIZINV      /* 0xBF808B3C */
-  .extern DCH3DSIZ         /* 0xBF808B40 */
-  .extern DCH3DSIZCLR      /* 0xBF808B44 */
-  .extern DCH3DSIZSET      /* 0xBF808B48 */
-  .extern DCH3DSIZINV      /* 0xBF808B4C */
-  .extern DCH3SPTR         /* 0xBF808B50 */
-  .extern DCH3SPTRCLR      /* 0xBF808B54 */
-  .extern DCH3SPTRSET      /* 0xBF808B58 */
-  .extern DCH3SPTRINV      /* 0xBF808B5C */
-  .extern DCH3DPTR         /* 0xBF808B60 */
-  .extern DCH3DPTRCLR      /* 0xBF808B64 */
-  .extern DCH3DPTRSET      /* 0xBF808B68 */
-  .extern DCH3DPTRINV      /* 0xBF808B6C */
-  .extern DCH3CSIZ         /* 0xBF808B70 */
-  .extern DCH3CSIZCLR      /* 0xBF808B74 */
-  .extern DCH3CSIZSET      /* 0xBF808B78 */
-  .extern DCH3CSIZINV      /* 0xBF808B7C */
-  .extern DCH3CPTR         /* 0xBF808B80 */
-  .extern DCH3CPTRCLR      /* 0xBF808B84 */
-  .extern DCH3CPTRSET      /* 0xBF808B88 */
-  .extern DCH3CPTRINV      /* 0xBF808B8C */
-  .extern DCH3DAT          /* 0xBF808B90 */
-  .extern DCH3DATCLR       /* 0xBF808B94 */
-  .extern DCH3DATSET       /* 0xBF808B98 */
-  .extern DCH3DATINV       /* 0xBF808B9C */
-  .extern DCH4CON          /* 0xBF808BA0 */
-  .extern DCH4CONCLR       /* 0xBF808BA4 */
-  .extern DCH4CONSET       /* 0xBF808BA8 */
-  .extern DCH4CONINV       /* 0xBF808BAC */
-  .extern DCH4ECON         /* 0xBF808BB0 */
-  .extern DCH4ECONCLR      /* 0xBF808BB4 */
-  .extern DCH4ECONSET      /* 0xBF808BB8 */
-  .extern DCH4ECONINV      /* 0xBF808BBC */
-  .extern DCH4INT          /* 0xBF808BC0 */
-  .extern DCH4INTCLR       /* 0xBF808BC4 */
-  .extern DCH4INTSET       /* 0xBF808BC8 */
-  .extern DCH4INTINV       /* 0xBF808BCC */
-  .extern DCH4SSA          /* 0xBF808BD0 */
-  .extern DCH4SSACLR       /* 0xBF808BD4 */
-  .extern DCH4SSASET       /* 0xBF808BD8 */
-  .extern DCH4SSAINV       /* 0xBF808BDC */
-  .extern DCH4DSA          /* 0xBF808BE0 */
-  .extern DCH4DSACLR       /* 0xBF808BE4 */
-  .extern DCH4DSASET       /* 0xBF808BE8 */
-  .extern DCH4DSAINV       /* 0xBF808BEC */
-  .extern DCH4SSIZ         /* 0xBF808BF0 */
-  .extern DCH4SSIZCLR      /* 0xBF808BF4 */
-  .extern DCH4SSIZSET      /* 0xBF808BF8 */
-  .extern DCH4SSIZINV      /* 0xBF808BFC */
-  .extern DCH4DSIZ         /* 0xBF808C00 */
-  .extern DCH4DSIZCLR      /* 0xBF808C04 */
-  .extern DCH4DSIZSET      /* 0xBF808C08 */
-  .extern DCH4DSIZINV      /* 0xBF808C0C */
-  .extern DCH4SPTR         /* 0xBF808C10 */
-  .extern DCH4SPTRCLR      /* 0xBF808C14 */
-  .extern DCH4SPTRSET      /* 0xBF808C18 */
-  .extern DCH4SPTRINV      /* 0xBF808C1C */
-  .extern DCH4DPTR         /* 0xBF808C20 */
-  .extern DCH4DPTRCLR      /* 0xBF808C24 */
-  .extern DCH4DPTRSET      /* 0xBF808C28 */
-  .extern DCH4DPTRINV      /* 0xBF808C2C */
-  .extern DCH4CSIZ         /* 0xBF808C30 */
-  .extern DCH4CSIZCLR      /* 0xBF808C34 */
-  .extern DCH4CSIZSET      /* 0xBF808C38 */
-  .extern DCH4CSIZINV      /* 0xBF808C3C */
-  .extern DCH4CPTR         /* 0xBF808C40 */
-  .extern DCH4CPTRCLR      /* 0xBF808C44 */
-  .extern DCH4CPTRSET      /* 0xBF808C48 */
-  .extern DCH4CPTRINV      /* 0xBF808C4C */
-  .extern DCH4DAT          /* 0xBF808C50 */
-  .extern DCH4DATCLR       /* 0xBF808C54 */
-  .extern DCH4DATSET       /* 0xBF808C58 */
-  .extern DCH4DATINV       /* 0xBF808C5C */
+  .extern DCH0CON          /* 0xBF808960 */
+  .extern DCH0CONCLR       /* 0xBF808964 */
+  .extern DCH0CONSET       /* 0xBF808968 */
+  .extern DCH0CONINV       /* 0xBF80896C */
+  .extern DCH0ECON         /* 0xBF808970 */
+  .extern DCH0ECONCLR      /* 0xBF808974 */
+  .extern DCH0ECONSET      /* 0xBF808978 */
+  .extern DCH0ECONINV      /* 0xBF80897C */
+  .extern DCH0INT          /* 0xBF808980 */
+  .extern DCH0INTCLR       /* 0xBF808984 */
+  .extern DCH0INTSET       /* 0xBF808988 */
+  .extern DCH0INTINV       /* 0xBF80898C */
+  .extern DCH0SSA          /* 0xBF808990 */
+  .extern DCH0SSACLR       /* 0xBF808994 */
+  .extern DCH0SSASET       /* 0xBF808998 */
+  .extern DCH0SSAINV       /* 0xBF80899C */
+  .extern DCH0DSA          /* 0xBF8089A0 */
+  .extern DCH0DSACLR       /* 0xBF8089A4 */
+  .extern DCH0DSASET       /* 0xBF8089A8 */
+  .extern DCH0DSAINV       /* 0xBF8089AC */
+  .extern DCH0SSIZ         /* 0xBF8089B0 */
+  .extern DCH0SSIZCLR      /* 0xBF8089B4 */
+  .extern DCH0SSIZSET      /* 0xBF8089B8 */
+  .extern DCH0SSIZINV      /* 0xBF8089BC */
+  .extern DCH0DSIZ         /* 0xBF8089C0 */
+  .extern DCH0DSIZCLR      /* 0xBF8089C4 */
+  .extern DCH0DSIZSET      /* 0xBF8089C8 */
+  .extern DCH0DSIZINV      /* 0xBF8089CC */
+  .extern DCH0SPTR         /* 0xBF8089D0 */
+  .extern DCH0SPTRCLR      /* 0xBF8089D4 */
+  .extern DCH0SPTRSET      /* 0xBF8089D8 */
+  .extern DCH0SPTRINV      /* 0xBF8089DC */
+  .extern DCH0DPTR         /* 0xBF8089E0 */
+  .extern DCH0DPTRCLR      /* 0xBF8089E4 */
+  .extern DCH0DPTRSET      /* 0xBF8089E8 */
+  .extern DCH0DPTRINV      /* 0xBF8089EC */
+  .extern DCH0CSIZ         /* 0xBF8089F0 */
+  .extern DCH0CSIZCLR      /* 0xBF8089F4 */
+  .extern DCH0CSIZSET      /* 0xBF8089F8 */
+  .extern DCH0CSIZINV      /* 0xBF8089FC */
+  .extern DCH0CPTR         /* 0xBF808A00 */
+  .extern DCH0CPTRCLR      /* 0xBF808A04 */
+  .extern DCH0CPTRSET      /* 0xBF808A08 */
+  .extern DCH0CPTRINV      /* 0xBF808A0C */
+  .extern DCH0DAT          /* 0xBF808A10 */
+  .extern DCH0DATCLR       /* 0xBF808A14 */
+  .extern DCH0DATSET       /* 0xBF808A18 */
+  .extern DCH0DATINV       /* 0xBF808A1C */
+  .extern DCH1CON          /* 0xBF808A20 */
+  .extern DCH1CONCLR       /* 0xBF808A24 */
+  .extern DCH1CONSET       /* 0xBF808A28 */
+  .extern DCH1CONINV       /* 0xBF808A2C */
+  .extern DCH1ECON         /* 0xBF808A30 */
+  .extern DCH1ECONCLR      /* 0xBF808A34 */
+  .extern DCH1ECONSET      /* 0xBF808A38 */
+  .extern DCH1ECONINV      /* 0xBF808A3C */
+  .extern DCH1INT          /* 0xBF808A40 */
+  .extern DCH1INTCLR       /* 0xBF808A44 */
+  .extern DCH1INTSET       /* 0xBF808A48 */
+  .extern DCH1INTINV       /* 0xBF808A4C */
+  .extern DCH1SSA          /* 0xBF808A50 */
+  .extern DCH1SSACLR       /* 0xBF808A54 */
+  .extern DCH1SSASET       /* 0xBF808A58 */
+  .extern DCH1SSAINV       /* 0xBF808A5C */
+  .extern DCH1DSA          /* 0xBF808A60 */
+  .extern DCH1DSACLR       /* 0xBF808A64 */
+  .extern DCH1DSASET       /* 0xBF808A68 */
+  .extern DCH1DSAINV       /* 0xBF808A6C */
+  .extern DCH1SSIZ         /* 0xBF808A70 */
+  .extern DCH1SSIZCLR      /* 0xBF808A74 */
+  .extern DCH1SSIZSET      /* 0xBF808A78 */
+  .extern DCH1SSIZINV      /* 0xBF808A7C */
+  .extern DCH1DSIZ         /* 0xBF808A80 */
+  .extern DCH1DSIZCLR      /* 0xBF808A84 */
+  .extern DCH1DSIZSET      /* 0xBF808A88 */
+  .extern DCH1DSIZINV      /* 0xBF808A8C */
+  .extern DCH1SPTR         /* 0xBF808A90 */
+  .extern DCH1SPTRCLR      /* 0xBF808A94 */
+  .extern DCH1SPTRSET      /* 0xBF808A98 */
+  .extern DCH1SPTRINV      /* 0xBF808A9C */
+  .extern DCH1DPTR         /* 0xBF808AA0 */
+  .extern DCH1DPTRCLR      /* 0xBF808AA4 */
+  .extern DCH1DPTRSET      /* 0xBF808AA8 */
+  .extern DCH1DPTRINV      /* 0xBF808AAC */
+  .extern DCH1CSIZ         /* 0xBF808AB0 */
+  .extern DCH1CSIZCLR      /* 0xBF808AB4 */
+  .extern DCH1CSIZSET      /* 0xBF808AB8 */
+  .extern DCH1CSIZINV      /* 0xBF808ABC */
+  .extern DCH1CPTR         /* 0xBF808AC0 */
+  .extern DCH1CPTRCLR      /* 0xBF808AC4 */
+  .extern DCH1CPTRSET      /* 0xBF808AC8 */
+  .extern DCH1CPTRINV      /* 0xBF808ACC */
+  .extern DCH1DAT          /* 0xBF808AD0 */
+  .extern DCH1DATCLR       /* 0xBF808AD4 */
+  .extern DCH1DATSET       /* 0xBF808AD8 */
+  .extern DCH1DATINV       /* 0xBF808ADC */
+  .extern DCH2CON          /* 0xBF808AE0 */
+  .extern DCH2CONCLR       /* 0xBF808AE4 */
+  .extern DCH2CONSET       /* 0xBF808AE8 */
+  .extern DCH2CONINV       /* 0xBF808AEC */
+  .extern DCH2ECON         /* 0xBF808AF0 */
+  .extern DCH2ECONCLR      /* 0xBF808AF4 */
+  .extern DCH2ECONSET      /* 0xBF808AF8 */
+  .extern DCH2ECONINV      /* 0xBF808AFC */
+  .extern DCH2INT          /* 0xBF808B00 */
+  .extern DCH2INTCLR       /* 0xBF808B04 */
+  .extern DCH2INTSET       /* 0xBF808B08 */
+  .extern DCH2INTINV       /* 0xBF808B0C */
+  .extern DCH2SSA          /* 0xBF808B10 */
+  .extern DCH2SSACLR       /* 0xBF808B14 */
+  .extern DCH2SSASET       /* 0xBF808B18 */
+  .extern DCH2SSAINV       /* 0xBF808B1C */
+  .extern DCH2DSA          /* 0xBF808B20 */
+  .extern DCH2DSACLR       /* 0xBF808B24 */
+  .extern DCH2DSASET       /* 0xBF808B28 */
+  .extern DCH2DSAINV       /* 0xBF808B2C */
+  .extern DCH2SSIZ         /* 0xBF808B30 */
+  .extern DCH2SSIZCLR      /* 0xBF808B34 */
+  .extern DCH2SSIZSET      /* 0xBF808B38 */
+  .extern DCH2SSIZINV      /* 0xBF808B3C */
+  .extern DCH2DSIZ         /* 0xBF808B40 */
+  .extern DCH2DSIZCLR      /* 0xBF808B44 */
+  .extern DCH2DSIZSET      /* 0xBF808B48 */
+  .extern DCH2DSIZINV      /* 0xBF808B4C */
+  .extern DCH2SPTR         /* 0xBF808B50 */
+  .extern DCH2SPTRCLR      /* 0xBF808B54 */
+  .extern DCH2SPTRSET      /* 0xBF808B58 */
+  .extern DCH2SPTRINV      /* 0xBF808B5C */
+  .extern DCH2DPTR         /* 0xBF808B60 */
+  .extern DCH2DPTRCLR      /* 0xBF808B64 */
+  .extern DCH2DPTRSET      /* 0xBF808B68 */
+  .extern DCH2DPTRINV      /* 0xBF808B6C */
+  .extern DCH2CSIZ         /* 0xBF808B70 */
+  .extern DCH2CSIZCLR      /* 0xBF808B74 */
+  .extern DCH2CSIZSET      /* 0xBF808B78 */
+  .extern DCH2CSIZINV      /* 0xBF808B7C */
+  .extern DCH2CPTR         /* 0xBF808B80 */
+  .extern DCH2CPTRCLR      /* 0xBF808B84 */
+  .extern DCH2CPTRSET      /* 0xBF808B88 */
+  .extern DCH2CPTRINV      /* 0xBF808B8C */
+  .extern DCH2DAT          /* 0xBF808B90 */
+  .extern DCH2DATCLR       /* 0xBF808B94 */
+  .extern DCH2DATSET       /* 0xBF808B98 */
+  .extern DCH2DATINV       /* 0xBF808B9C */
+  .extern DCH3CON          /* 0xBF808BA0 */
+  .extern DCH3CONCLR       /* 0xBF808BA4 */
+  .extern DCH3CONSET       /* 0xBF808BA8 */
+  .extern DCH3CONINV       /* 0xBF808BAC */
+  .extern DCH3ECON         /* 0xBF808BB0 */
+  .extern DCH3ECONCLR      /* 0xBF808BB4 */
+  .extern DCH3ECONSET      /* 0xBF808BB8 */
+  .extern DCH3ECONINV      /* 0xBF808BBC */
+  .extern DCH3INT          /* 0xBF808BC0 */
+  .extern DCH3INTCLR       /* 0xBF808BC4 */
+  .extern DCH3INTSET       /* 0xBF808BC8 */
+  .extern DCH3INTINV       /* 0xBF808BCC */
+  .extern DCH3SSA          /* 0xBF808BD0 */
+  .extern DCH3SSACLR       /* 0xBF808BD4 */
+  .extern DCH3SSASET       /* 0xBF808BD8 */
+  .extern DCH3SSAINV       /* 0xBF808BDC */
+  .extern DCH3DSA          /* 0xBF808BE0 */
+  .extern DCH3DSACLR       /* 0xBF808BE4 */
+  .extern DCH3DSASET       /* 0xBF808BE8 */
+  .extern DCH3DSAINV       /* 0xBF808BEC */
+  .extern DCH3SSIZ         /* 0xBF808BF0 */
+  .extern DCH3SSIZCLR      /* 0xBF808BF4 */
+  .extern DCH3SSIZSET      /* 0xBF808BF8 */
+  .extern DCH3SSIZINV      /* 0xBF808BFC */
+  .extern DCH3DSIZ         /* 0xBF808C00 */
+  .extern DCH3DSIZCLR      /* 0xBF808C04 */
+  .extern DCH3DSIZSET      /* 0xBF808C08 */
+  .extern DCH3DSIZINV      /* 0xBF808C0C */
+  .extern DCH3SPTR         /* 0xBF808C10 */
+  .extern DCH3SPTRCLR      /* 0xBF808C14 */
+  .extern DCH3SPTRSET      /* 0xBF808C18 */
+  .extern DCH3SPTRINV      /* 0xBF808C1C */
+  .extern DCH3DPTR         /* 0xBF808C20 */
+  .extern DCH3DPTRCLR      /* 0xBF808C24 */
+  .extern DCH3DPTRSET      /* 0xBF808C28 */
+  .extern DCH3DPTRINV      /* 0xBF808C2C */
+  .extern DCH3CSIZ         /* 0xBF808C30 */
+  .extern DCH3CSIZCLR      /* 0xBF808C34 */
+  .extern DCH3CSIZSET      /* 0xBF808C38 */
+  .extern DCH3CSIZINV      /* 0xBF808C3C */
+  .extern DCH3CPTR         /* 0xBF808C40 */
+  .extern DCH3CPTRCLR      /* 0xBF808C44 */
+  .extern DCH3CPTRSET      /* 0xBF808C48 */
+  .extern DCH3CPTRINV      /* 0xBF808C4C */
+  .extern DCH3DAT          /* 0xBF808C50 */
+  .extern DCH3DATCLR       /* 0xBF808C54 */
+  .extern DCH3DATSET       /* 0xBF808C58 */
+  .extern DCH3DATINV       /* 0xBF808C5C */
   .extern INTCON           /* 0xBF80F000 */
+  .extern INTCONCLR        /* 0xBF80F004 */
+  .extern INTCONSET        /* 0xBF80F008 */
+  .extern INTCONINV        /* 0xBF80F00C */
   .extern PRISS            /* 0xBF80F010 */
   .extern PRISSCLR         /* 0xBF80F014 */
   .extern PRISSSET         /* 0xBF80F018 */
@@ -8521,132 +8468,138 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
   .extern IFS3CLR          /* 0xBF80F074 */
   .extern IFS3SET          /* 0xBF80F078 */
   .extern IFS3INV          /* 0xBF80F07C */
-  .extern IEC0             /* 0xBF80F080 */
-  .extern IEC0CLR          /* 0xBF80F084 */
-  .extern IEC0SET          /* 0xBF80F088 */
-  .extern IEC0INV          /* 0xBF80F08C */
-  .extern IEC1             /* 0xBF80F090 */
-  .extern IEC1CLR          /* 0xBF80F094 */
-  .extern IEC1SET          /* 0xBF80F098 */
-  .extern IEC1INV          /* 0xBF80F09C */
-  .extern IEC2             /* 0xBF80F0A0 */
-  .extern IEC2CLR          /* 0xBF80F0A4 */
-  .extern IEC2SET          /* 0xBF80F0A8 */
-  .extern IEC2INV          /* 0xBF80F0AC */
-  .extern IEC3             /* 0xBF80F0B0 */
-  .extern IEC3CLR          /* 0xBF80F0B4 */
-  .extern IEC3SET          /* 0xBF80F0B8 */
-  .extern IEC3INV          /* 0xBF80F0BC */
-  .extern IPC0             /* 0xBF80F0C0 */
-  .extern IPC0CLR          /* 0xBF80F0C4 */
-  .extern IPC0SET          /* 0xBF80F0C8 */
-  .extern IPC0INV          /* 0xBF80F0CC */
-  .extern IPC1             /* 0xBF80F0D0 */
-  .extern IPC1CLR          /* 0xBF80F0D4 */
-  .extern IPC1SET          /* 0xBF80F0D8 */
-  .extern IPC1INV          /* 0xBF80F0DC */
-  .extern IPC2             /* 0xBF80F0E0 */
-  .extern IPC2CLR          /* 0xBF80F0E4 */
-  .extern IPC2SET          /* 0xBF80F0E8 */
-  .extern IPC2INV          /* 0xBF80F0EC */
-  .extern IPC3             /* 0xBF80F0F0 */
-  .extern IPC3CLR          /* 0xBF80F0F4 */
-  .extern IPC3SET          /* 0xBF80F0F8 */
-  .extern IPC3INV          /* 0xBF80F0FC */
-  .extern IPC4             /* 0xBF80F100 */
-  .extern IPC4CLR          /* 0xBF80F104 */
-  .extern IPC4SET          /* 0xBF80F108 */
-  .extern IPC4INV          /* 0xBF80F10C */
-  .extern IPC5             /* 0xBF80F110 */
-  .extern IPC5CLR          /* 0xBF80F114 */
-  .extern IPC5SET          /* 0xBF80F118 */
-  .extern IPC5INV          /* 0xBF80F11C */
-  .extern IPC6             /* 0xBF80F120 */
-  .extern IPC6CLR          /* 0xBF80F124 */
-  .extern IPC6SET          /* 0xBF80F128 */
-  .extern IPC6INV          /* 0xBF80F12C */
-  .extern IPC7             /* 0xBF80F130 */
-  .extern IPC7CLR          /* 0xBF80F134 */
-  .extern IPC7SET          /* 0xBF80F138 */
-  .extern IPC7INV          /* 0xBF80F13C */
-  .extern IPC8             /* 0xBF80F140 */
-  .extern IPC8CLR          /* 0xBF80F144 */
-  .extern IPC8SET          /* 0xBF80F148 */
-  .extern IPC8INV          /* 0xBF80F14C */
-  .extern IPC9             /* 0xBF80F150 */
-  .extern IPC9CLR          /* 0xBF80F154 */
-  .extern IPC9SET          /* 0xBF80F158 */
-  .extern IPC9INV          /* 0xBF80F15C */
-  .extern IPC10            /* 0xBF80F160 */
-  .extern IPC10CLR         /* 0xBF80F164 */
-  .extern IPC10SET         /* 0xBF80F168 */
-  .extern IPC10INV         /* 0xBF80F16C */
-  .extern IPC11            /* 0xBF80F170 */
-  .extern IPC11CLR         /* 0xBF80F174 */
-  .extern IPC11SET         /* 0xBF80F178 */
-  .extern IPC11INV         /* 0xBF80F17C */
-  .extern IPC12            /* 0xBF80F180 */
-  .extern IPC12CLR         /* 0xBF80F184 */
-  .extern IPC12SET         /* 0xBF80F188 */
-  .extern IPC12INV         /* 0xBF80F18C */
-  .extern IPC13            /* 0xBF80F190 */
-  .extern IPC13CLR         /* 0xBF80F194 */
-  .extern IPC13SET         /* 0xBF80F198 */
-  .extern IPC13INV         /* 0xBF80F19C */
-  .extern IPC14            /* 0xBF80F1A0 */
-  .extern IPC14CLR         /* 0xBF80F1A4 */
-  .extern IPC14SET         /* 0xBF80F1A8 */
-  .extern IPC14INV         /* 0xBF80F1AC */
-  .extern IPC15            /* 0xBF80F1B0 */
-  .extern IPC15CLR         /* 0xBF80F1B4 */
-  .extern IPC15SET         /* 0xBF80F1B8 */
-  .extern IPC15INV         /* 0xBF80F1BC */
-  .extern IPC16            /* 0xBF80F1C0 */
-  .extern IPC16CLR         /* 0xBF80F1C4 */
-  .extern IPC16SET         /* 0xBF80F1C8 */
-  .extern IPC16INV         /* 0xBF80F1CC */
-  .extern IPC17            /* 0xBF80F1D0 */
-  .extern IPC17CLR         /* 0xBF80F1D4 */
-  .extern IPC17SET         /* 0xBF80F1D8 */
-  .extern IPC17INV         /* 0xBF80F1DC */
-  .extern IPC18            /* 0xBF80F1E0 */
-  .extern IPC18CLR         /* 0xBF80F1E4 */
-  .extern IPC18SET         /* 0xBF80F1E8 */
-  .extern IPC18INV         /* 0xBF80F1EC */
-  .extern IPC19            /* 0xBF80F1F0 */
-  .extern IPC19CLR         /* 0xBF80F1F4 */
-  .extern IPC19SET         /* 0xBF80F1F8 */
-  .extern IPC19INV         /* 0xBF80F1FC */
-  .extern IPC20            /* 0xBF80F200 */
-  .extern IPC20CLR         /* 0xBF80F204 */
-  .extern IPC20SET         /* 0xBF80F208 */
-  .extern IPC20INV         /* 0xBF80F20C */
-  .extern IPC21            /* 0xBF80F210 */
-  .extern IPC21CLR         /* 0xBF80F214 */
-  .extern IPC21SET         /* 0xBF80F218 */
-  .extern IPC21INV         /* 0xBF80F21C */
-  .extern IPC22            /* 0xBF80F220 */
-  .extern IPC22CLR         /* 0xBF80F224 */
-  .extern IPC22SET         /* 0xBF80F228 */
-  .extern IPC22INV         /* 0xBF80F22C */
-  .extern IPC23            /* 0xBF80F230 */
-  .extern IPC23CLR         /* 0xBF80F234 */
-  .extern IPC23SET         /* 0xBF80F238 */
-  .extern IPC23INV         /* 0xBF80F23C */
-  .extern IPC24            /* 0xBF80F240 */
-  .extern IPC24CLR         /* 0xBF80F244 */
-  .extern IPC24SET         /* 0xBF80F248 */
-  .extern IPC24INV         /* 0xBF80F24C */
-  .extern IPC25            /* 0xBF80F250 */
-  .extern IPC25CLR         /* 0xBF80F254 */
-  .extern IPC25SET         /* 0xBF80F258 */
-  .extern IPC25INV         /* 0xBF80F25C */
+  .extern IEC0             /* 0xBF80F0C0 */
+  .extern IEC0CLR          /* 0xBF80F0C4 */
+  .extern IEC0SET          /* 0xBF80F0C8 */
+  .extern IEC0INV          /* 0xBF80F0CC */
+  .extern IEC1             /* 0xBF80F0D0 */
+  .extern IEC1CLR          /* 0xBF80F0D4 */
+  .extern IEC1SET          /* 0xBF80F0D8 */
+  .extern IEC1INV          /* 0xBF80F0DC */
+  .extern IEC2             /* 0xBF80F0E0 */
+  .extern IEC2CLR          /* 0xBF80F0E4 */
+  .extern IEC2SET          /* 0xBF80F0E8 */
+  .extern IEC2INV          /* 0xBF80F0EC */
+  .extern IEC3             /* 0xBF80F0F0 */
+  .extern IEC3CLR          /* 0xBF80F0F4 */
+  .extern IEC3SET          /* 0xBF80F0F8 */
+  .extern IEC3INV          /* 0xBF80F0FC */
+  .extern IPC0             /* 0xBF80F140 */
+  .extern IPC0CLR          /* 0xBF80F144 */
+  .extern IPC0SET          /* 0xBF80F148 */
+  .extern IPC0INV          /* 0xBF80F14C */
+  .extern IPC1             /* 0xBF80F150 */
+  .extern IPC1CLR          /* 0xBF80F154 */
+  .extern IPC1SET          /* 0xBF80F158 */
+  .extern IPC1INV          /* 0xBF80F15C */
+  .extern IPC2             /* 0xBF80F160 */
+  .extern IPC2CLR          /* 0xBF80F164 */
+  .extern IPC2SET          /* 0xBF80F168 */
+  .extern IPC2INV          /* 0xBF80F16C */
+  .extern IPC3             /* 0xBF80F170 */
+  .extern IPC3CLR          /* 0xBF80F174 */
+  .extern IPC3SET          /* 0xBF80F178 */
+  .extern IPC3INV          /* 0xBF80F17C */
+  .extern IPC4             /* 0xBF80F180 */
+  .extern IPC4CLR          /* 0xBF80F184 */
+  .extern IPC4SET          /* 0xBF80F188 */
+  .extern IPC4INV          /* 0xBF80F18C */
+  .extern IPC5             /* 0xBF80F190 */
+  .extern IPC5CLR          /* 0xBF80F194 */
+  .extern IPC5SET          /* 0xBF80F198 */
+  .extern IPC5INV          /* 0xBF80F19C */
+  .extern IPC6             /* 0xBF80F1A0 */
+  .extern IPC6CLR          /* 0xBF80F1A4 */
+  .extern IPC6SET          /* 0xBF80F1A8 */
+  .extern IPC6INV          /* 0xBF80F1AC */
+  .extern IPC7             /* 0xBF80F1B0 */
+  .extern IPC7CLR          /* 0xBF80F1B4 */
+  .extern IPC7SET          /* 0xBF80F1B8 */
+  .extern IPC7INV          /* 0xBF80F1BC */
+  .extern IPC8             /* 0xBF80F1C0 */
+  .extern IPC8CLR          /* 0xBF80F1C4 */
+  .extern IPC8SET          /* 0xBF80F1C8 */
+  .extern IPC8INV          /* 0xBF80F1CC */
+  .extern IPC9             /* 0xBF80F1D0 */
+  .extern IPC9CLR          /* 0xBF80F1D4 */
+  .extern IPC9SET          /* 0xBF80F1D8 */
+  .extern IPC9INV          /* 0xBF80F1DC */
+  .extern IPC10            /* 0xBF80F1E0 */
+  .extern IPC10CLR         /* 0xBF80F1E4 */
+  .extern IPC10SET         /* 0xBF80F1E8 */
+  .extern IPC10INV         /* 0xBF80F1EC */
+  .extern IPC11            /* 0xBF80F1F0 */
+  .extern IPC11CLR         /* 0xBF80F1F4 */
+  .extern IPC11SET         /* 0xBF80F1F8 */
+  .extern IPC11INV         /* 0xBF80F1FC */
+  .extern IPC12            /* 0xBF80F200 */
+  .extern IPC12CLR         /* 0xBF80F204 */
+  .extern IPC12SET         /* 0xBF80F208 */
+  .extern IPC12INV         /* 0xBF80F20C */
+  .extern IPC13            /* 0xBF80F210 */
+  .extern IPC13CLR         /* 0xBF80F214 */
+  .extern IPC13SET         /* 0xBF80F218 */
+  .extern IPC13INV         /* 0xBF80F21C */
+  .extern IPC14            /* 0xBF80F220 */
+  .extern IPC14CLR         /* 0xBF80F224 */
+  .extern IPC14SET         /* 0xBF80F228 */
+  .extern IPC14INV         /* 0xBF80F22C */
+  .extern IPC15            /* 0xBF80F230 */
+  .extern IPC15CLR         /* 0xBF80F234 */
+  .extern IPC15SET         /* 0xBF80F238 */
+  .extern IPC15INV         /* 0xBF80F23C */
+  .extern IPC16            /* 0xBF80F240 */
+  .extern IPC16CLR         /* 0xBF80F244 */
+  .extern IPC16SET         /* 0xBF80F248 */
+  .extern IPC16INV         /* 0xBF80F24C */
+  .extern IPC17            /* 0xBF80F250 */
+  .extern IPC17CLR         /* 0xBF80F254 */
+  .extern IPC17SET         /* 0xBF80F258 */
+  .extern IPC17INV         /* 0xBF80F25C */
+  .extern IPC18            /* 0xBF80F260 */
+  .extern IPC18CLR         /* 0xBF80F264 */
+  .extern IPC18SET         /* 0xBF80F268 */
+  .extern IPC18INV         /* 0xBF80F26C */
+  .extern IPC19            /* 0xBF80F270 */
+  .extern IPC19CLR         /* 0xBF80F274 */
+  .extern IPC19SET         /* 0xBF80F278 */
+  .extern IPC19INV         /* 0xBF80F27C */
+  .extern IPC20            /* 0xBF80F280 */
+  .extern IPC20CLR         /* 0xBF80F284 */
+  .extern IPC20SET         /* 0xBF80F288 */
+  .extern IPC20INV         /* 0xBF80F28C */
+  .extern IPC21            /* 0xBF80F290 */
+  .extern IPC21CLR         /* 0xBF80F294 */
+  .extern IPC21SET         /* 0xBF80F298 */
+  .extern IPC21INV         /* 0xBF80F29C */
+  .extern IPC22            /* 0xBF80F2A0 */
+  .extern IPC22CLR         /* 0xBF80F2A4 */
+  .extern IPC22SET         /* 0xBF80F2A8 */
+  .extern IPC22INV         /* 0xBF80F2AC */
+  .extern IPC23            /* 0xBF80F2B0 */
+  .extern IPC23CLR         /* 0xBF80F2B4 */
+  .extern IPC23SET         /* 0xBF80F2B8 */
+  .extern IPC23INV         /* 0xBF80F2BC */
+  .extern IPC24            /* 0xBF80F2C0 */
+  .extern IPC24CLR         /* 0xBF80F2C4 */
+  .extern IPC24SET         /* 0xBF80F2C8 */
+  .extern IPC24INV         /* 0xBF80F2CC */
+  .extern IPC25            /* 0xBF80F2D0 */
+  .extern IPC25CLR         /* 0xBF80F2D4 */
+  .extern IPC25SET         /* 0xBF80F2D8 */
+  .extern IPC25INV         /* 0xBF80F2DC */
   .extern FDEVOPT          /* 0xBFC017C4 */
   .extern FICD             /* 0xBFC017C8 */
   .extern FPOR             /* 0xBFC017CC */
   .extern FWDT             /* 0xBFC017D0 */
   .extern FOSCSEL          /* 0xBFC017D4 */
   .extern FSEC             /* 0xBFC017D8 */
+  .extern AFDEVOPT         /* 0xBFC01704 */
+  .extern AFICD            /* 0xBFC01708 */
+  .extern AFPOR            /* 0xBFC0170C */
+  .extern AFWDT            /* 0xBFC01710 */
+  .extern AFOSCSEL         /* 0xBFC01714 */
+  .extern AFSEC            /* 0xBFC01718 */
 #else
 #error Unknown language!
 #endif
@@ -11999,14 +11952,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _AD1CON1_FORM_MASK                       0x00000700
 #define _AD1CON1_FORM_LENGTH                     0x00000003
 
-#define _AD1CON1_DMAEN_POSITION                  0x0000000B
-#define _AD1CON1_DMAEN_MASK                      0x00000800
-#define _AD1CON1_DMAEN_LENGTH                    0x00000001
-
-#define _AD1CON1_DMABM_POSITION                  0x0000000C
-#define _AD1CON1_DMABM_MASK                      0x00001000
-#define _AD1CON1_DMABM_LENGTH                    0x00000001
-
 #define _AD1CON1_SIDL_POSITION                   0x0000000D
 #define _AD1CON1_SIDL_MASK                       0x00002000
 #define _AD1CON1_SIDL_LENGTH                     0x00000001
@@ -12207,6 +12152,18 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _AD1CON5_ASINT_MASK                      0x00000300
 #define _AD1CON5_ASINT_LENGTH                    0x00000002
 
+#define _AD1CON5_BGREQ_POSITION                  0x0000000C
+#define _AD1CON5_BGREQ_MASK                      0x00001000
+#define _AD1CON5_BGREQ_LENGTH                    0x00000001
+
+#define _AD1CON5_LPEN_POSITION                   0x0000000E
+#define _AD1CON5_LPEN_MASK                       0x00004000
+#define _AD1CON5_LPEN_LENGTH                     0x00000001
+
+#define _AD1CON5_ASEN_POSITION                   0x0000000F
+#define _AD1CON5_ASEN_MASK                       0x00008000
+#define _AD1CON5_ASEN_LENGTH                     0x00000001
+
 #define _AD1CHIT_CHH0_POSITION                   0x00000000
 #define _AD1CHIT_CHH0_MASK                       0x00000001
 #define _AD1CHIT_CHH0_LENGTH                     0x00000001
@@ -12283,53 +12240,37 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _AD1CHIT_CHH19_MASK                      0x00080000
 #define _AD1CHIT_CHH19_LENGTH                    0x00000001
 
-#define _AD1CHIT_CHH20_POSITION                  0x00000014
-#define _AD1CHIT_CHH20_MASK                      0x00100000
-#define _AD1CHIT_CHH20_LENGTH                    0x00000001
+#define _CMSTAT_C1OUT_POSITION                   0x00000000
+#define _CMSTAT_C1OUT_MASK                       0x00000001
+#define _CMSTAT_C1OUT_LENGTH                     0x00000001
 
-#define _AD1CHIT_CHH21_POSITION                  0x00000015
-#define _AD1CHIT_CHH21_MASK                      0x00200000
-#define _AD1CHIT_CHH21_LENGTH                    0x00000001
+#define _CMSTAT_C2OUT_POSITION                   0x00000001
+#define _CMSTAT_C2OUT_MASK                       0x00000002
+#define _CMSTAT_C2OUT_LENGTH                     0x00000001
 
-#define _AD1CHIT_CHH22_POSITION                  0x00000016
-#define _AD1CHIT_CHH22_MASK                      0x00400000
-#define _AD1CHIT_CHH22_LENGTH                    0x00000001
+#define _CMSTAT_C3OUT_POSITION                   0x00000002
+#define _CMSTAT_C3OUT_MASK                       0x00000004
+#define _CMSTAT_C3OUT_LENGTH                     0x00000001
 
-#define _AD1CHIT_CHH23_POSITION                  0x00000017
-#define _AD1CHIT_CHH23_MASK                      0x00800000
-#define _AD1CHIT_CHH23_LENGTH                    0x00000001
+#define _CMSTAT_CVREFSEL_POSITION                0x00000008
+#define _CMSTAT_CVREFSEL_MASK                    0x00000100
+#define _CMSTAT_CVREFSEL_LENGTH                  0x00000001
 
-#define _AD1CHIT_CHH24_POSITION                  0x00000018
-#define _AD1CHIT_CHH24_MASK                      0x01000000
-#define _AD1CHIT_CHH24_LENGTH                    0x00000001
+#define _CMSTAT_SIDL_POSITION                    0x0000000D
+#define _CMSTAT_SIDL_MASK                        0x00002000
+#define _CMSTAT_SIDL_LENGTH                      0x00000001
 
-#define _AD1CHIT_CHH25_POSITION                  0x00000019
-#define _AD1CHIT_CHH25_MASK                      0x02000000
-#define _AD1CHIT_CHH25_LENGTH                    0x00000001
+#define _CMSTAT_C1EVT_POSITION                   0x00000010
+#define _CMSTAT_C1EVT_MASK                       0x00010000
+#define _CMSTAT_C1EVT_LENGTH                     0x00000001
 
-#define _AD1CHIT_CHH26_POSITION                  0x0000001A
-#define _AD1CHIT_CHH26_MASK                      0x04000000
-#define _AD1CHIT_CHH26_LENGTH                    0x00000001
+#define _CMSTAT_C2EVT_POSITION                   0x00000011
+#define _CMSTAT_C2EVT_MASK                       0x00020000
+#define _CMSTAT_C2EVT_LENGTH                     0x00000001
 
-#define _AD1CHIT_CHH27_POSITION                  0x0000001B
-#define _AD1CHIT_CHH27_MASK                      0x08000000
-#define _AD1CHIT_CHH27_LENGTH                    0x00000001
-
-#define _AD1CHIT_CHH28_POSITION                  0x0000001C
-#define _AD1CHIT_CHH28_MASK                      0x10000000
-#define _AD1CHIT_CHH28_LENGTH                    0x00000001
-
-#define _AD1CHIT_CHH29_POSITION                  0x0000001D
-#define _AD1CHIT_CHH29_MASK                      0x20000000
-#define _AD1CHIT_CHH29_LENGTH                    0x00000001
-
-#define _AD1CHIT_CHH30_POSITION                  0x0000001E
-#define _AD1CHIT_CHH30_MASK                      0x40000000
-#define _AD1CHIT_CHH30_LENGTH                    0x00000001
-
-#define _AD1CHIT_CHH31_POSITION                  0x0000001F
-#define _AD1CHIT_CHH31_MASK                      0x80000000
-#define _AD1CHIT_CHH31_LENGTH                    0x00000001
+#define _CMSTAT_C3EVT_POSITION                   0x00000012
+#define _CMSTAT_C3EVT_MASK                       0x00040000
+#define _CMSTAT_C3EVT_LENGTH                     0x00000001
 
 #define _CM1CON_CCH_POSITION                     0x00000000
 #define _CM1CON_CCH_MASK                         0x00000003
@@ -12427,21 +12368,21 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CM3CON_ON_MASK                          0x00008000
 #define _CM3CON_ON_LENGTH                        0x00000001
 
-#define _VR1CON_REFSEL_POSITION                  0x00000000
-#define _VR1CON_REFSEL_MASK                      0x00000003
-#define _VR1CON_REFSEL_LENGTH                    0x00000002
+#define _DAC1CON_REFSEL_POSITION                 0x00000000
+#define _DAC1CON_REFSEL_MASK                     0x00000003
+#define _DAC1CON_REFSEL_LENGTH                   0x00000002
 
-#define _VR1CON_VROE_POSITION                    0x00000008
-#define _VR1CON_VROE_MASK                        0x00000100
-#define _VR1CON_VROE_LENGTH                      0x00000001
+#define _DAC1CON_DACOE_POSITION                  0x00000008
+#define _DAC1CON_DACOE_MASK                      0x00000100
+#define _DAC1CON_DACOE_LENGTH                    0x00000001
 
-#define _VR1CON_ON_POSITION                      0x0000000F
-#define _VR1CON_ON_MASK                          0x00008000
-#define _VR1CON_ON_LENGTH                        0x00000001
+#define _DAC1CON_ON_POSITION                     0x0000000F
+#define _DAC1CON_ON_MASK                         0x00008000
+#define _DAC1CON_ON_LENGTH                       0x00000001
 
-#define _VR1CON_VRDAT_POSITION                   0x00000010
-#define _VR1CON_VRDAT_MASK                       0xFFFF0000
-#define _VR1CON_VRDAT_LENGTH                     0x00000010
+#define _DAC1CON_DACDAT_POSITION                 0x00000010
+#define _DAC1CON_DACDAT_MASK                     0xFFFF0000
+#define _DAC1CON_DACDAT_LENGTH                   0x00000010
 
 #define _CLC1CON_MODE_POSITION                   0x00000000
 #define _CLC1CON_MODE_MASK                       0x00000007
@@ -13223,6 +13164,14 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _OSCCON_COSC_MASK                        0x00007000
 #define _OSCCON_COSC_LENGTH                      0x00000003
 
+#define _OSCCON_SLP2SPD_POSITION                 0x00000015
+#define _OSCCON_SLP2SPD_MASK                     0x00200000
+#define _OSCCON_SLP2SPD_LENGTH                   0x00000001
+
+#define _OSCCON_DRMEN_POSITION                   0x00000017
+#define _OSCCON_DRMEN_MASK                       0x00800000
+#define _OSCCON_DRMEN_LENGTH                     0x00000001
+
 #define _OSCCON_FRCDIV_POSITION                  0x00000018
 #define _OSCCON_FRCDIV_MASK                      0x07000000
 #define _OSCCON_FRCDIV_LENGTH                    0x00000003
@@ -13415,9 +13364,65 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _OSCTUN_TUN_MASK                         0x0000003F
 #define _OSCTUN_TUN_LENGTH                       0x00000006
 
+#define _OSCTUN_ORPOL_POSITION                   0x00000008
+#define _OSCTUN_ORPOL_MASK                       0x00000100
+#define _OSCTUN_ORPOL_LENGTH                     0x00000001
+
+#define _OSCTUN_OR_POSITION                      0x00000009
+#define _OSCTUN_OR_MASK                          0x00000200
+#define _OSCTUN_OR_LENGTH                        0x00000001
+
+#define _OSCTUN_POL_POSITION                     0x0000000A
+#define _OSCTUN_POL_MASK                         0x00000400
+#define _OSCTUN_POL_LENGTH                       0x00000001
+
+#define _OSCTUN_LOCK_POSITION                    0x0000000B
+#define _OSCTUN_LOCK_MASK                        0x00000800
+#define _OSCTUN_LOCK_LENGTH                      0x00000001
+
+#define _OSCTUN_SRC_POSITION                     0x0000000C
+#define _OSCTUN_SRC_MASK                         0x00001000
+#define _OSCTUN_SRC_LENGTH                       0x00000001
+
+#define _OSCTUN_SIDL_POSITION                    0x0000000D
+#define _OSCTUN_SIDL_MASK                        0x00002000
+#define _OSCTUN_SIDL_LENGTH                      0x00000001
+
+#define _OSCTUN_ON_POSITION                      0x0000000F
+#define _OSCTUN_ON_MASK                          0x00008000
+#define _OSCTUN_ON_LENGTH                        0x00000001
+
 #define _DCOCON_TUN_POSITION                     0x00000000
 #define _DCOCON_TUN_MASK                         0x0000003F
 #define _DCOCON_TUN_LENGTH                       0x00000006
+
+#define _DCOCON_ORPOL_POSITION                   0x00000008
+#define _DCOCON_ORPOL_MASK                       0x00000100
+#define _DCOCON_ORPOL_LENGTH                     0x00000001
+
+#define _DCOCON_OR_POSITION                      0x00000009
+#define _DCOCON_OR_MASK                          0x00000200
+#define _DCOCON_OR_LENGTH                        0x00000001
+
+#define _DCOCON_POL_POSITION                     0x0000000A
+#define _DCOCON_POL_MASK                         0x00000400
+#define _DCOCON_POL_LENGTH                       0x00000001
+
+#define _DCOCON_LOCK_POSITION                    0x0000000B
+#define _DCOCON_LOCK_MASK                        0x00000800
+#define _DCOCON_LOCK_LENGTH                      0x00000001
+
+#define _DCOCON_SRC_POSITION                     0x0000000C
+#define _DCOCON_SRC_MASK                         0x00001000
+#define _DCOCON_SRC_LENGTH                       0x00000001
+
+#define _DCOCON_SIDL_POSITION                    0x0000000D
+#define _DCOCON_SIDL_MASK                        0x00002000
+#define _DCOCON_SIDL_LENGTH                      0x00000001
+
+#define _DCOCON_CREN_POSITION                    0x0000000F
+#define _DCOCON_CREN_MASK                        0x00008000
+#define _DCOCON_CREN_LENGTH                      0x00000001
 
 #define _DCOCON_DCOFSEL_POSITION                 0x00000018
 #define _DCOCON_DCOFSEL_MASK                     0x0F000000
@@ -13427,9 +13432,21 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _DCOCON_ON_MASK                          0x20000000
 #define _DCOCON_ON_LENGTH                        0x00000001
 
-#define _SYSKEY_SYSKEY_POSITION                  0x00000000
-#define _SYSKEY_SYSKEY_MASK                      0xFFFFFFFF
-#define _SYSKEY_SYSKEY_LENGTH                    0x00000020
+#define _ANCFG_BGCMP_POSITION                    0x00000001
+#define _ANCFG_BGCMP_MASK                        0x00000002
+#define _ANCFG_BGCMP_LENGTH                      0x00000001
+
+#define _ANCFG_BGADC_POSITION                    0x00000002
+#define _ANCFG_BGADC_MASK                        0x00000004
+#define _ANCFG_BGADC_LENGTH                      0x00000001
+
+#define _ANCFG_VBGCMP_POSITION                   0x00000001
+#define _ANCFG_VBGCMP_MASK                       0x00000002
+#define _ANCFG_VBGCMP_LENGTH                     0x00000001
+
+#define _ANCFG_VBGADC_POSITION                   0x00000002
+#define _ANCFG_VBGADC_MASK                       0x00000004
+#define _ANCFG_VBGADC_LENGTH                     0x00000001
 
 #define _HLVDCON_HLVDL_POSITION                  0x00000000
 #define _HLVDCON_HLVDL_MASK                      0x0000000F
@@ -13523,193 +13540,197 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _NVMBWP_BWPULOCK_MASK                    0x00008000
 #define _NVMBWP_BWPULOCK_LENGTH                  0x00000001
 
-#define _RPINR2_INT4R_POSITION                   0x00000000
-#define _RPINR2_INT4R_MASK                       0x0000001F
-#define _RPINR2_INT4R_LENGTH                     0x00000005
+#define _RPCON_IOLOCK_POSITION                   0x0000000B
+#define _RPCON_IOLOCK_MASK                       0x00000800
+#define _RPCON_IOLOCK_LENGTH                     0x00000001
 
-#define _RPINR3_ICM1R_POSITION                   0x00000010
-#define _RPINR3_ICM1R_MASK                       0x001F0000
-#define _RPINR3_ICM1R_LENGTH                     0x00000005
+#define _RPINR1_INT4R_POSITION                   0x00000000
+#define _RPINR1_INT4R_MASK                       0x0000001F
+#define _RPINR1_INT4R_LENGTH                     0x00000005
 
-#define _RPINR3_ICM2R_POSITION                   0x00000018
-#define _RPINR3_ICM2R_MASK                       0x1F000000
-#define _RPINR3_ICM2R_LENGTH                     0x00000005
+#define _RPINR2_ICM1R_POSITION                   0x00000010
+#define _RPINR2_ICM1R_MASK                       0x001F0000
+#define _RPINR2_ICM1R_LENGTH                     0x00000005
 
-#define _RPINR4_ICM3R_POSITION                   0x00000000
-#define _RPINR4_ICM3R_MASK                       0x0000001F
-#define _RPINR4_ICM3R_LENGTH                     0x00000005
+#define _RPINR2_ICM2R_POSITION                   0x00000018
+#define _RPINR2_ICM2R_MASK                       0x1F000000
+#define _RPINR2_ICM2R_LENGTH                     0x00000005
 
-#define _RPINR4_ICM4R_POSITION                   0x00000008
-#define _RPINR4_ICM4R_MASK                       0x00001F00
-#define _RPINR4_ICM4R_LENGTH                     0x00000005
+#define _RPINR3_ICM3R_POSITION                   0x00000000
+#define _RPINR3_ICM3R_MASK                       0x0000001F
+#define _RPINR3_ICM3R_LENGTH                     0x00000005
 
-#define _RPINR6_OCFAR_POSITION                   0x00000010
-#define _RPINR6_OCFAR_MASK                       0x001F0000
-#define _RPINR6_OCFAR_LENGTH                     0x00000005
+#define _RPINR3_ICM4R_POSITION                   0x00000008
+#define _RPINR3_ICM4R_MASK                       0x00001F00
+#define _RPINR3_ICM4R_LENGTH                     0x00000005
 
-#define _RPINR6_OCFBR_POSITION                   0x00000018
-#define _RPINR6_OCFBR_MASK                       0x1F000000
-#define _RPINR6_OCFBR_LENGTH                     0x00000005
+#define _RPINR5_OCFAR_POSITION                   0x00000010
+#define _RPINR5_OCFAR_MASK                       0x001F0000
+#define _RPINR5_OCFAR_LENGTH                     0x00000005
 
-#define _RPINR7_TCKIAR_POSITION                  0x00000000
-#define _RPINR7_TCKIAR_MASK                      0x0000001F
-#define _RPINR7_TCKIAR_LENGTH                    0x00000005
+#define _RPINR5_OCFBR_POSITION                   0x00000018
+#define _RPINR5_OCFBR_MASK                       0x1F000000
+#define _RPINR5_OCFBR_LENGTH                     0x00000005
 
-#define _RPINR7_TCKIBR_POSITION                  0x00000008
-#define _RPINR7_TCKIBR_MASK                      0x00001F00
-#define _RPINR7_TCKIBR_LENGTH                    0x00000005
+#define _RPINR6_TCKIAR_POSITION                  0x00000000
+#define _RPINR6_TCKIAR_MASK                      0x0000001F
+#define _RPINR6_TCKIAR_LENGTH                    0x00000005
 
-#define _RPINR8_ICM5R_POSITION                   0x00000000
-#define _RPINR8_ICM5R_MASK                       0x0000001F
-#define _RPINR8_ICM5R_LENGTH                     0x00000005
+#define _RPINR6_TCKIBR_POSITION                  0x00000008
+#define _RPINR6_TCKIBR_MASK                      0x00001F00
+#define _RPINR6_TCKIBR_LENGTH                    0x00000005
 
-#define _RPINR8_ICM6R_POSITION                   0x00000008
-#define _RPINR8_ICM6R_MASK                       0x00001F00
-#define _RPINR8_ICM6R_LENGTH                     0x00000005
+#define _RPINR7_ICM5R_POSITION                   0x00000000
+#define _RPINR7_ICM5R_MASK                       0x0000001F
+#define _RPINR7_ICM5R_LENGTH                     0x00000005
 
-#define _RPINR8_ICM7R_POSITION                   0x00000010
-#define _RPINR8_ICM7R_MASK                       0x001F0000
-#define _RPINR8_ICM7R_LENGTH                     0x00000005
+#define _RPINR7_ICM6R_POSITION                   0x00000008
+#define _RPINR7_ICM6R_MASK                       0x00001F00
+#define _RPINR7_ICM6R_LENGTH                     0x00000005
 
-#define _RPINR8_ICM8R_POSITION                   0x00000018
-#define _RPINR8_ICM8R_MASK                       0x1F000000
-#define _RPINR8_ICM8R_LENGTH                     0x00000005
+#define _RPINR7_ICM7R_POSITION                   0x00000010
+#define _RPINR7_ICM7R_MASK                       0x001F0000
+#define _RPINR7_ICM7R_LENGTH                     0x00000005
 
-#define _RPINR9_ICM9R_POSITION                   0x00000000
-#define _RPINR9_ICM9R_MASK                       0x0000001F
-#define _RPINR9_ICM9R_LENGTH                     0x00000005
+#define _RPINR7_ICM8R_POSITION                   0x00000018
+#define _RPINR7_ICM8R_MASK                       0x1F000000
+#define _RPINR7_ICM8R_LENGTH                     0x00000005
 
-#define _RPINR9_U3RX_POSITION                    0x00000018
-#define _RPINR9_U3RX_MASK                        0x1F000000
-#define _RPINR9_U3RX_LENGTH                      0x00000005
+#define _RPINR8_ICM9R_POSITION                   0x00000000
+#define _RPINR8_ICM9R_MASK                       0x0000001F
+#define _RPINR8_ICM9R_LENGTH                     0x00000005
 
-#define _RPINR10_U2RXR_POSITION                  0x00000010
-#define _RPINR10_U2RXR_MASK                      0x001F0000
-#define _RPINR10_U2RXR_LENGTH                    0x00000005
+#define _RPINR8_U3RX_POSITION                    0x00000018
+#define _RPINR8_U3RX_MASK                        0x1F000000
+#define _RPINR8_U3RX_LENGTH                      0x00000005
 
-#define _RPINR10_U2CTSR_POSITION                 0x00000018
-#define _RPINR10_U2CTSR_MASK                     0x1F000000
-#define _RPINR10_U2CTSR_LENGTH                   0x00000005
+#define _RPINR9_U2RXR_POSITION                   0x00000010
+#define _RPINR9_U2RXR_MASK                       0x001F0000
+#define _RPINR9_U2RXR_LENGTH                     0x00000005
 
-#define _RPINR11_U3CTS_POSITION                  0x00000018
-#define _RPINR11_U3CTS_MASK                      0x1F000000
-#define _RPINR11_U3CTS_LENGTH                    0x00000005
+#define _RPINR9_U2CTSR_POSITION                  0x00000018
+#define _RPINR9_U2CTSR_MASK                      0x1F000000
+#define _RPINR9_U2CTSR_LENGTH                    0x00000005
 
-#define _RPINR12_SDI2R_POSITION                  0x00000000
-#define _RPINR12_SDI2R_MASK                      0x0000001F
-#define _RPINR12_SDI2R_LENGTH                    0x00000005
+#define _RPINR10_U3CTS_POSITION                  0x00000018
+#define _RPINR10_U3CTS_MASK                      0x1F000000
+#define _RPINR10_U3CTS_LENGTH                    0x00000005
 
-#define _RPINR12_SCK2INR_POSITION                0x00000008
-#define _RPINR12_SCK2INR_MASK                    0x00001F00
-#define _RPINR12_SCK2INR_LENGTH                  0x00000005
+#define _RPINR11_SDI2R_POSITION                  0x00000000
+#define _RPINR11_SDI2R_MASK                      0x0000001F
+#define _RPINR11_SDI2R_LENGTH                    0x00000005
 
-#define _RPINR12_SS2INR_POSITION                 0x00000010
-#define _RPINR12_SS2INR_MASK                     0x001F0000
-#define _RPINR12_SS2INR_LENGTH                   0x00000005
+#define _RPINR11_SCK2INR_POSITION                0x00000008
+#define _RPINR11_SCK2INR_MASK                    0x00001F00
+#define _RPINR11_SCK2INR_LENGTH                  0x00000005
 
-#define _RPINR13_CLCINAR_POSITION                0x00000010
-#define _RPINR13_CLCINAR_MASK                    0x001F0000
-#define _RPINR13_CLCINAR_LENGTH                  0x00000005
+#define _RPINR11_SS2INR_POSITION                 0x00000010
+#define _RPINR11_SS2INR_MASK                     0x001F0000
+#define _RPINR11_SS2INR_LENGTH                   0x00000005
 
-#define _RPINR13_CLCINBR_POSITION                0x00000018
-#define _RPINR13_CLCINBR_MASK                    0x1F000000
-#define _RPINR13_CLCINBR_LENGTH                  0x00000005
+#define _RPINR12_CLCINAR_POSITION                0x00000010
+#define _RPINR12_CLCINAR_MASK                    0x001F0000
+#define _RPINR12_CLCINAR_LENGTH                  0x00000005
+
+#define _RPINR12_CLCINBR_POSITION                0x00000018
+#define _RPINR12_CLCINBR_MASK                    0x1F000000
+#define _RPINR12_CLCINBR_LENGTH                  0x00000005
 
 #define _RPOR0_RP1R_POSITION                     0x00000000
-#define _RPOR0_RP1R_MASK                         0x0000000F
-#define _RPOR0_RP1R_LENGTH                       0x00000004
+#define _RPOR0_RP1R_MASK                         0x0000001F
+#define _RPOR0_RP1R_LENGTH                       0x00000005
 
 #define _RPOR0_RP2R_POSITION                     0x00000008
-#define _RPOR0_RP2R_MASK                         0x00000F00
-#define _RPOR0_RP2R_LENGTH                       0x00000004
+#define _RPOR0_RP2R_MASK                         0x00001F00
+#define _RPOR0_RP2R_LENGTH                       0x00000005
 
 #define _RPOR0_RP3R_POSITION                     0x00000010
-#define _RPOR0_RP3R_MASK                         0x000F0000
-#define _RPOR0_RP3R_LENGTH                       0x00000004
+#define _RPOR0_RP3R_MASK                         0x001F0000
+#define _RPOR0_RP3R_LENGTH                       0x00000005
 
 #define _RPOR0_RP4R_POSITION                     0x00000018
-#define _RPOR0_RP4R_MASK                         0x0F000000
-#define _RPOR0_RP4R_LENGTH                       0x00000004
+#define _RPOR0_RP4R_MASK                         0x1F000000
+#define _RPOR0_RP4R_LENGTH                       0x00000005
 
 #define _RPOR1_RP5R_POSITION                     0x00000000
-#define _RPOR1_RP5R_MASK                         0x0000000F
-#define _RPOR1_RP5R_LENGTH                       0x00000004
+#define _RPOR1_RP5R_MASK                         0x0000001F
+#define _RPOR1_RP5R_LENGTH                       0x00000005
 
 #define _RPOR1_RP6R_POSITION                     0x00000008
-#define _RPOR1_RP6R_MASK                         0x00000F00
-#define _RPOR1_RP6R_LENGTH                       0x00000004
+#define _RPOR1_RP6R_MASK                         0x00001F00
+#define _RPOR1_RP6R_LENGTH                       0x00000005
 
 #define _RPOR1_RP7R_POSITION                     0x00000010
-#define _RPOR1_RP7R_MASK                         0x000F0000
-#define _RPOR1_RP7R_LENGTH                       0x00000004
+#define _RPOR1_RP7R_MASK                         0x001F0000
+#define _RPOR1_RP7R_LENGTH                       0x00000005
 
 #define _RPOR1_RP8R_POSITION                     0x00000018
-#define _RPOR1_RP8R_MASK                         0x0F000000
-#define _RPOR1_RP8R_LENGTH                       0x00000004
+#define _RPOR1_RP8R_MASK                         0x1F000000
+#define _RPOR1_RP8R_LENGTH                       0x00000005
 
 #define _RPOR2_RP9R_POSITION                     0x00000000
-#define _RPOR2_RP9R_MASK                         0x0000000F
-#define _RPOR2_RP9R_LENGTH                       0x00000004
+#define _RPOR2_RP9R_MASK                         0x0000001F
+#define _RPOR2_RP9R_LENGTH                       0x00000005
 
 #define _RPOR2_RP10R_POSITION                    0x00000008
-#define _RPOR2_RP10R_MASK                        0x00000F00
-#define _RPOR2_RP10R_LENGTH                      0x00000004
+#define _RPOR2_RP10R_MASK                        0x00001F00
+#define _RPOR2_RP10R_LENGTH                      0x00000005
 
 #define _RPOR2_RP11R_POSITION                    0x00000010
-#define _RPOR2_RP11R_MASK                        0x000F0000
-#define _RPOR2_RP11R_LENGTH                      0x00000004
+#define _RPOR2_RP11R_MASK                        0x001F0000
+#define _RPOR2_RP11R_LENGTH                      0x00000005
 
 #define _RPOR2_RP12R_POSITION                    0x00000018
-#define _RPOR2_RP12R_MASK                        0x0F000000
-#define _RPOR2_RP12R_LENGTH                      0x00000004
+#define _RPOR2_RP12R_MASK                        0x1F000000
+#define _RPOR2_RP12R_LENGTH                      0x00000005
 
 #define _RPOR3_RP13R_POSITION                    0x00000000
-#define _RPOR3_RP13R_MASK                        0x0000000F
-#define _RPOR3_RP13R_LENGTH                      0x00000004
+#define _RPOR3_RP13R_MASK                        0x0000001F
+#define _RPOR3_RP13R_LENGTH                      0x00000005
 
 #define _RPOR3_RP14R_POSITION                    0x00000008
-#define _RPOR3_RP14R_MASK                        0x00000F00
-#define _RPOR3_RP14R_LENGTH                      0x00000004
+#define _RPOR3_RP14R_MASK                        0x00001F00
+#define _RPOR3_RP14R_LENGTH                      0x00000005
 
 #define _RPOR3_RP15R_POSITION                    0x00000010
-#define _RPOR3_RP15R_MASK                        0x000F0000
-#define _RPOR3_RP15R_LENGTH                      0x00000004
+#define _RPOR3_RP15R_MASK                        0x001F0000
+#define _RPOR3_RP15R_LENGTH                      0x00000005
 
 #define _RPOR3_RP16R_POSITION                    0x00000018
-#define _RPOR3_RP16R_MASK                        0x0F000000
-#define _RPOR3_RP16R_LENGTH                      0x00000004
+#define _RPOR3_RP16R_MASK                        0x1F000000
+#define _RPOR3_RP16R_LENGTH                      0x00000005
 
 #define _RPOR4_RP17R_POSITION                    0x00000000
-#define _RPOR4_RP17R_MASK                        0x0000000F
-#define _RPOR4_RP17R_LENGTH                      0x00000004
+#define _RPOR4_RP17R_MASK                        0x0000001F
+#define _RPOR4_RP17R_LENGTH                      0x00000005
 
 #define _RPOR4_RP18R_POSITION                    0x00000008
-#define _RPOR4_RP18R_MASK                        0x00000F00
-#define _RPOR4_RP18R_LENGTH                      0x00000004
+#define _RPOR4_RP18R_MASK                        0x00001F00
+#define _RPOR4_RP18R_LENGTH                      0x00000005
 
 #define _RPOR4_RP19R_POSITION                    0x00000010
-#define _RPOR4_RP19R_MASK                        0x000F0000
-#define _RPOR4_RP19R_LENGTH                      0x00000004
+#define _RPOR4_RP19R_MASK                        0x001F0000
+#define _RPOR4_RP19R_LENGTH                      0x00000005
 
 #define _RPOR4_RP20R_POSITION                    0x00000018
-#define _RPOR4_RP20R_MASK                        0x0F000000
-#define _RPOR4_RP20R_LENGTH                      0x00000004
+#define _RPOR4_RP20R_MASK                        0x1F000000
+#define _RPOR4_RP20R_LENGTH                      0x00000005
 
 #define _RPOR5_RPOR21_POSITION                   0x00000000
-#define _RPOR5_RPOR21_MASK                       0x0000000F
-#define _RPOR5_RPOR21_LENGTH                     0x00000004
+#define _RPOR5_RPOR21_MASK                       0x0000001F
+#define _RPOR5_RPOR21_LENGTH                     0x00000005
 
 #define _RPOR5_RPOR22_POSITION                   0x00000008
-#define _RPOR5_RPOR22_MASK                       0x00000F00
-#define _RPOR5_RPOR22_LENGTH                     0x00000004
+#define _RPOR5_RPOR22_MASK                       0x00001F00
+#define _RPOR5_RPOR22_LENGTH                     0x00000005
 
 #define _RPOR5_RPOR23_POSITION                   0x00000010
-#define _RPOR5_RPOR23_MASK                       0x000F0000
-#define _RPOR5_RPOR23_LENGTH                     0x00000004
+#define _RPOR5_RPOR23_MASK                       0x001F0000
+#define _RPOR5_RPOR23_LENGTH                     0x00000005
 
 #define _RPOR5_RPOR24_POSITION                   0x00000018
-#define _RPOR5_RPOR24_MASK                       0x0F000000
-#define _RPOR5_RPOR24_LENGTH                     0x00000004
+#define _RPOR5_RPOR24_MASK                       0x1F000000
+#define _RPOR5_RPOR24_LENGTH                     0x00000005
 
 #define _ANSELA_ANSA0_POSITION                   0x00000000
 #define _ANSELA_ANSA0_MASK                       0x00000001
@@ -13987,53 +14008,85 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNFA_w_MASK                             0xFFFFFFFF
 #define _CNFA_w_LENGTH                           0x00000020
 
-#define _SR0A_SR0A0_POSITION                     0x00000000
-#define _SR0A_SR0A0_MASK                         0x00000001
-#define _SR0A_SR0A0_LENGTH                       0x00000001
-
-#define _SR0A_SR0A1_POSITION                     0x00000001
-#define _SR0A_SR0A1_MASK                         0x00000002
-#define _SR0A_SR0A1_LENGTH                       0x00000001
-
-#define _SR0A_SR0A2_POSITION                     0x00000002
-#define _SR0A_SR0A2_MASK                         0x00000004
-#define _SR0A_SR0A2_LENGTH                       0x00000001
-
-#define _SR0A_SR0A3_POSITION                     0x00000003
-#define _SR0A_SR0A3_MASK                         0x00000008
-#define _SR0A_SR0A3_LENGTH                       0x00000001
-
-#define _SR0A_SR0A4_POSITION                     0x00000004
-#define _SR0A_SR0A4_MASK                         0x00000010
-#define _SR0A_SR0A4_LENGTH                       0x00000001
-
 #define _SR0A_w_POSITION                         0x00000000
 #define _SR0A_w_MASK                             0xFFFFFFFF
 #define _SR0A_w_LENGTH                           0x00000020
 
-#define _SR1A_SR0A0_POSITION                     0x00000000
-#define _SR1A_SR0A0_MASK                         0x00000001
-#define _SR1A_SR0A0_LENGTH                       0x00000001
-
-#define _SR1A_SR0A1_POSITION                     0x00000001
-#define _SR1A_SR0A1_MASK                         0x00000002
-#define _SR1A_SR0A1_LENGTH                       0x00000001
-
-#define _SR1A_SR0A2_POSITION                     0x00000002
-#define _SR1A_SR0A2_MASK                         0x00000004
-#define _SR1A_SR0A2_LENGTH                       0x00000001
-
-#define _SR1A_SR0A3_POSITION                     0x00000003
-#define _SR1A_SR0A3_MASK                         0x00000008
-#define _SR1A_SR0A3_LENGTH                       0x00000001
-
-#define _SR1A_SR0A4_POSITION                     0x00000004
-#define _SR1A_SR0A4_MASK                         0x00000010
-#define _SR1A_SR0A4_LENGTH                       0x00000001
-
 #define _SR1A_w_POSITION                         0x00000000
 #define _SR1A_w_MASK                             0xFFFFFFFF
 #define _SR1A_w_LENGTH                           0x00000020
+
+#define _ANSELB_ANSB0_POSITION                   0x00000000
+#define _ANSELB_ANSB0_MASK                       0x00000001
+#define _ANSELB_ANSB0_LENGTH                     0x00000001
+
+#define _ANSELB_ANSB1_POSITION                   0x00000001
+#define _ANSELB_ANSB1_MASK                       0x00000002
+#define _ANSELB_ANSB1_LENGTH                     0x00000001
+
+#define _ANSELB_ANSB2_POSITION                   0x00000002
+#define _ANSELB_ANSB2_MASK                       0x00000004
+#define _ANSELB_ANSB2_LENGTH                     0x00000001
+
+#define _ANSELB_ANSB3_POSITION                   0x00000003
+#define _ANSELB_ANSB3_MASK                       0x00000008
+#define _ANSELB_ANSB3_LENGTH                     0x00000001
+
+#define _ANSELB_ANSB4_POSITION                   0x00000004
+#define _ANSELB_ANSB4_MASK                       0x00000010
+#define _ANSELB_ANSB4_LENGTH                     0x00000001
+
+#define _ANSELB_ANSB13_POSITION                  0x0000000D
+#define _ANSELB_ANSB13_MASK                      0x00002000
+#define _ANSELB_ANSB13_LENGTH                    0x00000001
+
+#define _ANSELB_ANSB14_POSITION                  0x0000000E
+#define _ANSELB_ANSB14_MASK                      0x00004000
+#define _ANSELB_ANSB14_LENGTH                    0x00000001
+
+#define _ANSELB_ANSA15_POSITION                  0x0000000F
+#define _ANSELB_ANSA15_MASK                      0x00008000
+#define _ANSELB_ANSA15_LENGTH                    0x00000001
+
+#define _ANSELB_w_POSITION                       0x00000000
+#define _ANSELB_w_MASK                           0xFFFFFFFF
+#define _ANSELB_w_LENGTH                         0x00000020
+
+#define _B_ANSB0_POSITION                        0x00000000
+#define _B_ANSB0_MASK                            0x00000001
+#define _B_ANSB0_LENGTH                          0x00000001
+
+#define _B_ANSB1_POSITION                        0x00000001
+#define _B_ANSB1_MASK                            0x00000002
+#define _B_ANSB1_LENGTH                          0x00000001
+
+#define _B_ANSB2_POSITION                        0x00000002
+#define _B_ANSB2_MASK                            0x00000004
+#define _B_ANSB2_LENGTH                          0x00000001
+
+#define _B_ANSB3_POSITION                        0x00000003
+#define _B_ANSB3_MASK                            0x00000008
+#define _B_ANSB3_LENGTH                          0x00000001
+
+#define _B_ANSB4_POSITION                        0x00000004
+#define _B_ANSB4_MASK                            0x00000010
+#define _B_ANSB4_LENGTH                          0x00000001
+
+#define _B_ANSB13_POSITION                       0x0000000D
+#define _B_ANSB13_MASK                           0x00002000
+#define _B_ANSB13_LENGTH                         0x00000001
+
+#define _B_ANSB14_POSITION                       0x0000000E
+#define _B_ANSB14_MASK                           0x00004000
+#define _B_ANSB14_LENGTH                         0x00000001
+
+#define _B_ANSA15_POSITION                       0x0000000F
+#define _B_ANSA15_MASK                           0x00008000
+#define _B_ANSA15_LENGTH                         0x00000001
+
+#define _B_w_POSITION                            0x00000000
+#define _B_w_MASK                                0xFFFFFFFF
+#define _B_w_LENGTH                              0x00000020
 
 #define _TRISB_TRISB0_POSITION                   0x00000000
 #define _TRISB_TRISB0_MASK                       0x00000001
@@ -14082,10 +14135,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _TRISB_TRISB11_POSITION                  0x0000000B
 #define _TRISB_TRISB11_MASK                      0x00000800
 #define _TRISB_TRISB11_LENGTH                    0x00000001
-
-#define _TRISB_VBUSBIAS_POSITION                 0x0000000C
-#define _TRISB_VBUSBIAS_MASK                     0x00001000
-#define _TRISB_VBUSBIAS_LENGTH                   0x00000001
 
 #define _TRISB_TRISB13_POSITION                  0x0000000D
 #define _TRISB_TRISB13_MASK                      0x00002000
@@ -14151,10 +14200,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _PORTB_RB11_MASK                         0x00000800
 #define _PORTB_RB11_LENGTH                       0x00000001
 
-#define _PORTB_VBUSBIAS_POSITION                 0x0000000C
-#define _PORTB_VBUSBIAS_MASK                     0x00001000
-#define _PORTB_VBUSBIAS_LENGTH                   0x00000001
-
 #define _PORTB_RB13_POSITION                     0x0000000D
 #define _PORTB_RB13_MASK                         0x00002000
 #define _PORTB_RB13_LENGTH                       0x00000001
@@ -14218,10 +14263,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _LATB_LATB11_POSITION                    0x0000000B
 #define _LATB_LATB11_MASK                        0x00000800
 #define _LATB_LATB11_LENGTH                      0x00000001
-
-#define _LATB_VBUSBIAS_POSITION                  0x0000000C
-#define _LATB_VBUSBIAS_MASK                      0x00001000
-#define _LATB_VBUSBIAS_LENGTH                    0x00000001
 
 #define _LATB_LATB13_POSITION                    0x0000000D
 #define _LATB_LATB13_MASK                        0x00002000
@@ -14287,10 +14328,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _ODCB_ODCB11_MASK                        0x00000800
 #define _ODCB_ODCB11_LENGTH                      0x00000001
 
-#define _ODCB_VBUSBIAS_POSITION                  0x0000000C
-#define _ODCB_VBUSBIAS_MASK                      0x00001000
-#define _ODCB_VBUSBIAS_LENGTH                    0x00000001
-
 #define _ODCB_ODCB13_POSITION                    0x0000000D
 #define _ODCB_ODCB13_MASK                        0x00002000
 #define _ODCB_ODCB13_LENGTH                      0x00000001
@@ -14355,10 +14392,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNPUB_CNPUB11_MASK                      0x00000800
 #define _CNPUB_CNPUB11_LENGTH                    0x00000001
 
-#define _CNPUB_VBUSBIAS_POSITION                 0x0000000C
-#define _CNPUB_VBUSBIAS_MASK                     0x00001000
-#define _CNPUB_VBUSBIAS_LENGTH                   0x00000001
-
 #define _CNPUB_CNPUB13_POSITION                  0x0000000D
 #define _CNPUB_CNPUB13_MASK                      0x00002000
 #define _CNPUB_CNPUB13_LENGTH                    0x00000001
@@ -14422,10 +14455,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNPDB_CNPDB11_POSITION                  0x0000000B
 #define _CNPDB_CNPDB11_MASK                      0x00000800
 #define _CNPDB_CNPDB11_LENGTH                    0x00000001
-
-#define _CNPDB_VBUSBIAS_POSITION                 0x0000000C
-#define _CNPDB_VBUSBIAS_MASK                     0x00001000
-#define _CNPDB_VBUSBIAS_LENGTH                   0x00000001
 
 #define _CNPDB_CNPDB13_POSITION                  0x0000000D
 #define _CNPDB_CNPDB13_MASK                      0x00002000
@@ -14507,10 +14536,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNEN0B_CNIE0B11_MASK                    0x00000800
 #define _CNEN0B_CNIE0B11_LENGTH                  0x00000001
 
-#define _CNEN0B_VBUSBIAS_POSITION                0x0000000C
-#define _CNEN0B_VBUSBIAS_MASK                    0x00001000
-#define _CNEN0B_VBUSBIAS_LENGTH                  0x00000001
-
 #define _CNEN0B_CNIE0B13_POSITION                0x0000000D
 #define _CNEN0B_CNIE0B13_MASK                    0x00002000
 #define _CNEN0B_CNIE0B13_LENGTH                  0x00000001
@@ -14574,10 +14599,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNSTATB_CNSTATB11_POSITION              0x0000000B
 #define _CNSTATB_CNSTATB11_MASK                  0x00000800
 #define _CNSTATB_CNSTATB11_LENGTH                0x00000001
-
-#define _CNSTATB_VBUSBIAS_POSITION               0x0000000C
-#define _CNSTATB_VBUSBIAS_MASK                   0x00001000
-#define _CNSTATB_VBUSBIAS_LENGTH                 0x00000001
 
 #define _CNSTATB_CNSTATB13_POSITION              0x0000000D
 #define _CNSTATB_CNSTATB13_MASK                  0x00002000
@@ -14643,10 +14664,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNEN1B_CNIE1B11_MASK                    0x00000800
 #define _CNEN1B_CNIE1B11_LENGTH                  0x00000001
 
-#define _CNEN1B_VBUSBIAS_POSITION                0x0000000C
-#define _CNEN1B_VBUSBIAS_MASK                    0x00001000
-#define _CNEN1B_VBUSBIAS_LENGTH                  0x00000001
-
 #define _CNEN1B_CNIE1B13_POSITION                0x0000000D
 #define _CNEN1B_CNIE1B13_MASK                    0x00002000
 #define _CNEN1B_CNIE1B13_LENGTH                  0x00000001
@@ -14711,10 +14728,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNFB_CNFB11_MASK                        0x00000800
 #define _CNFB_CNFB11_LENGTH                      0x00000001
 
-#define _CNFB_VBUSBIAS_POSITION                  0x0000000C
-#define _CNFB_VBUSBIAS_MASK                      0x00001000
-#define _CNFB_VBUSBIAS_LENGTH                    0x00000001
-
 #define _CNFB_CNFB13_POSITION                    0x0000000D
 #define _CNFB_CNFB13_MASK                        0x00002000
 #define _CNFB_CNFB13_LENGTH                      0x00000001
@@ -14731,141 +14744,17 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNFB_w_MASK                             0xFFFFFFFF
 #define _CNFB_w_LENGTH                           0x00000020
 
-#define _SR0B_SR0B0_POSITION                     0x00000000
-#define _SR0B_SR0B0_MASK                         0x00000001
-#define _SR0B_SR0B0_LENGTH                       0x00000001
-
-#define _SR0B_SR0B1_POSITION                     0x00000001
-#define _SR0B_SR0B1_MASK                         0x00000002
-#define _SR0B_SR0B1_LENGTH                       0x00000001
-
-#define _SR0B_SR0B2_POSITION                     0x00000002
-#define _SR0B_SR0B2_MASK                         0x00000004
-#define _SR0B_SR0B2_LENGTH                       0x00000001
-
-#define _SR0B_SR0B3_POSITION                     0x00000003
-#define _SR0B_SR0B3_MASK                         0x00000008
-#define _SR0B_SR0B3_LENGTH                       0x00000001
-
-#define _SR0B_SR0B4_POSITION                     0x00000004
-#define _SR0B_SR0B4_MASK                         0x00000010
-#define _SR0B_SR0B4_LENGTH                       0x00000001
-
-#define _SR0B_SR0B5_POSITION                     0x00000005
-#define _SR0B_SR0B5_MASK                         0x00000020
-#define _SR0B_SR0B5_LENGTH                       0x00000001
-
-#define _SR0B_SR0B6_POSITION                     0x00000006
-#define _SR0B_SR0B6_MASK                         0x00000040
-#define _SR0B_SR0B6_LENGTH                       0x00000001
-
-#define _SR0B_SR0B7_POSITION                     0x00000007
-#define _SR0B_SR0B7_MASK                         0x00000080
-#define _SR0B_SR0B7_LENGTH                       0x00000001
-
-#define _SR0B_SR0B8_POSITION                     0x00000008
-#define _SR0B_SR0B8_MASK                         0x00000100
-#define _SR0B_SR0B8_LENGTH                       0x00000001
-
-#define _SR0B_SR0B9_POSITION                     0x00000009
-#define _SR0B_SR0B9_MASK                         0x00000200
-#define _SR0B_SR0B9_LENGTH                       0x00000001
-
-#define _SR0B_SR0B10_POSITION                    0x0000000A
-#define _SR0B_SR0B10_MASK                        0x00000400
-#define _SR0B_SR0B10_LENGTH                      0x00000001
-
-#define _SR0B_SR0B11_POSITION                    0x0000000B
-#define _SR0B_SR0B11_MASK                        0x00000800
-#define _SR0B_SR0B11_LENGTH                      0x00000001
-
-#define _SR0B_SR0B12_POSITION                    0x0000000C
-#define _SR0B_SR0B12_MASK                        0x00001000
-#define _SR0B_SR0B12_LENGTH                      0x00000001
-
-#define _SR0B_SR0B13_POSITION                    0x0000000D
-#define _SR0B_SR0B13_MASK                        0x00002000
-#define _SR0B_SR0B13_LENGTH                      0x00000001
-
-#define _SR0B_SR0B14_POSITION                    0x0000000E
-#define _SR0B_SR0B14_MASK                        0x00004000
-#define _SR0B_SR0B14_LENGTH                      0x00000001
-
-#define _SR0B_SR0B15_POSITION                    0x0000000F
-#define _SR0B_SR0B15_MASK                        0x00008000
-#define _SR0B_SR0B15_LENGTH                      0x00000001
-
 #define _SR0B_w_POSITION                         0x00000000
 #define _SR0B_w_MASK                             0xFFFFFFFF
 #define _SR0B_w_LENGTH                           0x00000020
 
-#define _SR1B_SR0B0_POSITION                     0x00000000
-#define _SR1B_SR0B0_MASK                         0x00000001
-#define _SR1B_SR0B0_LENGTH                       0x00000001
-
-#define _SR1B_SR0B1_POSITION                     0x00000001
-#define _SR1B_SR0B1_MASK                         0x00000002
-#define _SR1B_SR0B1_LENGTH                       0x00000001
-
-#define _SR1B_SR0B2_POSITION                     0x00000002
-#define _SR1B_SR0B2_MASK                         0x00000004
-#define _SR1B_SR0B2_LENGTH                       0x00000001
-
-#define _SR1B_SR0B3_POSITION                     0x00000003
-#define _SR1B_SR0B3_MASK                         0x00000008
-#define _SR1B_SR0B3_LENGTH                       0x00000001
-
-#define _SR1B_SR0B4_POSITION                     0x00000004
-#define _SR1B_SR0B4_MASK                         0x00000010
-#define _SR1B_SR0B4_LENGTH                       0x00000001
-
-#define _SR1B_SR0B5_POSITION                     0x00000005
-#define _SR1B_SR0B5_MASK                         0x00000020
-#define _SR1B_SR0B5_LENGTH                       0x00000001
-
-#define _SR1B_SR0B6_POSITION                     0x00000006
-#define _SR1B_SR0B6_MASK                         0x00000040
-#define _SR1B_SR0B6_LENGTH                       0x00000001
-
-#define _SR1B_SR0B7_POSITION                     0x00000007
-#define _SR1B_SR0B7_MASK                         0x00000080
-#define _SR1B_SR0B7_LENGTH                       0x00000001
-
-#define _SR1B_SR0B8_POSITION                     0x00000008
-#define _SR1B_SR0B8_MASK                         0x00000100
-#define _SR1B_SR0B8_LENGTH                       0x00000001
-
-#define _SR1B_SR0B9_POSITION                     0x00000009
-#define _SR1B_SR0B9_MASK                         0x00000200
-#define _SR1B_SR0B9_LENGTH                       0x00000001
-
-#define _SR1B_SR0B10_POSITION                    0x0000000A
-#define _SR1B_SR0B10_MASK                        0x00000400
-#define _SR1B_SR0B10_LENGTH                      0x00000001
-
-#define _SR1B_SR0B11_POSITION                    0x0000000B
-#define _SR1B_SR0B11_MASK                        0x00000800
-#define _SR1B_SR0B11_LENGTH                      0x00000001
-
-#define _SR1B_SR0B12_POSITION                    0x0000000C
-#define _SR1B_SR0B12_MASK                        0x00001000
-#define _SR1B_SR0B12_LENGTH                      0x00000001
-
-#define _SR1B_SR0B13_POSITION                    0x0000000D
-#define _SR1B_SR0B13_MASK                        0x00002000
-#define _SR1B_SR0B13_LENGTH                      0x00000001
-
-#define _SR1B_SR0B14_POSITION                    0x0000000E
-#define _SR1B_SR0B14_MASK                        0x00004000
-#define _SR1B_SR0B14_LENGTH                      0x00000001
-
-#define _SR1B_SR0B15_POSITION                    0x0000000F
-#define _SR1B_SR0B15_MASK                        0x00008000
-#define _SR1B_SR0B15_LENGTH                      0x00000001
-
 #define _SR1B_w_POSITION                         0x00000000
 #define _SR1B_w_MASK                             0xFFFFFFFF
 #define _SR1B_w_LENGTH                           0x00000020
+
+#define _ANSELC_w_POSITION                       0x00000000
+#define _ANSELC_w_MASK                           0xFFFFFFFF
+#define _ANSELC_w_LENGTH                         0x00000020
 
 #define _TRISC_TRISC9_POSITION                   0x00000009
 #define _TRISC_TRISC9_MASK                       0x00000200
@@ -14963,37 +14852,13 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CNFC_w_MASK                             0xFFFFFFFF
 #define _CNFC_w_LENGTH                           0x00000020
 
-#define _SR0C_SR0C9_POSITION                     0x00000009
-#define _SR0C_SR0C9_MASK                         0x00000200
-#define _SR0C_SR0C9_LENGTH                       0x00000001
-
 #define _SR0C_w_POSITION                         0x00000000
 #define _SR0C_w_MASK                             0xFFFFFFFF
 #define _SR0C_w_LENGTH                           0x00000020
 
-#define _SR1C_SR0C9_POSITION                     0x00000009
-#define _SR1C_SR0C9_MASK                         0x00000200
-#define _SR1C_SR0C9_LENGTH                       0x00000001
-
 #define _SR1C_w_POSITION                         0x00000000
 #define _SR1C_w_MASK                             0xFFFFFFFF
 #define _SR1C_w_LENGTH                           0x00000020
-
-#define _CNCOND_PORT32_POSITION                  0x0000000A
-#define _CNCOND_PORT32_MASK                      0x00000400
-#define _CNCOND_PORT32_LENGTH                    0x00000001
-
-#define _CNCOND_CNSTYLE_POSITION                 0x0000000B
-#define _CNCOND_CNSTYLE_MASK                     0x00000800
-#define _CNCOND_CNSTYLE_LENGTH                   0x00000001
-
-#define _CNCOND_ON_POSITION                      0x0000000F
-#define _CNCOND_ON_MASK                          0x00008000
-#define _CNCOND_ON_LENGTH                        0x00000001
-
-#define _CNCOND_w_POSITION                       0x00000000
-#define _CNCOND_w_MASK                           0xFFFFFFFF
-#define _CNCOND_w_LENGTH                         0x00000020
 
 #define _PMDCON_PMDLOCK_POSITION                 0x0000000B
 #define _PMDCON_PMDLOCK_MASK                     0x00000800
@@ -15138,10 +15003,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _PMD7_DMAMD_POSITION                     0x00000004
 #define _PMD7_DMAMD_MASK                         0x00000010
 #define _PMD7_DMAMD_LENGTH                       0x00000001
-
-#define _RPCON_IOLOCK_POSITION                   0x0000000B
-#define _RPCON_IOLOCK_MASK                       0x00000800
-#define _RPCON_IOLOCK_LENGTH                     0x00000001
 
 #define _CFGCON_TDOEN_POSITION                   0x00000000
 #define _CFGCON_TDOEN_MASK                       0x00000001
@@ -16855,6 +16716,150 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _DCRCCON_w_MASK                          0xFFFFFFFF
 #define _DCRCCON_w_LENGTH                        0x00000020
 
+#define _DCH0CON_CHPRI_POSITION                  0x00000000
+#define _DCH0CON_CHPRI_MASK                      0x00000003
+#define _DCH0CON_CHPRI_LENGTH                    0x00000002
+
+#define _DCH0CON_CHEDET_POSITION                 0x00000002
+#define _DCH0CON_CHEDET_MASK                     0x00000004
+#define _DCH0CON_CHEDET_LENGTH                   0x00000001
+
+#define _DCH0CON_CHAEN_POSITION                  0x00000004
+#define _DCH0CON_CHAEN_MASK                      0x00000010
+#define _DCH0CON_CHAEN_LENGTH                    0x00000001
+
+#define _DCH0CON_CHCHN_POSITION                  0x00000005
+#define _DCH0CON_CHCHN_MASK                      0x00000020
+#define _DCH0CON_CHCHN_LENGTH                    0x00000001
+
+#define _DCH0CON_CHAED_POSITION                  0x00000006
+#define _DCH0CON_CHAED_MASK                      0x00000040
+#define _DCH0CON_CHAED_LENGTH                    0x00000001
+
+#define _DCH0CON_CHEN_POSITION                   0x00000007
+#define _DCH0CON_CHEN_MASK                       0x00000080
+#define _DCH0CON_CHEN_LENGTH                     0x00000001
+
+#define _DCH0CON_CHCHNS_POSITION                 0x00000008
+#define _DCH0CON_CHCHNS_MASK                     0x00000100
+#define _DCH0CON_CHCHNS_LENGTH                   0x00000001
+
+#define _DCH0CON_CHBUSY_POSITION                 0x0000000F
+#define _DCH0CON_CHBUSY_MASK                     0x00008000
+#define _DCH0CON_CHBUSY_LENGTH                   0x00000001
+
+#define _DCH0CON_w_POSITION                      0x00000000
+#define _DCH0CON_w_MASK                          0xFFFFFFFF
+#define _DCH0CON_w_LENGTH                        0x00000020
+
+#define _DCH0ECON_AIRQEN_POSITION                0x00000003
+#define _DCH0ECON_AIRQEN_MASK                    0x00000008
+#define _DCH0ECON_AIRQEN_LENGTH                  0x00000001
+
+#define _DCH0ECON_SIRQEN_POSITION                0x00000004
+#define _DCH0ECON_SIRQEN_MASK                    0x00000010
+#define _DCH0ECON_SIRQEN_LENGTH                  0x00000001
+
+#define _DCH0ECON_PATEN_POSITION                 0x00000005
+#define _DCH0ECON_PATEN_MASK                     0x00000020
+#define _DCH0ECON_PATEN_LENGTH                   0x00000001
+
+#define _DCH0ECON_CABORT_POSITION                0x00000006
+#define _DCH0ECON_CABORT_MASK                    0x00000040
+#define _DCH0ECON_CABORT_LENGTH                  0x00000001
+
+#define _DCH0ECON_CFORCE_POSITION                0x00000007
+#define _DCH0ECON_CFORCE_MASK                    0x00000080
+#define _DCH0ECON_CFORCE_LENGTH                  0x00000001
+
+#define _DCH0ECON_CHSIRQ_POSITION                0x00000008
+#define _DCH0ECON_CHSIRQ_MASK                    0x0000FF00
+#define _DCH0ECON_CHSIRQ_LENGTH                  0x00000008
+
+#define _DCH0ECON_CHAIRQ_POSITION                0x00000010
+#define _DCH0ECON_CHAIRQ_MASK                    0x00FF0000
+#define _DCH0ECON_CHAIRQ_LENGTH                  0x00000008
+
+#define _DCH0ECON_w_POSITION                     0x00000000
+#define _DCH0ECON_w_MASK                         0xFFFFFFFF
+#define _DCH0ECON_w_LENGTH                       0x00000020
+
+#define _DCH0INT_CHERIF_POSITION                 0x00000000
+#define _DCH0INT_CHERIF_MASK                     0x00000001
+#define _DCH0INT_CHERIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHTAIF_POSITION                 0x00000001
+#define _DCH0INT_CHTAIF_MASK                     0x00000002
+#define _DCH0INT_CHTAIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHCCIF_POSITION                 0x00000002
+#define _DCH0INT_CHCCIF_MASK                     0x00000004
+#define _DCH0INT_CHCCIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHBCIF_POSITION                 0x00000003
+#define _DCH0INT_CHBCIF_MASK                     0x00000008
+#define _DCH0INT_CHBCIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHDHIF_POSITION                 0x00000004
+#define _DCH0INT_CHDHIF_MASK                     0x00000010
+#define _DCH0INT_CHDHIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHDDIF_POSITION                 0x00000005
+#define _DCH0INT_CHDDIF_MASK                     0x00000020
+#define _DCH0INT_CHDDIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHSHIF_POSITION                 0x00000006
+#define _DCH0INT_CHSHIF_MASK                     0x00000040
+#define _DCH0INT_CHSHIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHSDIF_POSITION                 0x00000007
+#define _DCH0INT_CHSDIF_MASK                     0x00000080
+#define _DCH0INT_CHSDIF_LENGTH                   0x00000001
+
+#define _DCH0INT_CHERIE_POSITION                 0x00000010
+#define _DCH0INT_CHERIE_MASK                     0x00010000
+#define _DCH0INT_CHERIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHTAIE_POSITION                 0x00000011
+#define _DCH0INT_CHTAIE_MASK                     0x00020000
+#define _DCH0INT_CHTAIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHCCIE_POSITION                 0x00000012
+#define _DCH0INT_CHCCIE_MASK                     0x00040000
+#define _DCH0INT_CHCCIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHBCIE_POSITION                 0x00000013
+#define _DCH0INT_CHBCIE_MASK                     0x00080000
+#define _DCH0INT_CHBCIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHDHIE_POSITION                 0x00000014
+#define _DCH0INT_CHDHIE_MASK                     0x00100000
+#define _DCH0INT_CHDHIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHDDIE_POSITION                 0x00000015
+#define _DCH0INT_CHDDIE_MASK                     0x00200000
+#define _DCH0INT_CHDDIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHSHIE_POSITION                 0x00000016
+#define _DCH0INT_CHSHIE_MASK                     0x00400000
+#define _DCH0INT_CHSHIE_LENGTH                   0x00000001
+
+#define _DCH0INT_CHSDIE_POSITION                 0x00000017
+#define _DCH0INT_CHSDIE_MASK                     0x00800000
+#define _DCH0INT_CHSDIE_LENGTH                   0x00000001
+
+#define _DCH0INT_w_POSITION                      0x00000000
+#define _DCH0INT_w_MASK                          0xFFFFFFFF
+#define _DCH0INT_w_LENGTH                        0x00000020
+
+#define _DCH0SSA_CHSSA_POSITION                  0x00000000
+#define _DCH0SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH0SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH0DSA_CHDSA_POSITION                  0x00000000
+#define _DCH0DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH0DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH1CON_CHPRI_POSITION                  0x00000000
 #define _DCH1CON_CHPRI_MASK                      0x00000003
 #define _DCH1CON_CHPRI_LENGTH                    0x00000002
@@ -17287,150 +17292,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _DCH3DSA_CHDSA_MASK                      0xFFFFFFFF
 #define _DCH3DSA_CHDSA_LENGTH                    0x00000020
 
-#define _DCH4CON_CHPRI_POSITION                  0x00000000
-#define _DCH4CON_CHPRI_MASK                      0x00000003
-#define _DCH4CON_CHPRI_LENGTH                    0x00000002
-
-#define _DCH4CON_CHEDET_POSITION                 0x00000002
-#define _DCH4CON_CHEDET_MASK                     0x00000004
-#define _DCH4CON_CHEDET_LENGTH                   0x00000001
-
-#define _DCH4CON_CHAEN_POSITION                  0x00000004
-#define _DCH4CON_CHAEN_MASK                      0x00000010
-#define _DCH4CON_CHAEN_LENGTH                    0x00000001
-
-#define _DCH4CON_CHCHN_POSITION                  0x00000005
-#define _DCH4CON_CHCHN_MASK                      0x00000020
-#define _DCH4CON_CHCHN_LENGTH                    0x00000001
-
-#define _DCH4CON_CHAED_POSITION                  0x00000006
-#define _DCH4CON_CHAED_MASK                      0x00000040
-#define _DCH4CON_CHAED_LENGTH                    0x00000001
-
-#define _DCH4CON_CHEN_POSITION                   0x00000007
-#define _DCH4CON_CHEN_MASK                       0x00000080
-#define _DCH4CON_CHEN_LENGTH                     0x00000001
-
-#define _DCH4CON_CHCHNS_POSITION                 0x00000008
-#define _DCH4CON_CHCHNS_MASK                     0x00000100
-#define _DCH4CON_CHCHNS_LENGTH                   0x00000001
-
-#define _DCH4CON_CHBUSY_POSITION                 0x0000000F
-#define _DCH4CON_CHBUSY_MASK                     0x00008000
-#define _DCH4CON_CHBUSY_LENGTH                   0x00000001
-
-#define _DCH4CON_w_POSITION                      0x00000000
-#define _DCH4CON_w_MASK                          0xFFFFFFFF
-#define _DCH4CON_w_LENGTH                        0x00000020
-
-#define _DCH4ECON_AIRQEN_POSITION                0x00000003
-#define _DCH4ECON_AIRQEN_MASK                    0x00000008
-#define _DCH4ECON_AIRQEN_LENGTH                  0x00000001
-
-#define _DCH4ECON_SIRQEN_POSITION                0x00000004
-#define _DCH4ECON_SIRQEN_MASK                    0x00000010
-#define _DCH4ECON_SIRQEN_LENGTH                  0x00000001
-
-#define _DCH4ECON_PATEN_POSITION                 0x00000005
-#define _DCH4ECON_PATEN_MASK                     0x00000020
-#define _DCH4ECON_PATEN_LENGTH                   0x00000001
-
-#define _DCH4ECON_CABORT_POSITION                0x00000006
-#define _DCH4ECON_CABORT_MASK                    0x00000040
-#define _DCH4ECON_CABORT_LENGTH                  0x00000001
-
-#define _DCH4ECON_CFORCE_POSITION                0x00000007
-#define _DCH4ECON_CFORCE_MASK                    0x00000080
-#define _DCH4ECON_CFORCE_LENGTH                  0x00000001
-
-#define _DCH4ECON_CHSIRQ_POSITION                0x00000008
-#define _DCH4ECON_CHSIRQ_MASK                    0x0000FF00
-#define _DCH4ECON_CHSIRQ_LENGTH                  0x00000008
-
-#define _DCH4ECON_CHAIRQ_POSITION                0x00000010
-#define _DCH4ECON_CHAIRQ_MASK                    0x00FF0000
-#define _DCH4ECON_CHAIRQ_LENGTH                  0x00000008
-
-#define _DCH4ECON_w_POSITION                     0x00000000
-#define _DCH4ECON_w_MASK                         0xFFFFFFFF
-#define _DCH4ECON_w_LENGTH                       0x00000020
-
-#define _DCH4INT_CHERIF_POSITION                 0x00000000
-#define _DCH4INT_CHERIF_MASK                     0x00000001
-#define _DCH4INT_CHERIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHTAIF_POSITION                 0x00000001
-#define _DCH4INT_CHTAIF_MASK                     0x00000002
-#define _DCH4INT_CHTAIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHCCIF_POSITION                 0x00000002
-#define _DCH4INT_CHCCIF_MASK                     0x00000004
-#define _DCH4INT_CHCCIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHBCIF_POSITION                 0x00000003
-#define _DCH4INT_CHBCIF_MASK                     0x00000008
-#define _DCH4INT_CHBCIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHDHIF_POSITION                 0x00000004
-#define _DCH4INT_CHDHIF_MASK                     0x00000010
-#define _DCH4INT_CHDHIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHDDIF_POSITION                 0x00000005
-#define _DCH4INT_CHDDIF_MASK                     0x00000020
-#define _DCH4INT_CHDDIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHSHIF_POSITION                 0x00000006
-#define _DCH4INT_CHSHIF_MASK                     0x00000040
-#define _DCH4INT_CHSHIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHSDIF_POSITION                 0x00000007
-#define _DCH4INT_CHSDIF_MASK                     0x00000080
-#define _DCH4INT_CHSDIF_LENGTH                   0x00000001
-
-#define _DCH4INT_CHERIE_POSITION                 0x00000010
-#define _DCH4INT_CHERIE_MASK                     0x00010000
-#define _DCH4INT_CHERIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHTAIE_POSITION                 0x00000011
-#define _DCH4INT_CHTAIE_MASK                     0x00020000
-#define _DCH4INT_CHTAIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHCCIE_POSITION                 0x00000012
-#define _DCH4INT_CHCCIE_MASK                     0x00040000
-#define _DCH4INT_CHCCIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHBCIE_POSITION                 0x00000013
-#define _DCH4INT_CHBCIE_MASK                     0x00080000
-#define _DCH4INT_CHBCIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHDHIE_POSITION                 0x00000014
-#define _DCH4INT_CHDHIE_MASK                     0x00100000
-#define _DCH4INT_CHDHIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHDDIE_POSITION                 0x00000015
-#define _DCH4INT_CHDDIE_MASK                     0x00200000
-#define _DCH4INT_CHDDIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHSHIE_POSITION                 0x00000016
-#define _DCH4INT_CHSHIE_MASK                     0x00400000
-#define _DCH4INT_CHSHIE_LENGTH                   0x00000001
-
-#define _DCH4INT_CHSDIE_POSITION                 0x00000017
-#define _DCH4INT_CHSDIE_MASK                     0x00800000
-#define _DCH4INT_CHSDIE_LENGTH                   0x00000001
-
-#define _DCH4INT_w_POSITION                      0x00000000
-#define _DCH4INT_w_MASK                          0xFFFFFFFF
-#define _DCH4INT_w_LENGTH                        0x00000020
-
-#define _DCH4SSA_CHSSA_POSITION                  0x00000000
-#define _DCH4SSA_CHSSA_MASK                      0xFFFFFFFF
-#define _DCH4SSA_CHSSA_LENGTH                    0x00000020
-
-#define _DCH4DSA_CHDSA_POSITION                  0x00000000
-#define _DCH4DSA_CHDSA_MASK                      0xFFFFFFFF
-#define _DCH4DSA_CHDSA_LENGTH                    0x00000020
-
 #define _INTCON_INT0EP_POSITION                  0x00000000
 #define _INTCON_INT0EP_MASK                      0x00000001
 #define _INTCON_INT0EP_LENGTH                    0x00000001
@@ -17579,8 +17440,8 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IFS0_CMP3IF_MASK                        0x02000000
 #define _IFS0_CMP3IF_LENGTH                      0x00000001
 
-#define _IFS0_USBIF_POSITION                     0x0000001E
-#define _IFS0_USBIF_MASK                         0x40000000
+#define _IFS0_USBIF_POSITION                     0x0000001D
+#define _IFS0_USBIF_MASK                         0x20000000
 #define _IFS0_USBIF_LENGTH                       0x00000001
 
 #define _IFS0_w_POSITION                         0x00000000
@@ -17707,13 +17568,13 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IFS2_I2C2SIF_MASK                       0x00000010
 #define _IFS2_I2C2SIF_LENGTH                     0x00000001
 
-#define _IFS2_I2CMIF_POSITION                    0x00000005
-#define _IFS2_I2CMIF_MASK                        0x00000020
-#define _IFS2_I2CMIF_LENGTH                      0x00000001
+#define _IFS2_I2C2MIF_POSITION                   0x00000005
+#define _IFS2_I2C2MIF_MASK                       0x00000020
+#define _IFS2_I2C2MIF_LENGTH                     0x00000001
 
-#define _IFS2_I2CBCIF_POSITION                   0x00000006
-#define _IFS2_I2CBCIF_MASK                       0x00000040
-#define _IFS2_I2CBCIF_LENGTH                     0x00000001
+#define _IFS2_I2C2BCIF_POSITION                  0x00000006
+#define _IFS2_I2C2BCIF_MASK                      0x00000040
+#define _IFS2_I2C2BCIF_LENGTH                    0x00000001
 
 #define _IFS2_I2C3SIF_POSITION                   0x00000007
 #define _IFS2_I2C3SIF_MASK                       0x00000080
@@ -17815,6 +17676,10 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IFS2_CPCIF_MASK                         0x80000000
 #define _IFS2_CPCIF_LENGTH                       0x00000001
 
+#define _IFS3_FDCIE_POSITION                     0x00000000
+#define _IFS3_FDCIE_MASK                         0x00000001
+#define _IFS3_FDCIE_LENGTH                       0x00000001
+
 #define _IFS3_ECCBEIF_POSITION                   0x00000001
 #define _IFS3_ECCBEIF_MASK                       0x00000002
 #define _IFS3_ECCBEIF_LENGTH                     0x00000001
@@ -17907,8 +17772,8 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IEC0_CMP3IE_MASK                        0x02000000
 #define _IEC0_CMP3IE_LENGTH                      0x00000001
 
-#define _IEC0_USBIE_POSITION                     0x0000001E
-#define _IEC0_USBIE_MASK                         0x40000000
+#define _IEC0_USBIE_POSITION                     0x0000001D
+#define _IEC0_USBIE_MASK                         0x20000000
 #define _IEC0_USBIE_LENGTH                       0x00000001
 
 #define _IEC0_w_POSITION                         0x00000000
@@ -18039,9 +17904,9 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IEC2_I2C2MIE_MASK                       0x00000020
 #define _IEC2_I2C2MIE_LENGTH                     0x00000001
 
-#define _IEC2_I2CBCIE_POSITION                   0x00000006
-#define _IEC2_I2CBCIE_MASK                       0x00000040
-#define _IEC2_I2CBCIE_LENGTH                     0x00000001
+#define _IEC2_I2C2BCIE_POSITION                  0x00000006
+#define _IEC2_I2C2BCIE_MASK                      0x00000040
+#define _IEC2_I2C2BCIE_LENGTH                    0x00000001
 
 #define _IEC2_I2C3SIE_POSITION                   0x00000007
 #define _IEC2_I2C3SIE_MASK                       0x00000080
@@ -18143,24 +18008,28 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IEC2_CPCIE_MASK                         0x80000000
 #define _IEC2_CPCIE_LENGTH                       0x00000001
 
-#define _IEC3_ECCBEIE_POSITION                   0x00000000
-#define _IEC3_ECCBEIE_MASK                       0x00000001
+#define _IEC3_FDCIE_POSITION                     0x00000000
+#define _IEC3_FDCIE_MASK                         0x00000001
+#define _IEC3_FDCIE_LENGTH                       0x00000001
+
+#define _IEC3_ECCBEIE_POSITION                   0x00000001
+#define _IEC3_ECCBEIE_MASK                       0x00000002
 #define _IEC3_ECCBEIE_LENGTH                     0x00000001
 
-#define _IEC3_DMA0IE_POSITION                    0x00000001
-#define _IEC3_DMA0IE_MASK                        0x00000002
+#define _IEC3_DMA0IE_POSITION                    0x00000002
+#define _IEC3_DMA0IE_MASK                        0x00000004
 #define _IEC3_DMA0IE_LENGTH                      0x00000001
 
-#define _IEC3_DMA1IE_POSITION                    0x00000002
-#define _IEC3_DMA1IE_MASK                        0x00000004
+#define _IEC3_DMA1IE_POSITION                    0x00000003
+#define _IEC3_DMA1IE_MASK                        0x00000008
 #define _IEC3_DMA1IE_LENGTH                      0x00000001
 
-#define _IEC3_DMA2IE_POSITION                    0x00000003
-#define _IEC3_DMA2IE_MASK                        0x00000008
+#define _IEC3_DMA2IE_POSITION                    0x00000004
+#define _IEC3_DMA2IE_MASK                        0x00000010
 #define _IEC3_DMA2IE_LENGTH                      0x00000001
 
-#define _IEC3_DMA3IE_POSITION                    0x00000004
-#define _IEC3_DMA3IE_MASK                        0x00000010
+#define _IEC3_DMA3IE_POSITION                    0x00000005
+#define _IEC3_DMA3IE_MASK                        0x00000020
 #define _IEC3_DMA3IE_LENGTH                      0x00000001
 
 #define _IPC0_CTIS_POSITION                      0x00000000
@@ -18515,13 +18384,13 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _IPC13_U1EIP_MASK                        0x1C000000
 #define _IPC13_U1EIP_LENGTH                      0x00000003
 
-#define _IPC14_U1RXIS_POSITION                   0x00000000
-#define _IPC14_U1RXIS_MASK                       0x00000003
-#define _IPC14_U1RXIS_LENGTH                     0x00000002
+#define _IPC14_U2RXIS_POSITION                   0x00000000
+#define _IPC14_U2RXIS_MASK                       0x00000003
+#define _IPC14_U2RXIS_LENGTH                     0x00000002
 
-#define _IPC14_U1RXIP_POSITION                   0x00000002
-#define _IPC14_U1RXIP_MASK                       0x0000001C
-#define _IPC14_U1RXIP_LENGTH                     0x00000003
+#define _IPC14_U2RXIP_POSITION                   0x00000002
+#define _IPC14_U2RXIP_MASK                       0x0000001C
+#define _IPC14_U2RXIP_LENGTH                     0x00000003
 
 #define _IPC14_U2TXIS_POSITION                   0x00000008
 #define _IPC14_U2TXIS_MASK                       0x00000300
@@ -18883,10 +18752,6 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _FICD_ICS_MASK                           0x00000018
 #define _FICD_ICS_LENGTH                         0x00000002
 
-#define _FICD_UXDDIS_POSITION                    0x00000007
-#define _FICD_UXDDIS_MASK                        0x00000080
-#define _FICD_UXDDIS_LENGTH                      0x00000001
-
 #define _FICD_w_POSITION                         0x00000000
 #define _FICD_w_MASK                             0xFFFFFFFF
 #define _FICD_w_LENGTH                           0x00000020
@@ -18979,6 +18844,130 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _FSEC_w_MASK                             0xFFFFFFFF
 #define _FSEC_w_LENGTH                           0x00000020
 
+#define _AFDEVOPT_SOSCHP_POSITION                0x00000003
+#define _AFDEVOPT_SOSCHP_MASK                    0x00000008
+#define _AFDEVOPT_SOSCHP_LENGTH                  0x00000001
+
+#define _AFDEVOPT_ALTI2C_POSITION                0x00000004
+#define _AFDEVOPT_ALTI2C_MASK                    0x00000010
+#define _AFDEVOPT_ALTI2C_LENGTH                  0x00000001
+
+#define _AFDEVOPT_FUSBIDIO_POSITION              0x0000000E
+#define _AFDEVOPT_FUSBIDIO_MASK                  0x00004000
+#define _AFDEVOPT_FUSBIDIO_LENGTH                0x00000001
+
+#define _AFDEVOPT_FVBUSIO_POSITION               0x0000000F
+#define _AFDEVOPT_FVBUSIO_MASK                   0x00008000
+#define _AFDEVOPT_FVBUSIO_LENGTH                 0x00000001
+
+#define _AFDEVOPT_USERID_POSITION                0x00000010
+#define _AFDEVOPT_USERID_MASK                    0xFFFF0000
+#define _AFDEVOPT_USERID_LENGTH                  0x00000010
+
+#define _AFDEVOPT_w_POSITION                     0x00000000
+#define _AFDEVOPT_w_MASK                         0xFFFFFFFF
+#define _AFDEVOPT_w_LENGTH                       0x00000020
+
+#define _AFICD_JTAGEN_POSITION                   0x00000002
+#define _AFICD_JTAGEN_MASK                       0x00000004
+#define _AFICD_JTAGEN_LENGTH                     0x00000001
+
+#define _AFICD_ICS_POSITION                      0x00000003
+#define _AFICD_ICS_MASK                          0x00000018
+#define _AFICD_ICS_LENGTH                        0x00000002
+
+#define _AFICD_w_POSITION                        0x00000000
+#define _AFICD_w_MASK                            0xFFFFFFFF
+#define _AFICD_w_LENGTH                          0x00000020
+
+#define _AFPOR_BOREN_POSITION                    0x00000000
+#define _AFPOR_BOREN_MASK                        0x00000003
+#define _AFPOR_BOREN_LENGTH                      0x00000002
+
+#define _AFPOR_RETVR_POSITION                    0x00000002
+#define _AFPOR_RETVR_MASK                        0x00000004
+#define _AFPOR_RETVR_LENGTH                      0x00000001
+
+#define _AFPOR_LPBOREN_POSITION                  0x00000003
+#define _AFPOR_LPBOREN_MASK                      0x00000008
+#define _AFPOR_LPBOREN_LENGTH                    0x00000001
+
+#define _AFPOR_w_POSITION                        0x00000000
+#define _AFPOR_w_MASK                            0xFFFFFFFF
+#define _AFPOR_w_LENGTH                          0x00000020
+
+#define _AFWDT_SWDTPS_POSITION                   0x00000000
+#define _AFWDT_SWDTPS_MASK                       0x0000001F
+#define _AFWDT_SWDTPS_LENGTH                     0x00000005
+
+#define _AFWDT_FWDTWINSZ_POSITION                0x00000005
+#define _AFWDT_FWDTWINSZ_MASK                    0x00000060
+#define _AFWDT_FWDTWINSZ_LENGTH                  0x00000002
+
+#define _AFWDT_WINDIS_POSITION                   0x00000007
+#define _AFWDT_WINDIS_MASK                       0x00000080
+#define _AFWDT_WINDIS_LENGTH                     0x00000001
+
+#define _AFWDT_RWDTPS_POSITION                   0x00000008
+#define _AFWDT_RWDTPS_MASK                       0x00001F00
+#define _AFWDT_RWDTPS_LENGTH                     0x00000005
+
+#define _AFWDT_RCLKSEL_POSITION                  0x0000000D
+#define _AFWDT_RCLKSEL_MASK                      0x00006000
+#define _AFWDT_RCLKSEL_LENGTH                    0x00000002
+
+#define _AFWDT_FWDTEN_POSITION                   0x0000000F
+#define _AFWDT_FWDTEN_MASK                       0x00008000
+#define _AFWDT_FWDTEN_LENGTH                     0x00000001
+
+#define _AFWDT_w_POSITION                        0x00000000
+#define _AFWDT_w_MASK                            0xFFFFFFFF
+#define _AFWDT_w_LENGTH                          0x00000020
+
+#define _AFOSCSEL_FNOSC_POSITION                 0x00000000
+#define _AFOSCSEL_FNOSC_MASK                     0x00000007
+#define _AFOSCSEL_FNOSC_LENGTH                   0x00000003
+
+#define _AFOSCSEL_PLLSRC_POSITION                0x00000004
+#define _AFOSCSEL_PLLSRC_MASK                    0x00000010
+#define _AFOSCSEL_PLLSRC_LENGTH                  0x00000001
+
+#define _AFOSCSEL_SOSCEN_POSITION                0x00000006
+#define _AFOSCSEL_SOSCEN_MASK                    0x00000040
+#define _AFOSCSEL_SOSCEN_LENGTH                  0x00000001
+
+#define _AFOSCSEL_IESO_POSITION                  0x00000007
+#define _AFOSCSEL_IESO_MASK                      0x00000080
+#define _AFOSCSEL_IESO_LENGTH                    0x00000001
+
+#define _AFOSCSEL_POSCMOD_POSITION               0x00000008
+#define _AFOSCSEL_POSCMOD_MASK                   0x00000300
+#define _AFOSCSEL_POSCMOD_LENGTH                 0x00000002
+
+#define _AFOSCSEL_OSCIOFNC_POSITION              0x0000000A
+#define _AFOSCSEL_OSCIOFNC_MASK                  0x00000400
+#define _AFOSCSEL_OSCIOFNC_LENGTH                0x00000001
+
+#define _AFOSCSEL_SOSCSEL_POSITION               0x0000000C
+#define _AFOSCSEL_SOSCSEL_MASK                   0x00001000
+#define _AFOSCSEL_SOSCSEL_LENGTH                 0x00000001
+
+#define _AFOSCSEL_FCKSM_POSITION                 0x0000000E
+#define _AFOSCSEL_FCKSM_MASK                     0x0000C000
+#define _AFOSCSEL_FCKSM_LENGTH                   0x00000002
+
+#define _AFOSCSEL_w_POSITION                     0x00000000
+#define _AFOSCSEL_w_MASK                         0xFFFFFFFF
+#define _AFOSCSEL_w_LENGTH                       0x00000020
+
+#define _AFSEC_CP_POSITION                       0x0000001F
+#define _AFSEC_CP_MASK                           0x80000000
+#define _AFSEC_CP_LENGTH                         0x00000001
+
+#define _AFSEC_w_POSITION                        0x00000000
+#define _AFSEC_w_MASK                            0xFFFFFFFF
+#define _AFSEC_w_LENGTH                          0x00000020
+
 /* Vector Numbers */
 #define _CORE_TIMER_VECTOR                       0
 #define _CORE_SOFTWARE_0_VECTOR                  1
@@ -19044,6 +19033,7 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CCP5_VECTOR                             82
 #define _CCT5_VECTOR                             83
 #define _CCP6_VECTOR                             84
+#define _CCT6_VECTOR                             85
 #define _CCP7_VECTOR                             86
 #define _CCT7_VECTOR                             87
 #define _CCP8_VECTOR                             88
@@ -19071,6 +19061,7 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CCP7
 #define _CCP8
 #define _CCP9
+#define _CDAC1
 #define _CLC1
 #define _CLC2
 #define _CLC3
@@ -19079,13 +19070,12 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CMP2
 #define _CMP3
 #define _CRU
-#define _CVR1
 #define _DCO
 #define _DMAC
+#define _DMAC0
 #define _DMAC1
 #define _DMAC2
 #define _DMAC3
-#define _DMAC4
 #define _FRC
 #define _HLVD
 #define _I2C1
@@ -19107,6 +19097,7 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _UART2
 #define _UART3
 #define _USB
+#define _USB1
 #define _WDT
 
 /* Base Addresses for Peripherals */
@@ -19120,6 +19111,7 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CCP7_BASE_ADDRESS                       0xBF800700
 #define _CCP8_BASE_ADDRESS                       0xBF800800
 #define _CCP9_BASE_ADDRESS                       0xBF800900
+#define _CDAC1_BASE_ADDRESS                      0xBF802380
 #define _CLC1_BASE_ADDRESS                       0xBF802480
 #define _CLC2_BASE_ADDRESS                       0xBF802500
 #define _CLC3_BASE_ADDRESS                       0xBF802580
@@ -19128,12 +19120,11 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _CMP2_BASE_ADDRESS                       0xBF802330
 #define _CMP3_BASE_ADDRESS                       0xBF802350
 #define _CRU_BASE_ADDRESS                        0xBF802680
-#define _CVR1_BASE_ADDRESS                       0xBF802380
 #define _DCO_BASE_ADDRESS                        0xBF802900
-#define _DMAC1_BASE_ADDRESS                      0xBF808960
-#define _DMAC2_BASE_ADDRESS                      0xBF808A20
-#define _DMAC3_BASE_ADDRESS                      0xBF808AE0
-#define _DMAC4_BASE_ADDRESS                      0xBF808BA0
+#define _DMAC0_BASE_ADDRESS                      0xBF808960
+#define _DMAC1_BASE_ADDRESS                      0xBF808A20
+#define _DMAC2_BASE_ADDRESS                      0xBF808AE0
+#define _DMAC3_BASE_ADDRESS                      0xBF808BA0
 #define _DMAC_BASE_ADDRESS                       0xBF808900
 #define _FRC_BASE_ADDRESS                        0xBF802880
 #define _HLVD_BASE_ADDRESS                       0xBF802920
@@ -19144,7 +19135,7 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _NVM_BASE_ADDRESS                        0xBF802930
 #define _PORTA_BASE_ADDRESS                      0xBF802BB0
 #define _PORTB_BASE_ADDRESS                      0xBF802CB0
-#define _PORTC_BASE_ADDRESS                      0xBF802EB0
+#define _PORTC_BASE_ADDRESS                      0xBF802DB0
 #define _RTCC_BASE_ADDRESS                       0xBF800000
 #define _SPI1_BASE_ADDRESS                       0xBF808100
 #define _SPI2_BASE_ADDRESS                       0xBF808200
@@ -19155,7 +19146,8 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define _UART1_BASE_ADDRESS                      0xBF801800
 #define _UART2_BASE_ADDRESS                      0xBF801900
 #define _UART3_BASE_ADDRESS                      0xBF802000
-#define _USB_BASE_ADDRESS                        0xBF808400
+#define _USB1_BASE_ADDRESS                       0xBF808440
+#define _USB_BASE_ADDRESS                        0xBF808440
 #define _WDT_BASE_ADDRESS                        0xBF803990
 
 /* Default Memory-region macros */
@@ -19166,9 +19158,11 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #define __KSEG1_BOOT_MEM_BASE                    0xBFC00000
 #define __KSEG1_BOOT_MEM_LENGTH                  0x490
 #define __KSEG0_DATA_MEM_BASE                    0x80000000
-#define __KSEG0_DATA_MEM_LENGTH                  0x8000
+#define __KSEG0_DATA_MEM_LENGTH                  0x4000
+#define __CONFIGSFRS_BFC01700_BASE               0xBFC01700
+#define __CONFIGSFRS_BFC01700_LENGTH             0x1C
 #define __CONFIGSFRS_BFC017C0_BASE               0xBFC017C0
-#define __CONFIGSFRS_BFC017C0_LENGTH             0x18
+#define __CONFIGSFRS_BFC017C0_LENGTH             0x1C
 #define __SFRS_BASE                              0xBF800000
 #define __SFRS_LENGTH                            0x100000
 
@@ -19201,6 +19195,28 @@ extern volatile __FSECbits_t FSECbits __asm__ ("FSEC") __attribute__((section("s
 #ifndef __PIC32MM__
 #  define __PIC32MM__ 1
 #endif
+#ifndef __PIC32_FLASH_SIZE
+#  define __PIC32_FLASH_SIZE 256
+#endif
+#ifndef __PIC32_FEATURE_SET
+#  define __PIC32_FEATURE_SET "GP"
+#endif
+#ifndef __PIC32_FEATURE_SET__
+#  define __PIC32_FEATURE_SET__ "GP"
+#endif
+#ifndef __PIC32_FEATURE_SET0
+#  define __PIC32_FEATURE_SET0 'G'
+#endif
+#ifndef __PIC32_FEATURE_SET1
+#  define __PIC32_FEATURE_SET1 'P'
+#endif
+#ifndef __PIC32_PRODUCT_GROUP
+#  define __PIC32_PRODUCT_GROUP 'M'
+#endif
+#ifndef __PIC32_PIN_COUNT
+#  define __PIC32_PIN_COUNT 28
+#endif
+
 /*  The following device macros indicate which core features are
  *  available on this device.
  */

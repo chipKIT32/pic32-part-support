@@ -179,8 +179,8 @@ CSETTING:0000FFFF:USER_ID:User unique ID, readable using the JTAG USER_ID instru
 CVALUE:00000000:00000000:Range is from 0 to 0xffff
 CWORD:BF800100:FFFFFFFF:FFFFFFFF
 CSETTING:10000000:CPN:
-CVALUE:00000000:OFF:Protection Enabled
-CVALUE:10000000:ON:Protection Disabled
+CVALUE:00000000:ON:Protection Enabled
+CVALUE:10000000:OFF:Protection Disabled
 CSETTING:80000000:BOOTSEL:Boot Source Select
 CVALUE:00000000:IPF:SPI0 connected at power-up to the in-package SPI Flash Memory
 CVALUE:80000000:EXTF:SPI0 connected at power-up to the external SPI Flash Memory

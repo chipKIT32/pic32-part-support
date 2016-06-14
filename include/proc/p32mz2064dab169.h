@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * PIC32MZ2064DAB169 processor header
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  *
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -296,9 +296,6 @@ typedef struct {
   unsigned ICD1PG:2;
 } __CFGPGbits_t;
 extern volatile __CFGPGbits_t CFGPGbits __asm__ ("CFGPG") __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGPGCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGPGSET __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGPGINV __attribute__((section("sfrs")));
 #define CFGCON2 CFGCON2
 extern volatile unsigned int   CFGCON2 __attribute__((section("sfrs")));
 typedef struct {
@@ -313,9 +310,6 @@ typedef struct {
   unsigned GLCDPINEN:1;
 } __CFGCON2bits_t;
 extern volatile __CFGCON2bits_t CFGCON2bits __asm__ ("CFGCON2") __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGCON2CLR __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGCON2SET __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGCON2INV __attribute__((section("sfrs")));
 #define NVMCON NVMCON
 extern volatile unsigned int   NVMCON __attribute__((section("sfrs")));
 typedef union {
@@ -422,23 +416,9 @@ extern volatile unsigned int        NVMBWPSET __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMBWPINV __attribute__((section("sfrs")));
 #define NVMCON2 NVMCON2
 extern volatile unsigned int   NVMCON2 __attribute__((section("sfrs")));
-typedef union {
-  struct {
-    unsigned :6;
-    unsigned SWAPLOCK:2;
-  };
-  struct {
-    unsigned :8;
-    unsigned ERETRY:2;
-    unsigned :2;
-    unsigned VREAD1:1;
-    unsigned CREAD1:1;
-    unsigned :1;
-    unsigned LPRD:1;
-    unsigned LPRDWS:5;
-    unsigned :7;
-    unsigned ERSCNT:4;
-  };
+typedef struct {
+  unsigned :6;
+  unsigned SWAPLOCK:2;
 } __NVMCON2bits_t;
 extern volatile __NVMCON2bits_t NVMCON2bits __asm__ ("NVMCON2") __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMCON2CLR __attribute__((section("sfrs")));
@@ -8332,21 +8312,32 @@ extern volatile unsigned int        PMSTATINV __attribute__((section("sfrs")));
 extern volatile unsigned int   PMWADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned WADDR:14;
-    unsigned WADDR14:1;
-    unsigned WADDR15:1;
+    unsigned WADDR:24;
   };
   struct {
     unsigned :14;
     unsigned WCS:2;
+    unsigned :6;
+    unsigned WCSA:2;
   };
   struct {
     unsigned :14;
     unsigned WCS1:1;
     unsigned WCS2:1;
+    unsigned :6;
+    unsigned WCS1A:1;
+    unsigned WCS2A:1;
   };
   struct {
     unsigned w:32;
+  };
+  struct {
+    unsigned :14;
+    unsigned WADDR14:1;
+    unsigned WADDR15:1;
+    unsigned :6;
+    unsigned WADDR22:1;
+    unsigned WADDR23:1;
   };
 } __PMWADDRbits_t;
 extern volatile __PMWADDRbits_t PMWADDRbits __asm__ ("PMWADDR") __attribute__((section("sfrs")));
@@ -11213,7 +11204,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -11553,7 +11546,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -11880,7 +11875,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -12205,7 +12202,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -12536,7 +12535,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -12831,7 +12832,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -13142,7 +13145,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -13483,7 +13488,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -13843,7 +13850,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -14156,7 +14165,9 @@ typedef union {
   struct {
     unsigned :11;
     unsigned EDGEDETECT:1;
-    unsigned :3;
+    unsigned :1;
+    unsigned SIDL:1;
+    unsigned :1;
     unsigned ON:1;
   };
   struct {
@@ -31223,6 +31234,72 @@ extern volatile unsigned int   SEQ2 __attribute__((section("sfrs")));
 extern volatile unsigned int   SEQ1 __attribute__((section("sfrs")));
 #define SEQ0 SEQ0
 extern volatile unsigned int   SEQ0 __attribute__((section("sfrs")));
+#define DEVADC0 DEVADC0
+extern volatile unsigned int   DEVADC0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC0bits_t;
+extern volatile __DEVADC0bits_t DEVADC0bits __asm__ ("DEVADC0") __attribute__((section("sfrs")));
+#define DEVADC1 DEVADC1
+extern volatile unsigned int   DEVADC1 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC1bits_t;
+extern volatile __DEVADC1bits_t DEVADC1bits __asm__ ("DEVADC1") __attribute__((section("sfrs")));
+#define DEVADC2 DEVADC2
+extern volatile unsigned int   DEVADC2 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC2bits_t;
+extern volatile __DEVADC2bits_t DEVADC2bits __asm__ ("DEVADC2") __attribute__((section("sfrs")));
+#define DEVADC3 DEVADC3
+extern volatile unsigned int   DEVADC3 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC3bits_t;
+extern volatile __DEVADC3bits_t DEVADC3bits __asm__ ("DEVADC3") __attribute__((section("sfrs")));
+#define DEVADC4 DEVADC4
+extern volatile unsigned int   DEVADC4 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC4bits_t;
+extern volatile __DEVADC4bits_t DEVADC4bits __asm__ ("DEVADC4") __attribute__((section("sfrs")));
+#define DEVADC7 DEVADC7
+extern volatile unsigned int   DEVADC7 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned ADCFG:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __DEVADC7bits_t;
+extern volatile __DEVADC7bits_t DEVADC7bits __asm__ ("DEVADC7") __attribute__((section("sfrs")));
 #define DEVSN0 DEVSN0
 extern volatile unsigned int   DEVSN0 __attribute__((section("sfrs")));
 typedef union {
@@ -32362,13 +32439,7 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
   .extern CFGEBIA          /* 0xBF8000C0 */
   .extern CFGEBIC          /* 0xBF8000D0 */
   .extern CFGPG            /* 0xBF8000E0 */
-  .extern CFGPGCLR         /* 0xBF8000E4 */
-  .extern CFGPGSET         /* 0xBF8000E8 */
-  .extern CFGPGINV         /* 0xBF8000EC */
   .extern CFGCON2          /* 0xBF8000F0 */
-  .extern CFGCON2CLR       /* 0xBF8000F4 */
-  .extern CFGCON2SET       /* 0xBF8000F8 */
-  .extern CFGCON2INV       /* 0xBF8000FC */
   .extern NVMCON           /* 0xBF800600 */
   .extern NVMCONCLR        /* 0xBF800604 */
   .extern NVMCONSET        /* 0xBF800608 */
@@ -37494,6 +37565,12 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
   .extern SEQ2             /* 0xBFC0FFF4 */
   .extern SEQ1             /* 0xBFC0FFF8 */
   .extern SEQ0             /* 0xBFC0FFFC */
+  .extern DEVADC0          /* 0xBFC54000 */
+  .extern DEVADC1          /* 0xBFC54004 */
+  .extern DEVADC2          /* 0xBFC54008 */
+  .extern DEVADC3          /* 0xBFC5400C */
+  .extern DEVADC4          /* 0xBFC54010 */
+  .extern DEVADC7          /* 0xBFC5401C */
   .extern DEVSN0           /* 0xBFC54020 */
   .extern DEVSN1           /* 0xBFC54024 */
   .extern ADEVCFG4         /* 0xBFC0FF3C */
@@ -38322,30 +38399,6 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _NVMCON2_SWAPLOCK_POSITION               0x00000006
 #define _NVMCON2_SWAPLOCK_MASK                   0x000000C0
 #define _NVMCON2_SWAPLOCK_LENGTH                 0x00000002
-
-#define _NVMCON2_ERETRY_POSITION                 0x00000008
-#define _NVMCON2_ERETRY_MASK                     0x00000300
-#define _NVMCON2_ERETRY_LENGTH                   0x00000002
-
-#define _NVMCON2_VREAD1_POSITION                 0x0000000C
-#define _NVMCON2_VREAD1_MASK                     0x00001000
-#define _NVMCON2_VREAD1_LENGTH                   0x00000001
-
-#define _NVMCON2_CREAD1_POSITION                 0x0000000D
-#define _NVMCON2_CREAD1_MASK                     0x00002000
-#define _NVMCON2_CREAD1_LENGTH                   0x00000001
-
-#define _NVMCON2_LPRD_POSITION                   0x0000000F
-#define _NVMCON2_LPRD_MASK                       0x00008000
-#define _NVMCON2_LPRD_LENGTH                     0x00000001
-
-#define _NVMCON2_LPRDWS_POSITION                 0x00000010
-#define _NVMCON2_LPRDWS_MASK                     0x001F0000
-#define _NVMCON2_LPRDWS_LENGTH                   0x00000005
-
-#define _NVMCON2_ERSCNT_POSITION                 0x0000001C
-#define _NVMCON2_ERSCNT_MASK                     0xF0000000
-#define _NVMCON2_ERSCNT_LENGTH                   0x00000004
 
 #define _WDTCON_WDTWINEN_POSITION                0x00000000
 #define _WDTCON_WDTWINEN_MASK                    0x00000001
@@ -48884,20 +48937,16 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _PMSTAT_w_LENGTH                         0x00000020
 
 #define _PMWADDR_WADDR_POSITION                  0x00000000
-#define _PMWADDR_WADDR_MASK                      0x00003FFF
-#define _PMWADDR_WADDR_LENGTH                    0x0000000E
-
-#define _PMWADDR_WADDR14_POSITION                0x0000000E
-#define _PMWADDR_WADDR14_MASK                    0x00004000
-#define _PMWADDR_WADDR14_LENGTH                  0x00000001
-
-#define _PMWADDR_WADDR15_POSITION                0x0000000F
-#define _PMWADDR_WADDR15_MASK                    0x00008000
-#define _PMWADDR_WADDR15_LENGTH                  0x00000001
+#define _PMWADDR_WADDR_MASK                      0x00FFFFFF
+#define _PMWADDR_WADDR_LENGTH                    0x00000018
 
 #define _PMWADDR_WCS_POSITION                    0x0000000E
 #define _PMWADDR_WCS_MASK                        0x0000C000
 #define _PMWADDR_WCS_LENGTH                      0x00000002
+
+#define _PMWADDR_WCSA_POSITION                   0x00000016
+#define _PMWADDR_WCSA_MASK                       0x00C00000
+#define _PMWADDR_WCSA_LENGTH                     0x00000002
 
 #define _PMWADDR_WCS1_POSITION                   0x0000000E
 #define _PMWADDR_WCS1_MASK                       0x00004000
@@ -48907,9 +48956,33 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _PMWADDR_WCS2_MASK                       0x00008000
 #define _PMWADDR_WCS2_LENGTH                     0x00000001
 
+#define _PMWADDR_WCS1A_POSITION                  0x00000016
+#define _PMWADDR_WCS1A_MASK                      0x00400000
+#define _PMWADDR_WCS1A_LENGTH                    0x00000001
+
+#define _PMWADDR_WCS2A_POSITION                  0x00000017
+#define _PMWADDR_WCS2A_MASK                      0x00800000
+#define _PMWADDR_WCS2A_LENGTH                    0x00000001
+
 #define _PMWADDR_w_POSITION                      0x00000000
 #define _PMWADDR_w_MASK                          0xFFFFFFFF
 #define _PMWADDR_w_LENGTH                        0x00000020
+
+#define _PMWADDR_WADDR14_POSITION                0x0000000E
+#define _PMWADDR_WADDR14_MASK                    0x00004000
+#define _PMWADDR_WADDR14_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR15_POSITION                0x0000000F
+#define _PMWADDR_WADDR15_MASK                    0x00008000
+#define _PMWADDR_WADDR15_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR22_POSITION                0x00000016
+#define _PMWADDR_WADDR22_MASK                    0x00400000
+#define _PMWADDR_WADDR22_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR23_POSITION                0x00000017
+#define _PMWADDR_WADDR23_MASK                    0x00800000
+#define _PMWADDR_WADDR23_LENGTH                  0x00000001
 
 #define _PMRADDR_RADDR_POSITION                  0x00000000
 #define _PMRADDR_RADDR_MASK                      0x00003FFF
@@ -54247,6 +54320,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONA_EDGEDETECT_MASK                  0x00000800
 #define _CNCONA_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONA_SIDL_POSITION                    0x0000000D
+#define _CNCONA_SIDL_MASK                        0x00002000
+#define _CNCONA_SIDL_LENGTH                      0x00000001
+
 #define _CNCONA_ON_POSITION                      0x0000000F
 #define _CNCONA_ON_MASK                          0x00008000
 #define _CNCONA_ON_LENGTH                        0x00000001
@@ -54947,6 +55024,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONB_EDGEDETECT_MASK                  0x00000800
 #define _CNCONB_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONB_SIDL_POSITION                    0x0000000D
+#define _CNCONB_SIDL_MASK                        0x00002000
+#define _CNCONB_SIDL_LENGTH                      0x00000001
+
 #define _CNCONB_ON_POSITION                      0x0000000F
 #define _CNCONB_ON_MASK                          0x00008000
 #define _CNCONB_ON_LENGTH                        0x00000001
@@ -55587,6 +55668,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONC_EDGEDETECT_MASK                  0x00000800
 #define _CNCONC_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONC_SIDL_POSITION                    0x0000000D
+#define _CNCONC_SIDL_MASK                        0x00002000
+#define _CNCONC_SIDL_LENGTH                      0x00000001
+
 #define _CNCONC_ON_POSITION                      0x0000000F
 #define _CNCONC_ON_MASK                          0x00008000
 #define _CNCONC_ON_LENGTH                        0x00000001
@@ -56194,6 +56279,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCOND_EDGEDETECT_POSITION              0x0000000B
 #define _CNCOND_EDGEDETECT_MASK                  0x00000800
 #define _CNCOND_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCOND_SIDL_POSITION                    0x0000000D
+#define _CNCOND_SIDL_MASK                        0x00002000
+#define _CNCOND_SIDL_LENGTH                      0x00000001
 
 #define _CNCOND_ON_POSITION                      0x0000000F
 #define _CNCOND_ON_MASK                          0x00008000
@@ -56867,6 +56956,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONE_EDGEDETECT_MASK                  0x00000800
 #define _CNCONE_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONE_SIDL_POSITION                    0x0000000D
+#define _CNCONE_SIDL_MASK                        0x00002000
+#define _CNCONE_SIDL_LENGTH                      0x00000001
+
 #define _CNCONE_ON_POSITION                      0x0000000F
 #define _CNCONE_ON_MASK                          0x00008000
 #define _CNCONE_ON_LENGTH                        0x00000001
@@ -57378,6 +57471,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONF_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONF_EDGEDETECT_MASK                  0x00000800
 #define _CNCONF_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONF_SIDL_POSITION                    0x0000000D
+#define _CNCONF_SIDL_MASK                        0x00002000
+#define _CNCONF_SIDL_LENGTH                      0x00000001
 
 #define _CNCONF_ON_POSITION                      0x0000000F
 #define _CNCONF_ON_MASK                          0x00008000
@@ -57902,6 +57999,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONG_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONG_EDGEDETECT_MASK                  0x00000800
 #define _CNCONG_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONG_SIDL_POSITION                    0x0000000D
+#define _CNCONG_SIDL_MASK                        0x00002000
+#define _CNCONG_SIDL_LENGTH                      0x00000001
 
 #define _CNCONG_ON_POSITION                      0x0000000F
 #define _CNCONG_ON_MASK                          0x00008000
@@ -58590,6 +58691,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONH_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONH_EDGEDETECT_MASK                  0x00000800
 #define _CNCONH_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONH_SIDL_POSITION                    0x0000000D
+#define _CNCONH_SIDL_MASK                        0x00002000
+#define _CNCONH_SIDL_LENGTH                      0x00000001
 
 #define _CNCONH_ON_POSITION                      0x0000000F
 #define _CNCONH_ON_MASK                          0x00008000
@@ -59411,6 +59516,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONJ_EDGEDETECT_MASK                  0x00000800
 #define _CNCONJ_EDGEDETECT_LENGTH                0x00000001
 
+#define _CNCONJ_SIDL_POSITION                    0x0000000D
+#define _CNCONJ_SIDL_MASK                        0x00002000
+#define _CNCONJ_SIDL_LENGTH                      0x00000001
+
 #define _CNCONJ_ON_POSITION                      0x0000000F
 #define _CNCONJ_ON_MASK                          0x00008000
 #define _CNCONJ_ON_LENGTH                        0x00000001
@@ -60042,6 +60151,10 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _CNCONK_EDGEDETECT_POSITION              0x0000000B
 #define _CNCONK_EDGEDETECT_MASK                  0x00000800
 #define _CNCONK_EDGEDETECT_LENGTH                0x00000001
+
+#define _CNCONK_SIDL_POSITION                    0x0000000D
+#define _CNCONK_SIDL_MASK                        0x00002000
+#define _CNCONK_SIDL_LENGTH                      0x00000001
 
 #define _CNCONK_ON_POSITION                      0x0000000F
 #define _CNCONK_ON_MASK                          0x00008000
@@ -87423,6 +87536,54 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _SEQ3_w_MASK                             0xFFFFFFFF
 #define _SEQ3_w_LENGTH                           0x00000020
 
+#define _DEVADC0_ADCFG_POSITION                  0x00000000
+#define _DEVADC0_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC0_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC0_w_POSITION                      0x00000000
+#define _DEVADC0_w_MASK                          0xFFFFFFFF
+#define _DEVADC0_w_LENGTH                        0x00000020
+
+#define _DEVADC1_ADCFG_POSITION                  0x00000000
+#define _DEVADC1_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC1_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC1_w_POSITION                      0x00000000
+#define _DEVADC1_w_MASK                          0xFFFFFFFF
+#define _DEVADC1_w_LENGTH                        0x00000020
+
+#define _DEVADC2_ADCFG_POSITION                  0x00000000
+#define _DEVADC2_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC2_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC2_w_POSITION                      0x00000000
+#define _DEVADC2_w_MASK                          0xFFFFFFFF
+#define _DEVADC2_w_LENGTH                        0x00000020
+
+#define _DEVADC3_ADCFG_POSITION                  0x00000000
+#define _DEVADC3_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC3_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC3_w_POSITION                      0x00000000
+#define _DEVADC3_w_MASK                          0xFFFFFFFF
+#define _DEVADC3_w_LENGTH                        0x00000020
+
+#define _DEVADC4_ADCFG_POSITION                  0x00000000
+#define _DEVADC4_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC4_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC4_w_POSITION                      0x00000000
+#define _DEVADC4_w_MASK                          0xFFFFFFFF
+#define _DEVADC4_w_LENGTH                        0x00000020
+
+#define _DEVADC7_ADCFG_POSITION                  0x00000000
+#define _DEVADC7_ADCFG_MASK                      0xFFFFFFFF
+#define _DEVADC7_ADCFG_LENGTH                    0x00000020
+
+#define _DEVADC7_w_POSITION                      0x00000000
+#define _DEVADC7_w_MASK                          0xFFFFFFFF
+#define _DEVADC7_w_LENGTH                        0x00000020
+
 #define _DEVSN0_SN_POSITION                      0x00000000
 #define _DEVSN0_SN_MASK                          0xFFFFFFFF
 #define _DEVSN0_SN_LENGTH                        0x00000020
@@ -89275,6 +89436,7 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define _ADC7_WARM_VECTOR                        214
 
 /* Device Peripherals */
+#define _ADCHS
 #define _CAN1
 #define _CAN2
 #define _CFG
@@ -89370,6 +89532,7 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define __DDPSTAT
 
 /* Base Addresses for Peripherals */
+#define _ADCHS_BASE_ADDRESS                      0xBF84B000
 #define _CAN1_BASE_ADDRESS                       0xBF880000
 #define _CAN2_BASE_ADDRESS                       0xBF881000
 #define _CFG_BASE_ADDRESS                        0xBF800000
@@ -89489,8 +89652,8 @@ extern volatile unsigned int   BF2SEQ0 __attribute__((section("sfrs")));
 #define __KSEG0_DATA_MEM_LENGTH                  0xA0000
 #define __CONFIGSFRS_BFC0FFB0_BASE               0xBFC0FFB0
 #define __CONFIGSFRS_BFC0FFB0_LENGTH             0x44
-#define __CONFIGSFRS_BFC54020_BASE               0xBFC54020
-#define __CONFIGSFRS_BFC54020_LENGTH             0x8
+#define __CONFIGSFRS_BFC54000_BASE               0xBFC54000
+#define __CONFIGSFRS_BFC54000_LENGTH             0x20
 #define __CONFIGSFRS_BFC4FFB0_BASE               0xBFC4FFB0
 #define __CONFIGSFRS_BFC4FFB0_LENGTH             0x44
 #define __CONFIGSFRS_BFC4FF30_BASE               0xBFC4FF30

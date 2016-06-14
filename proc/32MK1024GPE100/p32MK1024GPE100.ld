@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MK1024GPE100 linker script
- * Build date : Feb 18 2016
+ * Build date : Jun 01 2016
  * 
  * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -107,57 +107,30 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x100000
-  debug_exec_mem              : ORIGIN = 0x9FC20490, LENGTH = 0x3B70
+  debug_exec_mem              : ORIGIN = 0x9FC20490, LENGTH = 0x3B20
   kseg0_boot_mem              : ORIGIN = 0x9FC20490, LENGTH = 0x0
-  config_BFC04FC0             : ORIGIN = 0xBFC04FC0, LENGTH = 0x4
-  config_BFC04FC4             : ORIGIN = 0xBFC04FC4, LENGTH = 0x4
-  config_BFC04FC8             : ORIGIN = 0xBFC04FC8, LENGTH = 0x4
-  config_BFC04FCC             : ORIGIN = 0xBFC04FCC, LENGTH = 0x4
-  config_BFC04FD0             : ORIGIN = 0xBFC04FD0, LENGTH = 0x4
-  config_BFC04FD4             : ORIGIN = 0xBFC04FD4, LENGTH = 0x4
-  config_BFC04FD8             : ORIGIN = 0xBFC04FD8, LENGTH = 0x4
-  config_BFC04FDC             : ORIGIN = 0xBFC04FDC, LENGTH = 0x4
-  config_BFC04FE0             : ORIGIN = 0xBFC04FE0, LENGTH = 0x4
-  config_BFC04FE4             : ORIGIN = 0xBFC04FE4, LENGTH = 0x4
-  config_BFC04FE8             : ORIGIN = 0xBFC04FE8, LENGTH = 0x4
-  config_BFC04FEC             : ORIGIN = 0xBFC04FEC, LENGTH = 0x4
-  config_BFC04FF0             : ORIGIN = 0xBFC04FF0, LENGTH = 0x4
-  config_BFC04FF4             : ORIGIN = 0xBFC04FF4, LENGTH = 0x4
-  config_BFC04FF8             : ORIGIN = 0xBFC04FF8, LENGTH = 0x4
-  config_BFC04FFC             : ORIGIN = 0xBFC04FFC, LENGTH = 0x4
+  config_BFC03FC0             : ORIGIN = 0xBFC03FC0, LENGTH = 0x4
+  config_BFC03FC4             : ORIGIN = 0xBFC03FC4, LENGTH = 0x4
+  config_BFC03FC8             : ORIGIN = 0xBFC03FC8, LENGTH = 0x4
+  config_BFC03FCC             : ORIGIN = 0xBFC03FCC, LENGTH = 0x4
+  config_BFC03FDC             : ORIGIN = 0xBFC03FDC, LENGTH = 0x4
+  config_BFC03FEC             : ORIGIN = 0xBFC03FEC, LENGTH = 0x4
+  config_BFC03FF0             : ORIGIN = 0xBFC03FF0, LENGTH = 0x4
   kseg1_boot_mem              : ORIGIN = 0xBFC20000, LENGTH = 0x490
-  config_BFC24FC0             : ORIGIN = 0xBFC24FC0, LENGTH = 0x4
-  config_BFC24FC4             : ORIGIN = 0xBFC24FC4, LENGTH = 0x4
-  config_BFC24FC8             : ORIGIN = 0xBFC24FC8, LENGTH = 0x4
-  config_BFC24FCC             : ORIGIN = 0xBFC24FCC, LENGTH = 0x4
-  config_BFC24FD0             : ORIGIN = 0xBFC24FD0, LENGTH = 0x4
-  config_BFC24FD4             : ORIGIN = 0xBFC24FD4, LENGTH = 0x4
-  config_BFC24FD8             : ORIGIN = 0xBFC24FD8, LENGTH = 0x4
-  config_BFC24FDC             : ORIGIN = 0xBFC24FDC, LENGTH = 0x4
-  config_BFC24FE0             : ORIGIN = 0xBFC24FE0, LENGTH = 0x4
-  config_BFC24FE4             : ORIGIN = 0xBFC24FE4, LENGTH = 0x4
-  config_BFC24FE8             : ORIGIN = 0xBFC24FE8, LENGTH = 0x4
-  config_BFC24FEC             : ORIGIN = 0xBFC24FEC, LENGTH = 0x4
-  config_BFC24FF0             : ORIGIN = 0xBFC24FF0, LENGTH = 0x4
-  config_BFC24FF4             : ORIGIN = 0xBFC24FF4, LENGTH = 0x4
-  config_BFC24FF8             : ORIGIN = 0xBFC24FF8, LENGTH = 0x4
-  config_BFC24FFC             : ORIGIN = 0xBFC24FFC, LENGTH = 0x4
-  config_BFC44FC0             : ORIGIN = 0xBFC44FC0, LENGTH = 0x4
-  config_BFC44FC4             : ORIGIN = 0xBFC44FC4, LENGTH = 0x4
-  config_BFC44FC8             : ORIGIN = 0xBFC44FC8, LENGTH = 0x4
-  config_BFC44FCC             : ORIGIN = 0xBFC44FCC, LENGTH = 0x4
-  config_BFC44FD0             : ORIGIN = 0xBFC44FD0, LENGTH = 0x4
-  config_BFC44FD4             : ORIGIN = 0xBFC44FD4, LENGTH = 0x4
-  config_BFC44FD8             : ORIGIN = 0xBFC44FD8, LENGTH = 0x4
-  config_BFC44FDC             : ORIGIN = 0xBFC44FDC, LENGTH = 0x4
-  config_BFC44FE0             : ORIGIN = 0xBFC44FE0, LENGTH = 0x4
-  config_BFC44FE4             : ORIGIN = 0xBFC44FE4, LENGTH = 0x4
-  config_BFC44FE8             : ORIGIN = 0xBFC44FE8, LENGTH = 0x4
-  config_BFC44FEC             : ORIGIN = 0xBFC44FEC, LENGTH = 0x4
-  config_BFC44FF0             : ORIGIN = 0xBFC44FF0, LENGTH = 0x4
-  config_BFC44FF4             : ORIGIN = 0xBFC44FF4, LENGTH = 0x4
-  config_BFC44FF8             : ORIGIN = 0xBFC44FF8, LENGTH = 0x4
-  config_BFC44FFC             : ORIGIN = 0xBFC44FFC, LENGTH = 0x4
+  config_BFC23FC0             : ORIGIN = 0xBFC23FC0, LENGTH = 0x4
+  config_BFC23FC4             : ORIGIN = 0xBFC23FC4, LENGTH = 0x4
+  config_BFC23FC8             : ORIGIN = 0xBFC23FC8, LENGTH = 0x4
+  config_BFC23FCC             : ORIGIN = 0xBFC23FCC, LENGTH = 0x4
+  config_BFC23FDC             : ORIGIN = 0xBFC23FDC, LENGTH = 0x4
+  config_BFC23FEC             : ORIGIN = 0xBFC23FEC, LENGTH = 0x4
+  config_BFC23FF0             : ORIGIN = 0xBFC23FF0, LENGTH = 0x4
+  config_BFC43FC0             : ORIGIN = 0xBFC43FC0, LENGTH = 0x4
+  config_BFC43FC4             : ORIGIN = 0xBFC43FC4, LENGTH = 0x4
+  config_BFC43FC8             : ORIGIN = 0xBFC43FC8, LENGTH = 0x4
+  config_BFC43FCC             : ORIGIN = 0xBFC43FCC, LENGTH = 0x4
+  config_BFC43FDC             : ORIGIN = 0xBFC43FDC, LENGTH = 0x4
+  config_BFC43FEC             : ORIGIN = 0xBFC43FEC, LENGTH = 0x4
+  config_BFC43FF0             : ORIGIN = 0xBFC43FF0, LENGTH = 0x4
   config_BFC45000             : ORIGIN = 0xBFC45000, LENGTH = 0x4
   config_BFC45004             : ORIGIN = 0xBFC45004, LENGTH = 0x4
   config_BFC45008             : ORIGIN = 0xBFC45008, LENGTH = 0x4
@@ -173,31 +146,22 @@ MEMORY
   config_BFC45034             : ORIGIN = 0xBFC45034, LENGTH = 0x4
   config_BFC45038             : ORIGIN = 0xBFC45038, LENGTH = 0x4
   config_BFC4503C             : ORIGIN = 0xBFC4503C, LENGTH = 0x4
-  config_BFC64FC0             : ORIGIN = 0xBFC64FC0, LENGTH = 0x4
-  config_BFC64FC4             : ORIGIN = 0xBFC64FC4, LENGTH = 0x4
-  config_BFC64FC8             : ORIGIN = 0xBFC64FC8, LENGTH = 0x4
-  config_BFC64FCC             : ORIGIN = 0xBFC64FCC, LENGTH = 0x4
-  config_BFC64FD0             : ORIGIN = 0xBFC64FD0, LENGTH = 0x4
-  config_BFC64FD4             : ORIGIN = 0xBFC64FD4, LENGTH = 0x4
-  config_BFC64FD8             : ORIGIN = 0xBFC64FD8, LENGTH = 0x4
-  config_BFC64FDC             : ORIGIN = 0xBFC64FDC, LENGTH = 0x4
-  config_BFC64FE0             : ORIGIN = 0xBFC64FE0, LENGTH = 0x4
-  config_BFC64FE4             : ORIGIN = 0xBFC64FE4, LENGTH = 0x4
-  config_BFC64FE8             : ORIGIN = 0xBFC64FE8, LENGTH = 0x4
-  config_BFC64FEC             : ORIGIN = 0xBFC64FEC, LENGTH = 0x4
-  config_BFC64FF0             : ORIGIN = 0xBFC64FF0, LENGTH = 0x4
-  config_BFC64FF4             : ORIGIN = 0xBFC64FF4, LENGTH = 0x4
-  config_BFC64FF8             : ORIGIN = 0xBFC64FF8, LENGTH = 0x4
-  config_BFC64FFC             : ORIGIN = 0xBFC64FFC, LENGTH = 0x4
+  config_BFC63FC0             : ORIGIN = 0xBFC63FC0, LENGTH = 0x4
+  config_BFC63FC4             : ORIGIN = 0xBFC63FC4, LENGTH = 0x4
+  config_BFC63FC8             : ORIGIN = 0xBFC63FC8, LENGTH = 0x4
+  config_BFC63FCC             : ORIGIN = 0xBFC63FCC, LENGTH = 0x4
+  config_BFC63FDC             : ORIGIN = 0xBFC63FDC, LENGTH = 0x4
+  config_BFC63FEC             : ORIGIN = 0xBFC63FEC, LENGTH = 0x4
+  config_BFC63FF0             : ORIGIN = 0xBFC63FF0, LENGTH = 0x4
   kseg0_data_mem       (w!x)  : ORIGIN = 0x80000000, LENGTH = 0x40000
   sfrs                        : ORIGIN = 0xBF800000, LENGTH = 0x100000
-  configsfrs_BFC04FB0         : ORIGIN = 0xBFC04FB0, LENGTH = 0x40
-  configsfrs_BFC24FB0         : ORIGIN = 0xBFC24FB0, LENGTH = 0x40
-  configsfrs_BFC44FB0         : ORIGIN = 0xBFC44FB0, LENGTH = 0x40
+  configsfrs_BFC03FB0         : ORIGIN = 0xBFC03FB0, LENGTH = 0x1C
+  configsfrs_BFC23FB0         : ORIGIN = 0xBFC23FB0, LENGTH = 0x1C
+  configsfrs_BFC43FB0         : ORIGIN = 0xBFC43FB0, LENGTH = 0x1C
   configsfrs_BFC45000         : ORIGIN = 0xBFC45000, LENGTH = 0x1C
   configsfrs_BFC45020         : ORIGIN = 0xBFC45020, LENGTH = 0x10
   configsfrs_BFC45030         : ORIGIN = 0xBFC45030, LENGTH = 0x10
-  configsfrs_BFC64FB0         : ORIGIN = 0xBFC64FB0, LENGTH = 0x40
+  configsfrs_BFC63FB0         : ORIGIN = 0xBFC63FB0, LENGTH = 0x1C
 }
 
 /*************************************************************************
@@ -206,150 +170,69 @@ MEMORY
  *************************************************************************/
 SECTIONS
 {
-  .config_BFC04FC0 : {
-    KEEP(*(.config_BFC04FC0))
-  } > config_BFC04FC0
-  .config_BFC04FC4 : {
-    KEEP(*(.config_BFC04FC4))
-  } > config_BFC04FC4
-  .config_BFC04FC8 : {
-    KEEP(*(.config_BFC04FC8))
-  } > config_BFC04FC8
-  .config_BFC04FCC : {
-    KEEP(*(.config_BFC04FCC))
-  } > config_BFC04FCC
-  .config_BFC04FD0 : {
-    KEEP(*(.config_BFC04FD0))
-  } > config_BFC04FD0
-  .config_BFC04FD4 : {
-    KEEP(*(.config_BFC04FD4))
-  } > config_BFC04FD4
-  .config_BFC04FD8 : {
-    KEEP(*(.config_BFC04FD8))
-  } > config_BFC04FD8
-  .config_BFC04FDC : {
-    KEEP(*(.config_BFC04FDC))
-  } > config_BFC04FDC
-  .config_BFC04FE0 : {
-    KEEP(*(.config_BFC04FE0))
-  } > config_BFC04FE0
-  .config_BFC04FE4 : {
-    KEEP(*(.config_BFC04FE4))
-  } > config_BFC04FE4
-  .config_BFC04FE8 : {
-    KEEP(*(.config_BFC04FE8))
-  } > config_BFC04FE8
-  .config_BFC04FEC : {
-    KEEP(*(.config_BFC04FEC))
-  } > config_BFC04FEC
-  .config_BFC04FF0 : {
-    KEEP(*(.config_BFC04FF0))
-  } > config_BFC04FF0
-  .config_BFC04FF4 : {
-    KEEP(*(.config_BFC04FF4))
-  } > config_BFC04FF4
-  .config_BFC04FF8 : {
-    KEEP(*(.config_BFC04FF8))
-  } > config_BFC04FF8
-  .config_BFC04FFC : {
-    KEEP(*(.config_BFC04FFC))
-  } > config_BFC04FFC
-  .config_BFC24FC0 : {
-    KEEP(*(.config_BFC24FC0))
-  } > config_BFC24FC0
-  .config_BFC24FC4 : {
-    KEEP(*(.config_BFC24FC4))
-  } > config_BFC24FC4
-  .config_BFC24FC8 : {
-    KEEP(*(.config_BFC24FC8))
-  } > config_BFC24FC8
-  .config_BFC24FCC : {
-    KEEP(*(.config_BFC24FCC))
-  } > config_BFC24FCC
-  .config_BFC24FD0 : {
-    KEEP(*(.config_BFC24FD0))
-  } > config_BFC24FD0
-  .config_BFC24FD4 : {
-    KEEP(*(.config_BFC24FD4))
-  } > config_BFC24FD4
-  .config_BFC24FD8 : {
-    KEEP(*(.config_BFC24FD8))
-  } > config_BFC24FD8
-  .config_BFC24FDC : {
-    KEEP(*(.config_BFC24FDC))
-  } > config_BFC24FDC
-  .config_BFC24FE0 : {
-    KEEP(*(.config_BFC24FE0))
-  } > config_BFC24FE0
-  .config_BFC24FE4 : {
-    KEEP(*(.config_BFC24FE4))
-  } > config_BFC24FE4
-  .config_BFC24FE8 : {
-    KEEP(*(.config_BFC24FE8))
-  } > config_BFC24FE8
-  .config_BFC24FEC : {
-    KEEP(*(.config_BFC24FEC))
-  } > config_BFC24FEC
-  .config_BFC24FF0 : {
-    KEEP(*(.config_BFC24FF0))
-  } > config_BFC24FF0
-  .config_BFC24FF4 : {
-    KEEP(*(.config_BFC24FF4))
-  } > config_BFC24FF4
-  .config_BFC24FF8 : {
-    KEEP(*(.config_BFC24FF8))
-  } > config_BFC24FF8
-  .config_BFC24FFC : {
-    KEEP(*(.config_BFC24FFC))
-  } > config_BFC24FFC
-  .config_BFC44FC0 : {
-    KEEP(*(.config_BFC44FC0))
-  } > config_BFC44FC0
-  .config_BFC44FC4 : {
-    KEEP(*(.config_BFC44FC4))
-  } > config_BFC44FC4
-  .config_BFC44FC8 : {
-    KEEP(*(.config_BFC44FC8))
-  } > config_BFC44FC8
-  .config_BFC44FCC : {
-    KEEP(*(.config_BFC44FCC))
-  } > config_BFC44FCC
-  .config_BFC44FD0 : {
-    KEEP(*(.config_BFC44FD0))
-  } > config_BFC44FD0
-  .config_BFC44FD4 : {
-    KEEP(*(.config_BFC44FD4))
-  } > config_BFC44FD4
-  .config_BFC44FD8 : {
-    KEEP(*(.config_BFC44FD8))
-  } > config_BFC44FD8
-  .config_BFC44FDC : {
-    KEEP(*(.config_BFC44FDC))
-  } > config_BFC44FDC
-  .config_BFC44FE0 : {
-    KEEP(*(.config_BFC44FE0))
-  } > config_BFC44FE0
-  .config_BFC44FE4 : {
-    KEEP(*(.config_BFC44FE4))
-  } > config_BFC44FE4
-  .config_BFC44FE8 : {
-    KEEP(*(.config_BFC44FE8))
-  } > config_BFC44FE8
-  .config_BFC44FEC : {
-    KEEP(*(.config_BFC44FEC))
-  } > config_BFC44FEC
-  .config_BFC44FF0 : {
-    KEEP(*(.config_BFC44FF0))
-  } > config_BFC44FF0
-  .config_BFC44FF4 : {
-    KEEP(*(.config_BFC44FF4))
-  } > config_BFC44FF4
-  .config_BFC44FF8 : {
-    KEEP(*(.config_BFC44FF8))
-  } > config_BFC44FF8
-  .config_BFC44FFC : {
-    KEEP(*(.config_BFC44FFC))
-  } > config_BFC44FFC
+  .config_BFC03FC0 : {
+    KEEP(*(.config_BFC03FC0))
+  } > config_BFC03FC0
+  .config_BFC03FC4 : {
+    KEEP(*(.config_BFC03FC4))
+  } > config_BFC03FC4
+  .config_BFC03FC8 : {
+    KEEP(*(.config_BFC03FC8))
+  } > config_BFC03FC8
+  .config_BFC03FCC : {
+    KEEP(*(.config_BFC03FCC))
+  } > config_BFC03FCC
+  .config_BFC03FDC : {
+    KEEP(*(.config_BFC03FDC))
+  } > config_BFC03FDC
+  .config_BFC03FEC : {
+    KEEP(*(.config_BFC03FEC))
+  } > config_BFC03FEC
+  .config_BFC03FF0 : {
+    KEEP(*(.config_BFC03FF0))
+  } > config_BFC03FF0
+  .config_BFC23FC0 : {
+    KEEP(*(.config_BFC23FC0))
+  } > config_BFC23FC0
+  .config_BFC23FC4 : {
+    KEEP(*(.config_BFC23FC4))
+  } > config_BFC23FC4
+  .config_BFC23FC8 : {
+    KEEP(*(.config_BFC23FC8))
+  } > config_BFC23FC8
+  .config_BFC23FCC : {
+    KEEP(*(.config_BFC23FCC))
+  } > config_BFC23FCC
+  .config_BFC23FDC : {
+    KEEP(*(.config_BFC23FDC))
+  } > config_BFC23FDC
+  .config_BFC23FEC : {
+    KEEP(*(.config_BFC23FEC))
+  } > config_BFC23FEC
+  .config_BFC23FF0 : {
+    KEEP(*(.config_BFC23FF0))
+  } > config_BFC23FF0
+  .config_BFC43FC0 : {
+    KEEP(*(.config_BFC43FC0))
+  } > config_BFC43FC0
+  .config_BFC43FC4 : {
+    KEEP(*(.config_BFC43FC4))
+  } > config_BFC43FC4
+  .config_BFC43FC8 : {
+    KEEP(*(.config_BFC43FC8))
+  } > config_BFC43FC8
+  .config_BFC43FCC : {
+    KEEP(*(.config_BFC43FCC))
+  } > config_BFC43FCC
+  .config_BFC43FDC : {
+    KEEP(*(.config_BFC43FDC))
+  } > config_BFC43FDC
+  .config_BFC43FEC : {
+    KEEP(*(.config_BFC43FEC))
+  } > config_BFC43FEC
+  .config_BFC43FF0 : {
+    KEEP(*(.config_BFC43FF0))
+  } > config_BFC43FF0
   .config_BFC45000 : {
     KEEP(*(.config_BFC45000))
   } > config_BFC45000
@@ -395,54 +278,27 @@ SECTIONS
   .config_BFC4503C : {
     KEEP(*(.config_BFC4503C))
   } > config_BFC4503C
-  .config_BFC64FC0 : {
-    KEEP(*(.config_BFC64FC0))
-  } > config_BFC64FC0
-  .config_BFC64FC4 : {
-    KEEP(*(.config_BFC64FC4))
-  } > config_BFC64FC4
-  .config_BFC64FC8 : {
-    KEEP(*(.config_BFC64FC8))
-  } > config_BFC64FC8
-  .config_BFC64FCC : {
-    KEEP(*(.config_BFC64FCC))
-  } > config_BFC64FCC
-  .config_BFC64FD0 : {
-    KEEP(*(.config_BFC64FD0))
-  } > config_BFC64FD0
-  .config_BFC64FD4 : {
-    KEEP(*(.config_BFC64FD4))
-  } > config_BFC64FD4
-  .config_BFC64FD8 : {
-    KEEP(*(.config_BFC64FD8))
-  } > config_BFC64FD8
-  .config_BFC64FDC : {
-    KEEP(*(.config_BFC64FDC))
-  } > config_BFC64FDC
-  .config_BFC64FE0 : {
-    KEEP(*(.config_BFC64FE0))
-  } > config_BFC64FE0
-  .config_BFC64FE4 : {
-    KEEP(*(.config_BFC64FE4))
-  } > config_BFC64FE4
-  .config_BFC64FE8 : {
-    KEEP(*(.config_BFC64FE8))
-  } > config_BFC64FE8
-  .config_BFC64FEC : {
-    KEEP(*(.config_BFC64FEC))
-  } > config_BFC64FEC
-  .config_BFC64FF0 : {
-    KEEP(*(.config_BFC64FF0))
-  } > config_BFC64FF0
-  .config_BFC64FF4 : {
-    KEEP(*(.config_BFC64FF4))
-  } > config_BFC64FF4
-  .config_BFC64FF8 : {
-    KEEP(*(.config_BFC64FF8))
-  } > config_BFC64FF8
-  .config_BFC64FFC : {
-    KEEP(*(.config_BFC64FFC))
-  } > config_BFC64FFC
+  .config_BFC63FC0 : {
+    KEEP(*(.config_BFC63FC0))
+  } > config_BFC63FC0
+  .config_BFC63FC4 : {
+    KEEP(*(.config_BFC63FC4))
+  } > config_BFC63FC4
+  .config_BFC63FC8 : {
+    KEEP(*(.config_BFC63FC8))
+  } > config_BFC63FC8
+  .config_BFC63FCC : {
+    KEEP(*(.config_BFC63FCC))
+  } > config_BFC63FCC
+  .config_BFC63FDC : {
+    KEEP(*(.config_BFC63FDC))
+  } > config_BFC63FDC
+  .config_BFC63FEC : {
+    KEEP(*(.config_BFC63FEC))
+  } > config_BFC63FEC
+  .config_BFC63FF0 : {
+    KEEP(*(.config_BFC63FF0))
+  } > config_BFC63FF0
 }
 SECTIONS
 {

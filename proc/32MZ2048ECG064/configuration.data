@@ -304,12 +304,12 @@ CSETTING:00000400:FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:EJTAGBEN:EJTAG Boot
@@ -336,25 +336,25 @@ CSETTING:FFFF0000:CSEQ:Boot Flash Complement Sequence Number
 CVALUE:00000000:00000000:Range is from 0 to 0xffff
 CWORD:BFC54000:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:ADCCALDATA:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54004:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:ADCCALDATA:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54008:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:ADCCALDATA:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC5400C:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:ADCCALDATA:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54010:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:ADCCALDATA:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54020:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:SN:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC54024:FFFFFFFF:FFFFFFFF
 CSETTING:FFFFFFFF:SN:
-CVALUE:00000000:00000000:Range is from 0 to 0xffffffffL
+CVALUE:00000000:00000000:Range is from 0 to 0xffffffff
 CWORD:BFC0FF40:FFFFFFFF:FFFFFFFF
 CSETTING:0000FFFF:A_USERID:
 CVALUE:00000000:00000000:Range is from 0 to 0xffff
@@ -660,12 +660,12 @@ CSETTING:00000400:A_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:A_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:A_EJTAGBEN:EJTAG Boot
@@ -995,12 +995,12 @@ CSETTING:00000400:AUBA_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:AUBA_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:AUBA_EJTAGBEN:EJTAG Boot
@@ -1330,12 +1330,12 @@ CSETTING:00000400:UBA_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:UBA_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:UBA_EJTAGBEN:EJTAG Boot
@@ -1665,12 +1665,12 @@ CSETTING:00000400:ABF1_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:ABF1_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:ABF1_EJTAGBEN:EJTAG Boot
@@ -2000,12 +2000,12 @@ CSETTING:00000400:BF1_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:BF1_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:BF1_EJTAGBEN:EJTAG Boot
@@ -2335,12 +2335,12 @@ CSETTING:00000400:ABF2_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:ABF2_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:ABF2_EJTAGBEN:EJTAG Boot
@@ -2670,12 +2670,12 @@ CSETTING:00000400:BF2_FSLEEP:Flash Sleep Mode
 CVALUE:00000000:VREGS:Flash power down is controlled by the VREGS bit
 CVALUE:00000400:OFF:Flash is powered down when the device is in Sleep mode
 CSETTING:00007000:BF2_DBGPER:Debug Mode CPU Access Permission
-CVALUE:00000000:DENY_PG0:Deny CPU access to Permission Group 0 permission regions
-CVALUE:00000000:DENY_PG1:Deny CPU access to Permission Group 1 permission regions
-CVALUE:00000000:DENY_PG2:Deny CPU access to Permission Group 2 permission regions
+CVALUE:00000000:PG_NONE:Deny CPU access to all permission regions
 CVALUE:00001000:ALLOW_PG0:Allow CPU access to Permission Group 0 permission regions
 CVALUE:00002000:ALLOW_PG1:Allow CPU access to Permission Group 1 permission regions
+CVALUE:00003000:PG_1_0:PG0: Allow PG1: Allow PG2: Deny
 CVALUE:00004000:ALLOW_PG2:Allow CPU access to Permission Group 2 permission regions
+CVALUE:00005000:PG_2_0:PG0: Allow PG1: Deny PG2: Allow
 CVALUE:00006000:PG_2_1:PG0: Deny PG1: Allow PG2: Allow
 CVALUE:00007000:PG_ALL:Allow CPU access to all permission regions
 CSETTING:40000000:BF2_EJTAGBEN:EJTAG Boot
