@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MZ1024EFK100 linker script
- * Build date : May 01 2015
+ * Build date : Jun 01 2016
  * 
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -61,12 +61,6 @@ PROVIDE(_min_stack_size = 0x400) ;
  *************************************************************************/
 INPUT("processor.o")
 
-/*************************************************************************
- * Processor-specific peripheral libraries are optional
- *************************************************************************/
-OPTIONAL("libmchp_peripheral.a")
-OPTIONAL("libmchp_peripheral_32MZ1024EFK100.a")
-
 
 /*************************************************************************
  * Vector-offset initialization
@@ -74,14 +68,17 @@ OPTIONAL("libmchp_peripheral_32MZ1024EFK100.a")
 OPTIONAL("vector_offset_init.o")
 
 /*************************************************************************
- * For interrupt vector handling
+ * Symbols used for interrupt-vector table generation
+ * To override the defaults, define the _ebase_address symbol using
+ * the --defsym linker opt as shown in this example:
+ *   xc32-gcc src.c -Wl,--defsym=_ebase_address=0x9D001000
  *************************************************************************/
-PROVIDE(_vector_spacing = 0x00000001);
+PROVIDE(_vector_spacing = 0x0001);
 PROVIDE(_ebase_address = 0x9D000000);
 
 /*************************************************************************
  * Memory Address Equates
- * _RESET_ADDR                    -- Reset Vector
+ * _RESET_ADDR                    -- Reset Vector or entry point
  * _BEV_EXCPT_ADDR                -- Boot exception Vector
  * _DBG_EXCPT_ADDR                -- In-circuit Debugging Exception Vector
  * _SIMPLE_TLB_REFILL_EXCPT_ADDR  -- Simple TLB-Refill Exception Vector
@@ -107,6 +104,8 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
+
+
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x100000
@@ -214,6 +213,12 @@ MEMORY
   config_BFC4FFF8             : ORIGIN = 0xBFC4FFF8, LENGTH = 0x4
   config_BFC4FFFC             : ORIGIN = 0xBFC4FFFC, LENGTH = 0x4
   boot1lastpage               : ORIGIN = 0xBFC50000, LENGTH = 0x4000
+  config_BFC54000             : ORIGIN = 0xBFC54000, LENGTH = 0x4
+  config_BFC54004             : ORIGIN = 0xBFC54004, LENGTH = 0x4
+  config_BFC54008             : ORIGIN = 0xBFC54008, LENGTH = 0x4
+  config_BFC5400C             : ORIGIN = 0xBFC5400C, LENGTH = 0x4
+  config_BFC54010             : ORIGIN = 0xBFC54010, LENGTH = 0x4
+  config_BFC5401C             : ORIGIN = 0xBFC5401C, LENGTH = 0x4
   config_BFC54020             : ORIGIN = 0xBFC54020, LENGTH = 0x4
   config_BFC54024             : ORIGIN = 0xBFC54024, LENGTH = 0x4
   boot2                       : ORIGIN = 0xBFC60000, LENGTH = 0xFF00
@@ -258,7 +263,7 @@ MEMORY
   configsfrs_BFC2FFC0         : ORIGIN = 0xBFC2FFC0, LENGTH = 0x40
   configsfrs_BFC4FF40         : ORIGIN = 0xBFC4FF40, LENGTH = 0x40
   configsfrs_BFC4FFC0         : ORIGIN = 0xBFC4FFC0, LENGTH = 0x40
-  configsfrs_BFC54020         : ORIGIN = 0xBFC54020, LENGTH = 0x8
+  configsfrs_BFC54000         : ORIGIN = 0xBFC54000, LENGTH = 0x20
   configsfrs_BFC6FF40         : ORIGIN = 0xBFC6FF40, LENGTH = 0x40
   configsfrs_BFC6FFC0         : ORIGIN = 0xBFC6FFC0, LENGTH = 0x40
   kseg2_ebi_data_mem          : ORIGIN = 0xC0000000, LENGTH = 0x4000000
@@ -561,6 +566,24 @@ SECTIONS
   .config_BFC4FFFC : {
     KEEP(*(.config_BFC4FFFC))
   } > config_BFC4FFFC
+  .config_BFC54000 : {
+    KEEP(*(.config_BFC54000))
+  } > config_BFC54000
+  .config_BFC54004 : {
+    KEEP(*(.config_BFC54004))
+  } > config_BFC54004
+  .config_BFC54008 : {
+    KEEP(*(.config_BFC54008))
+  } > config_BFC54008
+  .config_BFC5400C : {
+    KEEP(*(.config_BFC5400C))
+  } > config_BFC5400C
+  .config_BFC54010 : {
+    KEEP(*(.config_BFC54010))
+  } > config_BFC54010
+  .config_BFC5401C : {
+    KEEP(*(.config_BFC5401C))
+  } > config_BFC5401C
   .config_BFC54020 : {
     KEEP(*(.config_BFC54020))
   } > config_BFC54020
@@ -1283,7 +1306,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* chipKIT uses crtbegin.o to find the start of
+    /* XC32 uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not
@@ -1715,7 +1738,7 @@ __pic32_tlb_7_entrylo1 = __pic32_tlb_7_entrylo0 | 0x00040000 ;
  *  called by the default C startup code (crt0_<isa>.o),
  *  uses the table created in the .tlb_init_values output
  *  section to initialize the Translation Lookaside buffer (TLB)
- *  of the Memory Mangagement Unit (MMU).
+ *  of the Memory Management Unit (MMU).
  */
 SECTIONS
 {

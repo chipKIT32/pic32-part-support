@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------
  * XC processor header
- * Build date : May 01 2015
+ * Build date : June 9 2016
  *
  * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
@@ -51,6 +51,10 @@ extern "C" {
 #  include <proc/pmec1406.h>
 #elif defined(__MEC1408__)
 #  include <proc/pmec1408.h>
+#elif defined(__MEC1414__)
+#  include <proc/pmec1414.h>
+#elif defined(__MEC1416__)
+#  include <proc/pmec1416.h>
 #elif defined(__MEC1418__)
 #  include <proc/pmec1418.h>
 #elif defined(__MGC3430__)
@@ -61,6 +65,24 @@ extern "C" {
 #  include <proc/pmgc3450.h>
 #elif defined(__MGC3451__)
 #  include <proc/pmgc3451.h>
+#elif defined(__32MK0512GPD064__)
+#  include <proc/p32mk0512gpd064.h>
+#elif defined(__32MK0512GPD100__)
+#  include <proc/p32mk0512gpd100.h>
+#elif defined(__32MK0512GPE064__)
+#  include <proc/p32mk0512gpe064.h>
+#elif defined(__32MK0512GPE100__)
+#  include <proc/p32mk0512gpe100.h>
+#elif defined(__32MK1024GPD064__)
+#  include <proc/p32mk1024gpd064.h>
+#elif defined(__32MK1024GPD100__)
+#  include <proc/p32mk1024gpd100.h>
+#elif defined(__32MK1024GPE064__)
+#  include <proc/p32mk1024gpe064.h>
+#elif defined(__32MK1024GPE100__)
+#  include <proc/p32mk1024gpe100.h>
+#elif defined(__32MK1024MCF100__)
+#  include <proc/p32mk1024mcf100.h>
 #elif defined(__32MM0016GPL020__)
 #  include <proc/p32mm0016gpl020.h>
 #elif defined(__32MM0016GPL028__)
@@ -79,6 +101,30 @@ extern "C" {
 #  include <proc/p32mm0064gpl028.h>
 #elif defined(__32MM0064GPL036__)
 #  include <proc/p32mm0064gpl036.h>
+#elif defined(__32MM0064GPM028__)
+#  include <proc/p32mm0064gpm028.h>
+#elif defined(__32MM0064GPM036__)
+#  include <proc/p32mm0064gpm036.h>
+#elif defined(__32MM0064GPM048__)
+#  include <proc/p32mm0064gpm048.h>
+#elif defined(__32MM0064GPM064__)
+#  include <proc/p32mm0064gpm064.h>
+#elif defined(__32MM0128GPM028__)
+#  include <proc/p32mm0128gpm028.h>
+#elif defined(__32MM0128GPM036__)
+#  include <proc/p32mm0128gpm036.h>
+#elif defined(__32MM0128GPM048__)
+#  include <proc/p32mm0128gpm048.h>
+#elif defined(__32MM0128GPM064__)
+#  include <proc/p32mm0128gpm064.h>
+#elif defined(__32MM0256GPM028__)
+#  include <proc/p32mm0256gpm028.h>
+#elif defined(__32MM0256GPM036__)
+#  include <proc/p32mm0256gpm036.h>
+#elif defined(__32MM0256GPM048__)
+#  include <proc/p32mm0256gpm048.h>
+#elif defined(__32MM0256GPM064__)
+#  include <proc/p32mm0256gpm064.h>
 #elif defined(__32MX110F016B__)
 #  include <proc/p32mx110f016b.h>
 #elif defined(__32MX110F016C__)
@@ -173,10 +219,14 @@ extern "C" {
 #  include <proc/p32mx270f256b.h>
 #elif defined(__32MX270F256D__)
 #  include <proc/p32mx270f256d.h>
+#elif defined(__32MX270F256DB__)
+#  include <proc/p32mx270f256db.h>
 #elif defined(__32MX270F512H__)
 #  include <proc/p32mx270f512h.h>
 #elif defined(__32MX270F512L__)
 #  include <proc/p32mx270f512l.h>
+#elif defined(__32MX275F256D__)
+#  include <proc/p32mx275f256d.h>
 #elif defined(__32MX320F032H__)
 #  include <proc/p32mx320f032h.h>
 #elif defined(__32MX320F064H__)
@@ -233,6 +283,8 @@ extern "C" {
 #  include <proc/p32mx450f128l.h>
 #elif defined(__32MX450F256H__)
 #  include <proc/p32mx450f256h.h>
+#elif defined(__32MX450F256HB__)
+#  include <proc/p32mx450f256hb.h>
 #elif defined(__32MX450F256L__)
 #  include <proc/p32mx450f256l.h>
 #elif defined(__32MX460F256L__)
@@ -243,6 +295,8 @@ extern "C" {
 #  include <proc/p32mx470f512h.h>
 #elif defined(__32MX470F512L__)
 #  include <proc/p32mx470f512l.h>
+#elif defined(__32MX470F512LB__)
+#  include <proc/p32mx470f512lb.h>
 #elif defined(__32MX530F128H__)
 #  include <proc/p32mx530f128h.h>
 #elif defined(__32MX530F128L__)
@@ -407,6 +461,66 @@ extern "C" {
 #  include <proc/p32mz1024efm124.h>
 #elif defined(__32MZ1024EFM144__)
 #  include <proc/p32mz1024efm144.h>
+#elif defined(__32MZ1025DAA169__)
+#  include <proc/p32mz1025daa169.h>
+#elif defined(__32MZ1025DAA176__)
+#  include <proc/p32mz1025daa176.h>
+#elif defined(__32MZ1025DAA288__)
+#  include <proc/p32mz1025daa288.h>
+#elif defined(__32MZ1025DAB169__)
+#  include <proc/p32mz1025dab169.h>
+#elif defined(__32MZ1025DAB176__)
+#  include <proc/p32mz1025dab176.h>
+#elif defined(__32MZ1025DAB288__)
+#  include <proc/p32mz1025dab288.h>
+#elif defined(__32MZ1025DAG169__)
+#  include <proc/p32mz1025dag169.h>
+#elif defined(__32MZ1025DAG176__)
+#  include <proc/p32mz1025dag176.h>
+#elif defined(__32MZ1025DAH169__)
+#  include <proc/p32mz1025dah169.h>
+#elif defined(__32MZ1025DAH176__)
+#  include <proc/p32mz1025dah176.h>
+#elif defined(__32MZ1064DAA169__)
+#  include <proc/p32mz1064daa169.h>
+#elif defined(__32MZ1064DAA176__)
+#  include <proc/p32mz1064daa176.h>
+#elif defined(__32MZ1064DAA288__)
+#  include <proc/p32mz1064daa288.h>
+#elif defined(__32MZ1064DAB169__)
+#  include <proc/p32mz1064dab169.h>
+#elif defined(__32MZ1064DAB176__)
+#  include <proc/p32mz1064dab176.h>
+#elif defined(__32MZ1064DAB288__)
+#  include <proc/p32mz1064dab288.h>
+#elif defined(__32MZ1064DAG169__)
+#  include <proc/p32mz1064dag169.h>
+#elif defined(__32MZ1064DAG176__)
+#  include <proc/p32mz1064dag176.h>
+#elif defined(__32MZ1064DAH169__)
+#  include <proc/p32mz1064dah169.h>
+#elif defined(__32MZ1064DAH176__)
+#  include <proc/p32mz1064dah176.h>
+#elif defined(__32MZ2025DAA169__)
+#  include <proc/p32mz2025daa169.h>
+#elif defined(__32MZ2025DAA176__)
+#  include <proc/p32mz2025daa176.h>
+#elif defined(__32MZ2025DAA288__)
+#  include <proc/p32mz2025daa288.h>
+#elif defined(__32MZ2025DAB169__)
+#  include <proc/p32mz2025dab169.h>
+#elif defined(__32MZ2025DAB176__)
+#  include <proc/p32mz2025dab176.h>
+#elif defined(__32MZ2025DAB288__)
+#  include <proc/p32mz2025dab288.h>
+#elif defined(__32MZ2025DAG169__)
+#  include <proc/p32mz2025dag169.h>
+#elif defined(__32MZ2025DAG176__)
+#  include <proc/p32mz2025dag176.h>
+#elif defined(__32MZ2025DAH169__)
+#  include <proc/p32mz2025dah169.h>
+#elif defined(__32MZ2025DAH176__)
+#  include <proc/p32mz2025dah176.h>
 #elif defined(__32MZ2048ECG064__)
 #  include <proc/p32mz2048ecg064.h>
 #elif defined(__32MZ2048ECG100__)
@@ -455,6 +569,30 @@ extern "C" {
 #  include <proc/p32mz2048efm124.h>
 #elif defined(__32MZ2048EFM144__)
 #  include <proc/p32mz2048efm144.h>
+#elif defined(__32MZ2064DAA169__)
+#  include <proc/p32mz2064daa169.h>
+#elif defined(__32MZ2064DAA176__)
+#  include <proc/p32mz2064daa176.h>
+#elif defined(__32MZ2064DAA288__)
+#  include <proc/p32mz2064daa288.h>
+#elif defined(__32MZ2064DAB169__)
+#  include <proc/p32mz2064dab169.h>
+#elif defined(__32MZ2064DAB176__)
+#  include <proc/p32mz2064dab176.h>
+#elif defined(__32MZ2064DAB288__)
+#  include <proc/p32mz2064dab288.h>
+#elif defined(__32MZ2064DAG169__)
+#  include <proc/p32mz2064dag169.h>
+#elif defined(__32MZ2064DAG176__)
+#  include <proc/p32mz2064dag176.h>
+#elif defined(__32MZ2064DAH169__)
+#  include <proc/p32mz2064dah169.h>
+#elif defined(__32MZ2064DAH176__)
+#  include <proc/p32mz2064dah176.h>
+#elif defined(__32WK2057GPB132__)
+#  include <proc/p32wk2057gpb132.h>
+#elif defined(__32WK2057GPD132__)
+#  include <proc/p32wk2057gpd132.h>
 #elif defined(__32M4KCORE__)
 #  include <proc/p32m4kcore.h>
 #elif defined(__32MXGENERIC__)
