@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MM0128GPM064 processor definition module
  # 
- # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its
@@ -1424,13 +1424,13 @@ REFO1TRIMSET = 0xBF802738
   .global REFO1TRIMSET
 REFO1TRIMINV = 0xBF80273C
   .global REFO1TRIMINV
-CLKSTAT = 0xBF802850
+CLKSTAT = 0xBF802870
   .global CLKSTAT
-CLKSTATCLR = 0xBF802854
+CLKSTATCLR = 0xBF802874
   .global CLKSTATCLR
-CLKSTATSET = 0xBF802858
+CLKSTATSET = 0xBF802878
   .global CLKSTATSET
-CLKSTATINV = 0xBF80285C
+CLKSTATINV = 0xBF80287C
   .global CLKSTATINV
 OSCTUN = 0xBF802880
   .global OSCTUN
@@ -1440,14 +1440,6 @@ OSCTUNSET = 0xBF802888
   .global OSCTUNSET
 OSCTUNINV = 0xBF80288C
   .global OSCTUNINV
-DCOCON = 0xBF802900
-  .global DCOCON
-DCOCONCLR = 0xBF802904
-  .global DCOCONCLR
-DCOCONSET = 0xBF802908
-  .global DCOCONSET
-DCOCONINV = 0xBF80290C
-  .global DCOCONINV
 ANCFG = 0xBF802910
   .global ANCFG
 ANCFGCLR = 0xBF802914
@@ -3398,17 +3390,17 @@ FOSCSEL = 0xBFC017D4
   .global FOSCSEL
 FSEC = 0xBFC017D8
   .global FSEC
-AFDEVOPT = 0xBFC01704
+AFDEVOPT = 0xBFC01744
   .global AFDEVOPT
-AFICD = 0xBFC01708
+AFICD = 0xBFC01748
   .global AFICD
-AFPOR = 0xBFC0170C
+AFPOR = 0xBFC0174C
   .global AFPOR
-AFWDT = 0xBFC01710
+AFWDT = 0xBFC01750
   .global AFWDT
-AFOSCSEL = 0xBFC01714
+AFOSCSEL = 0xBFC01754
   .global AFOSCSEL
-AFSEC = 0xBFC01718
+AFSEC = 0xBFC01758
   .global AFSEC
 
 

@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MX450F128H linker script
- * Build date : Jun 01 2016
+ * Build date : Jan 05 2017
  * 
- * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -757,12 +757,12 @@ SECTIONS
     /DISCARD/ : { *(.pdr) }
   .gptab.sdata : { *(.gptab.data) *(.gptab.sdata) }
   .gptab.sbss : { *(.gptab.bss) *(.gptab.sbss) }
-  .mdebug.abi32 : { KEEP(*(.mdebug.abi32)) }
-  .mdebug.abiN32 : { KEEP(*(.mdebug.abiN32)) }
-  .mdebug.abi64 : { KEEP(*(.mdebug.abi64)) }
-  .mdebug.abiO64 : { KEEP(*(.mdebug.abiO64)) }
-  .mdebug.eabi32 : { KEEP(*(.mdebug.eabi32)) }
-  .mdebug.eabi64 : { KEEP(*(.mdebug.eabi64)) }
+  .mdebug.abi32 0 : { KEEP(*(.mdebug.abi32)) }
+  .mdebug.abiN32 0 : { KEEP(*(.mdebug.abiN32)) }
+  .mdebug.abi64 0 : { KEEP(*(.mdebug.abi64)) }
+  .mdebug.abiO64 0 : { KEEP(*(.mdebug.abiO64)) }
+  .mdebug.eabi32 0 : { KEEP(*(.mdebug.eabi32)) }
+  .mdebug.eabi64 0 : { KEEP(*(.mdebug.eabi64)) }
   .gcc_compiled_long32 : { KEEP(*(.gcc_compiled_long32)) }
   .gcc_compiled_long64 : { KEEP(*(.gcc_compiled_long64)) }
   /* Stabs debugging sections.  */

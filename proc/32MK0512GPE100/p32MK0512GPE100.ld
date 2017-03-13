@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MK0512GPE100 linker script
- * Build date : Jun 01 2016
+ * Build date : Jan 05 2017
  * 
- * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -107,8 +107,8 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x80000
-  debug_exec_mem              : ORIGIN = 0x9FC20490, LENGTH = 0x3B20
-  kseg0_boot_mem              : ORIGIN = 0x9FC20490, LENGTH = 0x0
+  debug_exec_mem              : ORIGIN = 0x9FC04490, LENGTH = 0xB70
+  kseg0_boot_mem              : ORIGIN = 0x9FC04490, LENGTH = 0x0
   config_BFC03FC0             : ORIGIN = 0xBFC03FC0, LENGTH = 0x4
   config_BFC03FC4             : ORIGIN = 0xBFC03FC4, LENGTH = 0x4
   config_BFC03FC8             : ORIGIN = 0xBFC03FC8, LENGTH = 0x4
@@ -116,7 +116,7 @@ MEMORY
   config_BFC03FDC             : ORIGIN = 0xBFC03FDC, LENGTH = 0x4
   config_BFC03FEC             : ORIGIN = 0xBFC03FEC, LENGTH = 0x4
   config_BFC03FF0             : ORIGIN = 0xBFC03FF0, LENGTH = 0x4
-  kseg1_boot_mem              : ORIGIN = 0xBFC20000, LENGTH = 0x490
+  kseg1_boot_mem              : ORIGIN = 0xBFC04000, LENGTH = 0x490
   config_BFC23FC0             : ORIGIN = 0xBFC23FC0, LENGTH = 0x4
   config_BFC23FC4             : ORIGIN = 0xBFC23FC4, LENGTH = 0x4
   config_BFC23FC8             : ORIGIN = 0xBFC23FC8, LENGTH = 0x4
@@ -1106,12 +1106,12 @@ SECTIONS
     /DISCARD/ : { *(.pdr) }
   .gptab.sdata : { *(.gptab.data) *(.gptab.sdata) }
   .gptab.sbss : { *(.gptab.bss) *(.gptab.sbss) }
-  .mdebug.abi32 : { KEEP(*(.mdebug.abi32)) }
-  .mdebug.abiN32 : { KEEP(*(.mdebug.abiN32)) }
-  .mdebug.abi64 : { KEEP(*(.mdebug.abi64)) }
-  .mdebug.abiO64 : { KEEP(*(.mdebug.abiO64)) }
-  .mdebug.eabi32 : { KEEP(*(.mdebug.eabi32)) }
-  .mdebug.eabi64 : { KEEP(*(.mdebug.eabi64)) }
+  .mdebug.abi32 0 : { KEEP(*(.mdebug.abi32)) }
+  .mdebug.abiN32 0 : { KEEP(*(.mdebug.abiN32)) }
+  .mdebug.abi64 0 : { KEEP(*(.mdebug.abi64)) }
+  .mdebug.abiO64 0 : { KEEP(*(.mdebug.abiO64)) }
+  .mdebug.eabi32 0 : { KEEP(*(.mdebug.eabi32)) }
+  .mdebug.eabi64 0 : { KEEP(*(.mdebug.eabi64)) }
   .gcc_compiled_long32 : { KEEP(*(.gcc_compiled_long32)) }
   .gcc_compiled_long64 : { KEEP(*(.gcc_compiled_long64)) }
   /* Stabs debugging sections.  */

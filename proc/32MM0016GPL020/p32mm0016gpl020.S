@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MM0016GPL020 processor definition module
  # 
- # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its
@@ -1484,17 +1484,17 @@ FOSCSEL = 0xBFC017D4
   .global FOSCSEL
 FSEC = 0xBFC017D8
   .global FSEC
-AFDEVOPT = 0xBFC01704
+AFDEVOPT = 0xBFC01744
   .global AFDEVOPT
-AFICD = 0xBFC01708
+AFICD = 0xBFC01748
   .global AFICD
-AFPOR = 0xBFC0170C
+AFPOR = 0xBFC0174C
   .global AFPOR
-AFWDT = 0xBFC01710
+AFWDT = 0xBFC01750
   .global AFWDT
-AFOSCSEL = 0xBFC01714
+AFOSCSEL = 0xBFC01754
   .global AFOSCSEL
-AFSEC = 0xBFC01718
+AFSEC = 0xBFC01758
   .global AFSEC
 
 

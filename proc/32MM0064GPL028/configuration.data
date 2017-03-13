@@ -123,13 +123,13 @@ CSETTING:80000000:CP:Code Protection Enable bit
 CVALUE:00000000:ON:Code protection is enabled
 CVALUE:80000000:OFF:Code protection is disabled
 CWORD:BFC017E0:FFFFFFFF:FFFFFFFF
-CWORD:BFC01704:FFFFFFFF:FFFFFFFF
+CWORD:BFC01744:FFFFFFFF:FFFFFFFF
 CSETTING:00000008:A_SOSCHP:Secondary Oscillator High Power Enable bit
 CVALUE:00000000:ON:SOSC oprerates in high power mode
 CVALUE:00000008:OFF:SOSC oprerates in normal power mode.
 CSETTING:FFFF0000:A_USERID:User ID bits
 CVALUE:00000000:00000000:Range is from 0 to 0xffff
-CWORD:BFC01708:FFFFFFFF:FFFFFFFF
+CWORD:BFC01748:FFFFFFFF:FFFFFFFF
 CSETTING:00000004:A_JTAGEN:JTAG Enable bit
 CVALUE:00000000:OFF:JTAG is disabled
 CVALUE:00000004:ON:JTAG is enabled
@@ -138,7 +138,7 @@ CVALUE:00000000:NONE:Not connected
 CVALUE:00000008:PGx3:Communicate on PGEC3/PGED3
 CVALUE:00000010:PGx2:Communicate on PGEC2/PGED2
 CVALUE:00000018:PGx1:Communicate on PGEC1/PGED1
-CWORD:BFC0170C:FFFFFFFF:FFFFFFFF
+CWORD:BFC0174C:FFFFFFFF:FFFFFFFF
 CSETTING:00000003:A_BOREN:Brown-out Reset Enable bits
 CVALUE:00000000:BOR0:Brown-out Reset disabled in hardware; SBOREN bit disabled
 CVALUE:00000001:BOR1:Brown-out Reset controlled with the SBOREN bit setting
@@ -150,7 +150,7 @@ CVALUE:00000004:OFF:Retention regulator is disabled
 CSETTING:00000008:A_LPBOREN:Low Power Brown-out Enable bit
 CVALUE:00000000:OFF:Low power BOR is disabled
 CVALUE:00000008:ON:Low power BOR is enabled, when main BOR is disabled
-CWORD:BFC01710:FFFFFFFF:FFFFFFFF
+CWORD:BFC01750:FFFFFFFF:FFFFFFFF
 CSETTING:0000001F:A_SWDTPS:Sleep Mode Watchdog Timer Postscale Selection bits
 CVALUE:00000000:PS1:1:1
 CVALUE:00000001:PS2:1:2
@@ -210,7 +210,7 @@ CVALUE:00006000:LPRC:Clock source is LPRC (same as for sleep mode)
 CSETTING:00008000:A_FWDTEN:Watchdog Timer Enable bit
 CVALUE:00000000:OFF:WDT is disabled
 CVALUE:00008000:ON:WDT is enabled
-CWORD:BFC01714:FFFFFFFF:FFFFFFFF
+CWORD:BFC01754:FFFFFFFF:FFFFFFFF
 CSETTING:00000007:A_FNOSC:Oscillator Selection bits
 CVALUE:00000000:FRCDIV:Fast RC oscillator (FRC) with divide-by-N
 CVALUE:00000001:PLL:Primary or FRC oscillator with PLL
@@ -242,8 +242,8 @@ CVALUE:00000000:CSDCMD:Clock switching is disabled; Fail-safe clock monitor is d
 CVALUE:00004000:CSECMD:Clock switching is enabled; Fail-safe clock monitor is disabled
 CVALUE:00008000:CSDCME:Clock switching is disabled; Fail-safe clock monitor is enabled
 CVALUE:0000C000:CSECME:Clock switching is enabled; Fail-safe clock monitor is enabled
-CWORD:BFC01718:FFFFFFFF:FFFFFFFF
+CWORD:BFC01758:FFFFFFFF:FFFFFFFF
 CSETTING:80000000:A_CP:Code Protection Enable bit
 CVALUE:00000000:ON:Code protection is enabled
 CVALUE:80000000:OFF:Code protection is disabled
-CWORD:BFC01720:FFFFFFFF:FFFFFFFF
+CWORD:BFC01760:FFFFFFFF:FFFFFFFF

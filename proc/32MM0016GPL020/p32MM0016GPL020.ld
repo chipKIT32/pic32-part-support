@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MM0016GPL020 linker script
- * Build date : Jun 01 2016
+ * Build date : Jan 05 2017
  * 
- * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -105,13 +105,13 @@ MEMORY
   debug_exec_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x760
   kseg0_boot_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x0
   kseg1_boot_mem              : ORIGIN = 0xBFC00000, LENGTH = 0x490
-  config_BFC01704             : ORIGIN = 0xBFC01704, LENGTH = 0x4
-  config_BFC01708             : ORIGIN = 0xBFC01708, LENGTH = 0x4
-  config_BFC0170C             : ORIGIN = 0xBFC0170C, LENGTH = 0x4
-  config_BFC01710             : ORIGIN = 0xBFC01710, LENGTH = 0x4
-  config_BFC01714             : ORIGIN = 0xBFC01714, LENGTH = 0x4
-  config_BFC01718             : ORIGIN = 0xBFC01718, LENGTH = 0x4
-  config_BFC01720             : ORIGIN = 0xBFC01720, LENGTH = 0x4
+  config_BFC01744             : ORIGIN = 0xBFC01744, LENGTH = 0x4
+  config_BFC01748             : ORIGIN = 0xBFC01748, LENGTH = 0x4
+  config_BFC0174C             : ORIGIN = 0xBFC0174C, LENGTH = 0x4
+  config_BFC01750             : ORIGIN = 0xBFC01750, LENGTH = 0x4
+  config_BFC01754             : ORIGIN = 0xBFC01754, LENGTH = 0x4
+  config_BFC01758             : ORIGIN = 0xBFC01758, LENGTH = 0x4
+  config_BFC01760             : ORIGIN = 0xBFC01760, LENGTH = 0x4
   config_BFC017C4             : ORIGIN = 0xBFC017C4, LENGTH = 0x4
   config_BFC017C8             : ORIGIN = 0xBFC017C8, LENGTH = 0x4
   config_BFC017CC             : ORIGIN = 0xBFC017CC, LENGTH = 0x4
@@ -121,7 +121,7 @@ MEMORY
   config_BFC017E0             : ORIGIN = 0xBFC017E0, LENGTH = 0x4
   kseg0_data_mem       (w!x)  : ORIGIN = 0x80000000, LENGTH = 0x1000
   sfrs                        : ORIGIN = 0xBF800000, LENGTH = 0x100000
-  configsfrs_BFC01700         : ORIGIN = 0xBFC01700, LENGTH = 0x1C
+  configsfrs_BFC01740         : ORIGIN = 0xBFC01740, LENGTH = 0x1C
   configsfrs_BFC017C0         : ORIGIN = 0xBFC017C0, LENGTH = 0x1C
 }
 
@@ -131,27 +131,27 @@ MEMORY
  *************************************************************************/
 SECTIONS
 {
-  .config_BFC01704 : {
-    KEEP(*(.config_BFC01704))
-  } > config_BFC01704
-  .config_BFC01708 : {
-    KEEP(*(.config_BFC01708))
-  } > config_BFC01708
-  .config_BFC0170C : {
-    KEEP(*(.config_BFC0170C))
-  } > config_BFC0170C
-  .config_BFC01710 : {
-    KEEP(*(.config_BFC01710))
-  } > config_BFC01710
-  .config_BFC01714 : {
-    KEEP(*(.config_BFC01714))
-  } > config_BFC01714
-  .config_BFC01718 : {
-    KEEP(*(.config_BFC01718))
-  } > config_BFC01718
-  .config_BFC01720 : {
-    KEEP(*(.config_BFC01720))
-  } > config_BFC01720
+  .config_BFC01744 : {
+    KEEP(*(.config_BFC01744))
+  } > config_BFC01744
+  .config_BFC01748 : {
+    KEEP(*(.config_BFC01748))
+  } > config_BFC01748
+  .config_BFC0174C : {
+    KEEP(*(.config_BFC0174C))
+  } > config_BFC0174C
+  .config_BFC01750 : {
+    KEEP(*(.config_BFC01750))
+  } > config_BFC01750
+  .config_BFC01754 : {
+    KEEP(*(.config_BFC01754))
+  } > config_BFC01754
+  .config_BFC01758 : {
+    KEEP(*(.config_BFC01758))
+  } > config_BFC01758
+  .config_BFC01760 : {
+    KEEP(*(.config_BFC01760))
+  } > config_BFC01760
   .config_BFC017C4 : {
     KEEP(*(.config_BFC017C4))
   } > config_BFC017C4
@@ -701,12 +701,12 @@ SECTIONS
     /DISCARD/ : { *(.pdr) }
   .gptab.sdata : { *(.gptab.data) *(.gptab.sdata) }
   .gptab.sbss : { *(.gptab.bss) *(.gptab.sbss) }
-  .mdebug.abi32 : { KEEP(*(.mdebug.abi32)) }
-  .mdebug.abiN32 : { KEEP(*(.mdebug.abiN32)) }
-  .mdebug.abi64 : { KEEP(*(.mdebug.abi64)) }
-  .mdebug.abiO64 : { KEEP(*(.mdebug.abiO64)) }
-  .mdebug.eabi32 : { KEEP(*(.mdebug.eabi32)) }
-  .mdebug.eabi64 : { KEEP(*(.mdebug.eabi64)) }
+  .mdebug.abi32 0 : { KEEP(*(.mdebug.abi32)) }
+  .mdebug.abiN32 0 : { KEEP(*(.mdebug.abiN32)) }
+  .mdebug.abi64 0 : { KEEP(*(.mdebug.abi64)) }
+  .mdebug.abiO64 0 : { KEEP(*(.mdebug.abiO64)) }
+  .mdebug.eabi32 0 : { KEEP(*(.mdebug.eabi32)) }
+  .mdebug.eabi64 0 : { KEEP(*(.mdebug.eabi64)) }
   .gcc_compiled_long32 : { KEEP(*(.gcc_compiled_long32)) }
   .gcc_compiled_long64 : { KEEP(*(.gcc_compiled_long64)) }
   /* Stabs debugging sections.  */
