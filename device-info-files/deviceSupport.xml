@@ -2,32 +2,25 @@
 <mp:deviceSupport xmlns:mp="http://crownking/mplab"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://crownking/mplab%20mplab/deviceSupport"
-         mp:version="1.42 (A)"
-         mp:builddate="2016-06-01"
+         mp:version="1.43 (A)"
+         mp:builddate="2017-03-01"
 >
 
 <mp:family mp:family="32x">
 
 
   <mp:device mp:name="PIC32MXGENERIC"/>
-  <mp:device mp:name="MEC1404"/>
-  <mp:device mp:name="MEC1406"/>
-  <mp:device mp:name="MEC1408"/>
-  <mp:device mp:name="MEC1414"/>
-  <mp:device mp:name="MEC1416"/>
-  <mp:device mp:name="MEC1418"/>
-  <mp:device mp:name="MGC3430"/>
-  <mp:device mp:name="MGC3431"/>
-  <mp:device mp:name="MGC3450"/>
-  <mp:device mp:name="MGC3451"/>
   <mp:device mp:name="PIC32MK0512GPD064"/>
   <mp:device mp:name="PIC32MK0512GPD100"/>
   <mp:device mp:name="PIC32MK0512GPE064"/>
   <mp:device mp:name="PIC32MK0512GPE100"/>
+  <mp:device mp:name="PIC32MK0512MCF064"/>
+  <mp:device mp:name="PIC32MK0512MCF100"/>
   <mp:device mp:name="PIC32MK1024GPD064"/>
   <mp:device mp:name="PIC32MK1024GPD100"/>
   <mp:device mp:name="PIC32MK1024GPE064"/>
   <mp:device mp:name="PIC32MK1024GPE100"/>
+  <mp:device mp:name="PIC32MK1024MCF064"/>
   <mp:device mp:name="PIC32MK1024MCF100"/>
   <mp:device mp:name="PIC32MM0016GPL020"/>
   <mp:device mp:name="PIC32MM0016GPL028"/>
@@ -69,12 +62,19 @@
   <mp:device mp:name="PIC32MX150F128D"/>
   <mp:device mp:name="PIC32MX150F256H"/>
   <mp:device mp:name="PIC32MX150F256L"/>
-  <mp:device mp:name="PIC32MX151F128E"/>
   <mp:device mp:name="PIC32MX151F128H"/>
+  <mp:device mp:name="PIC32MX154F128B"/>
+  <mp:device mp:name="PIC32MX154F128D"/>
+  <mp:device mp:name="PIC32MX155F128B"/>
+  <mp:device mp:name="PIC32MX155F128D"/>
   <mp:device mp:name="PIC32MX170F256B"/>
   <mp:device mp:name="PIC32MX170F256D"/>
   <mp:device mp:name="PIC32MX170F512H"/>
   <mp:device mp:name="PIC32MX170F512L"/>
+  <mp:device mp:name="PIC32MX174F256B"/>
+  <mp:device mp:name="PIC32MX174F256D"/>
+  <mp:device mp:name="PIC32MX175F256B"/>
+  <mp:device mp:name="PIC32MX175F256D"/>
   <mp:device mp:name="PIC32MX210F016B"/>
   <mp:device mp:name="PIC32MX210F016C"/>
   <mp:device mp:name="PIC32MX210F016D"/>
@@ -95,11 +95,17 @@
   <mp:device mp:name="PIC32MX250F256L"/>
   <mp:device mp:name="PIC32MX251F128E"/>
   <mp:device mp:name="PIC32MX251F128H"/>
+  <mp:device mp:name="PIC32MX254F128B"/>
+  <mp:device mp:name="PIC32MX254F128D"/>
+  <mp:device mp:name="PIC32MX255F128B"/>
   <mp:device mp:name="PIC32MX270F256B"/>
-  <mp:device mp:name="PIC32MX270F256D"/>
   <mp:device mp:name="PIC32MX270F256DB"/>
+  <mp:device mp:name="PIC32MX270F256D"/>
   <mp:device mp:name="PIC32MX270F512H"/>
   <mp:device mp:name="PIC32MX270F512L"/>
+  <mp:device mp:name="PIC32MX274F256B"/>
+  <mp:device mp:name="PIC32MX274F256D"/>
+  <mp:device mp:name="PIC32MX275F256B"/>
   <mp:device mp:name="PIC32MX275F256D"/>
   <mp:device mp:name="PIC32MX320F032H"/>
   <mp:device mp:name="PIC32MX320F064H"/>
@@ -128,14 +134,14 @@
   <mp:device mp:name="PIC32MX440F512H"/>
   <mp:device mp:name="PIC32MX450F128H"/>
   <mp:device mp:name="PIC32MX450F128L"/>
-  <mp:device mp:name="PIC32MX450F256H"/>
   <mp:device mp:name="PIC32MX450F256HB"/>
+  <mp:device mp:name="PIC32MX450F256H"/>
   <mp:device mp:name="PIC32MX450F256L"/>
   <mp:device mp:name="PIC32MX460F256L"/>
   <mp:device mp:name="PIC32MX460F512L"/>
   <mp:device mp:name="PIC32MX470F512H"/>
-  <mp:device mp:name="PIC32MX470F512L"/>
   <mp:device mp:name="PIC32MX470F512LB"/>
+  <mp:device mp:name="PIC32MX470F512L"/>
   <mp:device mp:name="PIC32MX530F128H"/>
   <mp:device mp:name="PIC32MX530F128L"/>
   <mp:device mp:name="PIC32MX534F064H"/>
@@ -282,8 +288,22 @@
   <mp:device mp:name="PIC32MZ2064DAG176"/>
   <mp:device mp:name="PIC32MZ2064DAH169"/>
   <mp:device mp:name="PIC32MZ2064DAH176"/>
-  <mp:device mp:name="PIC32WK2057GPB132"/>
   <mp:device mp:name="PIC32WK2057GPD132"/>
+  <mp:device mp:name="MEC1404"/>
+  <mp:device mp:name="MEC1406"/>
+  <mp:device mp:name="MEC1408"/>
+  <mp:device mp:name="MEC1414"/>
+  <mp:device mp:name="MEC1416"/>
+  <mp:device mp:name="MEC1418"/>
+  <mp:device mp:name="MEC1424"/>
+  <mp:device mp:name="MEC1426"/>
+  <mp:device mp:name="MEC1428"/>
+  <mp:device mp:name="MGC3140"/>
+  <mp:device mp:name="MGC3430"/>
+  <mp:device mp:name="MGC3431"/>
+  <mp:device mp:name="MGC3450"/>
+  <mp:device mp:name="MGC3451"/>
+  <mp:device mp:name="USB49XX"/>
 </mp:family>
 
 </mp:deviceSupport>

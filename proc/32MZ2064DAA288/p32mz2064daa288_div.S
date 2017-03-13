@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MZ2064DAA288 processor Default ISR Vectors module
  # 
- # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its

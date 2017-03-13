@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * MEC1404 processor header
- * Build date : Jun 01 2016
+ * Build date : Mar 01 2017
  *
- * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -46,7 +46,7 @@ extern "C" {
 #endif
 
 #define _ICDCON _ICDCON
-extern volatile unsigned int   _ICDCON __attribute__((section("sfrs")));
+extern volatile unsigned int   _ICDCON __attribute__((section("sfrs"), address(0xBFBFEFF0)));
 typedef struct {
   unsigned USER_CODE_VALID:1;
   unsigned SLPBKEN:1;
@@ -56,17 +56,17 @@ typedef struct {
   unsigned :9;
   unsigned FRZ:1;
 } ___ICDCONbits_t;
-extern volatile ___ICDCONbits_t _ICDCONbits __asm__ ("_ICDCON") __attribute__((section("sfrs")));
+extern volatile ___ICDCONbits_t _ICDCONbits __asm__ ("_ICDCON") __attribute__((section("sfrs"), address(0xBFBFEFF0)));
 #define _ICDSTAT _ICDSTAT
-extern volatile unsigned int   _ICDSTAT __attribute__((section("sfrs")));
+extern volatile unsigned int   _ICDSTAT __attribute__((section("sfrs"), address(0xBFBFEFF4)));
 typedef struct {
   unsigned :1;
   unsigned WDTBF:1;
   unsigned SLPBF:1;
 } ___ICDSTATbits_t;
-extern volatile ___ICDSTATbits_t _ICDSTATbits __asm__ ("_ICDSTAT") __attribute__((section("sfrs")));
+extern volatile ___ICDSTATbits_t _ICDSTATbits __asm__ ("_ICDSTAT") __attribute__((section("sfrs"), address(0xBFBFEFF4)));
 #define TEST_MODE_CTL TEST_MODE_CTL
-extern volatile unsigned int   TEST_MODE_CTL __attribute__((section("sfrs")));
+extern volatile unsigned int   TEST_MODE_CTL __attribute__((section("sfrs"), address(0xBFBFEFF8)));
 typedef struct {
   unsigned TEST_MODE_EN:1;
   unsigned :1;
@@ -81,7 +81,7 @@ typedef struct {
   unsigned TEST_MODE2:1;
   unsigned TEST_MODE3:1;
 } __TEST_MODE_CTLbits_t;
-extern volatile __TEST_MODE_CTLbits_t TEST_MODE_CTLbits __asm__ ("TEST_MODE_CTL") __attribute__((section("sfrs")));
+extern volatile __TEST_MODE_CTLbits_t TEST_MODE_CTLbits __asm__ ("TEST_MODE_CTL") __attribute__((section("sfrs"), address(0xBFBFEFF8)));
 #ifdef __cplusplus
 }
 #endif

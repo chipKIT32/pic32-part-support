@@ -34,7 +34,7 @@ CVALUE:00020000:ICAP_ALT_TMR:ICAP module use an alternative TMR pair as their ti
 CSETTING:80000000:EPGMCLK:External Programming Clock enable
 CVALUE:00000000:FRC:In ICSP (TMOD0) mode, the FRC clock is always driven by the FRC oscillator
 CVALUE:80000000:TSTFRC:In ICSP (TMOD0) mode, enable the FRC clock to be driven by the TSTFRC Pin Function
-CWORD:BF800010:1FC1403B:1FC1403B
+CWORD:BF800010:14C1403B:14C1403B
 CSETTING:00000003:DEBUG:Background Debugger Access Selection
 CVALUE:00000000:EMUC_ICD:EMUC/EMUD Enabled - 4-wire JTAG I/F Disabled - ICD Module Enabled
 CVALUE:00000001:EMUC:EMUC/EMUD Enabled - 4-wire JTAG I/F Disabled - ICD Module Disabled
@@ -85,7 +85,7 @@ CVALUE:11000000:PSS131072:1:131072
 CVALUE:12000000:PSS262144:1:262144
 CVALUE:13000000:PSS524288:1:524288
 CVALUE:14000000:PSS1048576:1:1048576
-CWORD:BF800020:7F7FD378:7F7FD378
+CWORD:BF800020:5F74D378:5F74D378
 CSETTING:00000038:DMTINTV:Dead Man Timer Count Window Interval bits
 CVALUE:00000000:WIN_0:Window/Interval value is zero for cfg_dmt_intv[31:0] - windowed mode is disabled
 CVALUE:00000008:WIN_1_2:Window/Interval value is 1/2 Counter value for cfg_dmt_intv[31:0]
